@@ -1,79 +1,117 @@
-<section class="text-center p-10 bg-yellow-100 rounded-xl shadow-md">
-  <h1 id="header" class="text-4xl font-bold text-gray-800">HelpLink</h1> 
-  <h2 class="text-3xl font-bold text-gray-800">Empowering Communities. Ending Poverty</h2>
-  
-  <p class="mt-4 text-lg text-gray-600">
+<!-- Hero -->
+<section class="hero">
+  <span class="hero-badge"><i class="fa-solid fa-earth-americas"></i> SDG 1 &middot; No Poverty</span>
+  <h1 class="hero-title">HelpLink</h1>
+  <h2 class="hero-subtitle">Empowering Communities. Ending Poverty.</h2>
+  <p class="hero-text">
     Join us in connecting people to vital resources, opportunities, and support.
   </p>
-
-</section>
-<section id="intro" class="my-12 p-8 bg-gradient-to-br from-yellow-100 to-white rounded-xl shadow-lg">
-  <h2 class="text-3xl font-semibold text-gray-800 mb-4">What is SDG 1: No Poverty?</h2>
-  <p class="text-gray-700 mb-4 leading-relaxed">
-    Sustainable Development Goal 1 (SDG 1) is a global commitment to end poverty in all its forms everywhere.
-    It aims to ensure equal access to resources, services, and opportunities — especially for the most vulnerable.
-    <br><br>
-    Our platform contributes to this mission by connecting people in need with life-changing resources, 
-    from food assistance and shelter to job opportunities and community support. 
-    Together, we can help reduce poverty and uplift communities.
-  </p>
-
-  <div class="flex flex-wrap gap-6 justify-center items-center mt-6">
-    <img src="https://uomus.edu.iq/Sustainability/assets/images/SSDG1.gif" 
-     alt="SDG 1 Icon" 
-     class="w-32 transition-transform duration-300 hover:scale-110">
-     
-  </div>
-</section>
-<section id="bottom" class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 text-center">
-  <!-- Tile 1 -->
-  <div id="resource" class="bg-yellow-50 p-6 rounded-lg shadow hover:shadow-lg transition cursor-pointer"
-       (click)="navigateTo('/resources')">
-    <h2 class="font-semibold text-lg">🌐🔗🆔</h2>
-    <h3 class="font-semibold text-lg">Browse Support Services</h3>
-    <p class="text-sm text-gray-600">Find food banks, shelters, job centers and more.</p>
-  </div>
-
-  <!-- Tile 2 -->
-  <div id="help" class="bg-blue-50 p-6 rounded-lg shadow hover:shadow-lg transition cursor-pointer"
-       (click)="navigateTo('/help')">
-    <h2 class="font-semibold text-lg">🏢🤝🆘</h2>
-    <h3 class="font-semibold text-lg">Request Help</h3>
-    <p class="text-sm text-gray-600">Reach out for assistance with essentials and services.</p>
-  </div>
-
-  <!-- Tile 3 -->
-  <div id="volunteer" class="bg-green-50 p-6 rounded-lg shadow hover:shadow-lg transition cursor-pointer"
-       (click)="navigateTo('/volunteer')">
-    <h2 class="font-semibold text-lg">🌎🫂❤️</h2>
-    <h3 class="font-semibold text-lg">Become a Volunteer</h3>
-    <p class="text-sm text-gray-600">Help others by sharing your time, skills, or resources.</p>
+  <div class="hero-actions">
+    <button class="btn btn-primary" (click)="navigateTo('/resources')">
+      <i class="fa-solid fa-magnifying-glass"></i> Find Support
+    </button>
+    <button class="btn btn-secondary" (click)="navigateTo('/volunteer')">
+      <i class="fa-solid fa-hand-holding-heart"></i> Volunteer
+    </button>
   </div>
 </section>
 
-<section class="p-6 bg-gray-50 min-h-screen">
-  <h2 class="text-3xl font-bold mb-6 text-green-700">📰 Latest News on Poverty</h2>
-
-  <!-- Loading State -->
-  <div *ngIf="articles?.length === 0" class="text-gray-500 animate-pulse">
-    Loading news articles...
+<!-- Mission -->
+<section class="intro">
+  <div class="intro-text">
+    <h2 class="section-title">What is SDG 1: No Poverty?</h2>
+    <p>
+      Sustainable Development Goal 1 (SDG 1) is a global commitment to end poverty in all its forms everywhere.
+      It aims to ensure equal access to resources, services, and opportunities — especially for the most vulnerable.
+    </p>
+    <p>
+      Our platform contributes to this mission by connecting people in need with life-changing resources,
+      from food assistance and shelter to job opportunities and community support.
+      Together, we can help reduce poverty and uplift communities.
+    </p>
   </div>
+  <img src="https://uomus.edu.iq/Sustainability/assets/images/SSDG1.gif"
+       alt="SDG 1: No Poverty icon"
+       class="intro-img">
+</section>
 
-  <!-- News Grid -->
-  <div id= "article" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" *ngIf="articles.length > 0">
-    <div id="article-card" *ngFor="let article of articles" class="bg-white rounded-2xl shadow-md p-4 hover:shadow-lg transition">
-      
+<!-- Quick links -->
+<section class="features">
+  <h2 class="section-title">How can we help you today?</h2>
+  <div class="feature-grid">
+    <div class="feature-card" role="link" tabindex="0"
+         (click)="navigateTo('/resources')" (keyup.enter)="navigateTo('/resources')">
+      <span class="feature-icon icon-amber"><i class="fa-solid fa-map-location-dot"></i></span>
+      <h3>Browse Support Services</h3>
+      <p>Find food banks, shelters, job centers and more.</p>
+    </div>
 
-      <h3 class="text-lg font-semibold text-gray-800">{{ article.title }}</h3>
-      <p class="text-sm text-gray-500 mb-2">{{ article.publishedAt | date:'mediumDate' }}</p>
-      <p class="text-gray-700 text-sm line-clamp-3">{{ article.description }}</p>
+    <div class="feature-card" role="link" tabindex="0"
+         (click)="navigateTo('/jobs')" (keyup.enter)="navigateTo('/jobs')">
+      <span class="feature-icon icon-blue"><i class="fa-solid fa-briefcase"></i></span>
+      <h3>Jobs &amp; Training</h3>
+      <p>Search job listings and skill-building opportunities.</p>
+    </div>
 
-      <a [href]="article.url" target="_blank" class="mt-3 inline-block text-green-600 hover:underline text-sm font-medium">
-        Read more →
-      </a>
+    <div class="feature-card" role="link" tabindex="0"
+         (click)="navigateTo('/shelter')" (keyup.enter)="navigateTo('/shelter')">
+      <span class="feature-icon icon-purple"><i class="fa-solid fa-house-chimney"></i></span>
+      <h3>Shelter Directory</h3>
+      <p>Browse local shelters and filter them by state.</p>
+    </div>
+
+    <div class="feature-card" role="link" tabindex="0"
+         (click)="navigateTo('/market')" (keyup.enter)="navigateTo('/market')">
+      <span class="feature-icon icon-teal"><i class="fa-solid fa-store"></i></span>
+      <h3>Community Market</h3>
+      <p>Support local artisans in the community marketplace.</p>
+    </div>
+
+    <div class="feature-card" role="link" tabindex="0"
+         (click)="navigateTo('/help')" (keyup.enter)="navigateTo('/help')">
+      <span class="feature-icon icon-red"><i class="fa-solid fa-hands-holding-circle"></i></span>
+      <h3>Request Help</h3>
+      <p>Reach out for assistance with essentials and services.</p>
+    </div>
+
+    <div class="feature-card" role="link" tabindex="0"
+         (click)="navigateTo('/volunteer')" (keyup.enter)="navigateTo('/volunteer')">
+      <span class="feature-icon icon-green"><i class="fa-solid fa-hand-holding-heart"></i></span>
+      <h3>Become a Volunteer</h3>
+      <p>Help others by sharing your time, skills, or resources.</p>
     </div>
   </div>
 </section>
 
+<!-- News -->
+<section class="news">
+  <h2 class="section-title"><i class="fa-regular fa-newspaper"></i> Latest News on Poverty</h2>
 
+  <!-- Loading State -->
+  <div class="news-grid" *ngIf="articles.length === 0">
+    <div class="news-card skeleton" *ngFor="let s of [1, 2, 3]">
+      <div class="skeleton-img"></div>
+      <div class="news-card-body">
+        <div class="skeleton-line w-75"></div>
+        <div class="skeleton-line w-50"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+      </div>
+    </div>
+  </div>
 
+  <!-- News Grid -->
+  <div class="news-grid" *ngIf="articles.length > 0">
+    <article class="news-card" *ngFor="let article of articles">
+      <img *ngIf="article.image" [src]="article.image" [alt]="article.title" class="news-img" loading="lazy">
+      <div class="news-card-body">
+        <p class="news-date">{{ article.publishedAt | date:'mediumDate' }}</p>
+        <h3 class="news-title">{{ article.title }}</h3>
+        <p class="news-desc">{{ article.description }}</p>
+        <a [href]="article.url" target="_blank" rel="noopener" class="news-link">
+          Read more <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </article>
+  </div>
+</section>
