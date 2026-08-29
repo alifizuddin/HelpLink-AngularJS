@@ -1,8 +1,4 @@
 import { Routes } from '@angular/router';
-import { JobsComponent } from './pages/jobs/jobs.component';
-import { ShelterComponent } from './pages/shelter/shelter.component';
-import { LayoutComponent } from './layout/layout.component';
-import { FormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },

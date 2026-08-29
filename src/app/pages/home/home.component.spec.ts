@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 import { HomeComponent } from './home.component';
-import { Router } from '@angular/router';
 
 
 describe('HomeComponent', () => {
@@ -10,7 +10,8 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HomeComponent]
+      imports: [HomeComponent],
+      providers: [provideRouter([]), provideHttpClient()]
     })
     .compileComponents();
 
