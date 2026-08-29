@@ -1,79 +1,71 @@
-<section class="text-center p-10 bg-yellow-100 rounded-xl shadow-md">
-  <h1 id="header" class="text-4xl font-bold text-gray-800">HelpLink</h1> 
-  <h2 class="text-3xl font-bold text-gray-800">Empowering Communities. Ending Poverty</h2>
-  
-  <p class="mt-4 text-lg text-gray-600">
-    Join us in connecting people to vital resources, opportunities, and support.
+<section class="p-6">
+  <h2 id="header">HelpLink</h2>
+  <p class="subtitle">
+    Empowering communities. Ending poverty. Join us in connecting people to vital
+    resources, opportunities, and support.
   </p>
-
 </section>
-<section id="intro" class="my-12 p-8 bg-gradient-to-br from-yellow-100 to-white rounded-xl shadow-lg">
-  <h2 class="text-3xl font-semibold text-gray-800 mb-4">What is SDG 1: No Poverty?</h2>
-  <p class="text-gray-700 mb-4 leading-relaxed">
+
+<section id="intro" class="panel">
+  <h3 class="section-title">What is SDG 1: No Poverty?</h3>
+  <p class="panel-text">
     Sustainable Development Goal 1 (SDG 1) is a global commitment to end poverty in all its forms everywhere.
     It aims to ensure equal access to resources, services, and opportunities — especially for the most vulnerable.
     <br><br>
-    Our platform contributes to this mission by connecting people in need with life-changing resources, 
-    from food assistance and shelter to job opportunities and community support. 
+    Our platform contributes to this mission by connecting people in need with life-changing resources,
+    from food assistance and shelter to job opportunities and community support.
     Together, we can help reduce poverty and uplift communities.
   </p>
 
-  <div class="flex flex-wrap gap-6 justify-center items-center mt-6">
-    <img src="https://uomus.edu.iq/Sustainability/assets/images/SSDG1.gif" 
-     alt="SDG 1 Icon" 
-     class="w-32 transition-transform duration-300 hover:scale-110">
-     
-  </div>
+  <img
+    src="https://uomus.edu.iq/Sustainability/assets/images/SSDG1.gif"
+    alt="SDG 1 Icon"
+    class="intro-image">
 </section>
-<section id="bottom" class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 text-center">
-  <!-- Tile 1 -->
-  <div id="resource" class="bg-yellow-50 p-6 rounded-lg shadow hover:shadow-lg transition cursor-pointer"
-       (click)="navigateTo('/resources')">
-    <h2 class="font-semibold text-lg">🌐🔗🆔</h2>
-    <h3 class="font-semibold text-lg">Browse Support Services</h3>
-    <p class="text-sm text-gray-600">Find food banks, shelters, job centers and more.</p>
-  </div>
 
-  <!-- Tile 2 -->
-  <div id="help" class="bg-blue-50 p-6 rounded-lg shadow hover:shadow-lg transition cursor-pointer"
-       (click)="navigateTo('/help')">
-    <h2 class="font-semibold text-lg">🏢🤝🆘</h2>
-    <h3 class="font-semibold text-lg">Request Help</h3>
-    <p class="text-sm text-gray-600">Reach out for assistance with essentials and services.</p>
-  </div>
+<section id="bottom" class="panel">
+  <div class="card-grid">
+    <!-- Tile 1 -->
+    <div id="resource" class="home-card clickable" (click)="navigateTo('/resources')">
+      <span class="card-icon">🌐</span>
+      <h3 class="section-title">Browse Support Services</h3>
+      <p>Find food banks, shelters, job centers and more.</p>
+    </div>
 
-  <!-- Tile 3 -->
-  <div id="volunteer" class="bg-green-50 p-6 rounded-lg shadow hover:shadow-lg transition cursor-pointer"
-       (click)="navigateTo('/volunteer')">
-    <h2 class="font-semibold text-lg">🌎🫂❤️</h2>
-    <h3 class="font-semibold text-lg">Become a Volunteer</h3>
-    <p class="text-sm text-gray-600">Help others by sharing your time, skills, or resources.</p>
+    <!-- Tile 2 -->
+    <div id="help" class="home-card clickable" (click)="navigateTo('/help')">
+      <span class="card-icon">🤝</span>
+      <h3 class="section-title">Request Help</h3>
+      <p>Reach out for assistance with essentials and services.</p>
+    </div>
+
+    <!-- Tile 3 -->
+    <div id="volunteer" class="home-card clickable" (click)="navigateTo('/volunteer')">
+      <span class="card-icon">❤️</span>
+      <h3 class="section-title">Become a Volunteer</h3>
+      <p>Help others by sharing your time, skills, or resources.</p>
+    </div>
   </div>
 </section>
 
-<section class="p-6 bg-gray-50 min-h-screen">
-  <h2 class="text-3xl font-bold mb-6 text-green-700">📰 Latest News on Poverty</h2>
+<section id="news" class="panel">
+  <h3 class="section-title">📰 Latest News on Poverty</h3>
 
   <!-- Loading State -->
-  <div *ngIf="articles?.length === 0" class="text-gray-500 animate-pulse">
+  <div *ngIf="articles?.length === 0" class="loading-text">
     Loading news articles...
   </div>
 
   <!-- News Grid -->
-  <div id= "article" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" *ngIf="articles.length > 0">
-    <div id="article-card" *ngFor="let article of articles" class="bg-white rounded-2xl shadow-md p-4 hover:shadow-lg transition">
-      
+  <div id="article" class="card-grid" *ngIf="articles.length > 0">
+    <div id="article-card" class="home-card" *ngFor="let article of articles">
+      <h3 class="card-title">{{ article.title }}</h3>
+      <p class="card-meta">{{ article.publishedAt | date:'mediumDate' }}</p>
+      <p class="card-text clamp-3">{{ article.description }}</p>
 
-      <h3 class="text-lg font-semibold text-gray-800">{{ article.title }}</h3>
-      <p class="text-sm text-gray-500 mb-2">{{ article.publishedAt | date:'mediumDate' }}</p>
-      <p class="text-gray-700 text-sm line-clamp-3">{{ article.description }}</p>
-
-      <a [href]="article.url" target="_blank" class="mt-3 inline-block text-green-600 hover:underline text-sm font-medium">
+      <a [href]="article.url" target="_blank" rel="noopener noreferrer" class="card-link">
         Read more →
       </a>
     </div>
   </div>
 </section>
-
-
-
