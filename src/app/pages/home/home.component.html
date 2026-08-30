@@ -1,9 +1,37 @@
-<section class="p-6">
-  <h2 id="header">HelpLink</h2>
-  <p class="subtitle">
-    Empowering communities. Ending poverty. Join us in connecting people to vital
-    resources, opportunities, and support.
-  </p>
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <i class="fas fa-globe"></i>
+        <span>UN SDG 1 Initiative</span>
+      </div>
+      <h1 class="hero-title">
+        Empowering Communities,<br/>
+        <span class="hero-title-highlight">Ending Poverty</span>
+      </h1>
+      <p class="hero-description">
+        A centralized platform providing immediate access to real-time data, local jobs, community support networks, and essential services to uplift those in need.
+      </p>
+      <div class="hero-buttons">
+        <button routerLink="/resources" class="hero-btn-primary">
+          Find Support
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        <button routerLink="/volunteer" class="hero-btn-secondary">
+          Join as Volunteer
+          <i class="fas fa-handshake"></i>
+        </button>
+      </div>
+    </div>
+    <div class="hero-image-container">
+      <img
+        class="hero-image"
+        alt="A diverse group of community volunteers working together in a bright, modern community center, packing boxes of supplies."
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4nLtN48lOhRZlnqNU6lu_COxGmpRo1N7Os17qEIQiyvQz8ZJYCXGQNHPLSfvEMp0Ey4ZKJj7v1GN4EjGE3yhnO3jth-wfAq2vogTTsdAFuoTyjBtt_-G4MAzKcxP3GrGY1roc4ouykRxOGJDMjHs4vmY8WT7wej_j68aXE6JyjsDw8R8PkOg0mczzqk1wew3SZLyY06grQWFEeoioobRLH1tt9BbpqMCeNcO4EzvUbu6P59GgScdTfg"
+      />
+    </div>
+  </div>
 </section>
 
 <section id="intro" class="panel">
@@ -18,7 +46,7 @@
   </p>
 
   <img
-    src="https://uomus.edu.iq/Sustainability/assets/images/SSDG1.gif"
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrVbFprUc1CT9ahOWOOh85Cm7gTBD1RWCeMPYq2wIsDHW3WRvpUrR6JN4Q&s=10"
     alt="SDG 1 Icon"
     class="intro-image">
 </section>
@@ -48,8 +76,17 @@
   </div>
 </section>
 
-<section id="news" class="panel">
-  <h3 class="section-title">📰 Latest News on Poverty</h3>
+<section id="news" class="news-section">
+  <div class="news-header">
+    <div class="news-header-content">
+      <h2 class="news-title">News & Data Insights</h2>
+      <p class="news-subtitle">Latest updates on poverty alleviation efforts and economic data.</p>
+    </div>
+    <a routerLink="/news" class="news-dashboard-link">
+      View Dashboard
+      <i class="fas fa-chevron-right"></i>
+    </a>
+  </div>
 
   <!-- Loading State -->
   <div *ngIf="articles?.length === 0" class="loading-text">
@@ -57,13 +94,19 @@
   </div>
 
   <!-- News Grid -->
-  <div id="article" class="card-grid" *ngIf="articles.length > 0">
-    <div id="article-card" class="home-card" *ngFor="let article of articles">
-      <h3 class="card-title">{{ article.title }}</h3>
-      <p class="card-meta">{{ article.publishedAt | date:'mediumDate' }}</p>
-      <p class="card-text clamp-3">{{ article.description }}</p>
-
-      <a [href]="article.url" target="_blank" rel="noopener noreferrer" class="card-link">
+  <div class="news-grid" *ngIf="articles.length > 0">
+    <div class="news-card" *ngFor="let article of articles | slice:0:3">
+      <div class="news-card-header">
+        <span class="news-badge">News</span>
+        <span class="news-time">{{ article.publishedAt | date:'mediumDate' }}</span>
+      </div>
+      <h3 class="news-card-title">{{ article.title }}</h3>
+      <p class="news-card-description">{{ article.description }}</p>
+      <div class="news-card-footer">
+        <i class="fas fa-newspaper"></i>
+        <span class="news-source">HelpLink News</span>
+      </div>
+      <a [href]="article.url" target="_blank" rel="noopener noreferrer" class="news-card-link">
         Read more →
       </a>
     </div>

@@ -37,7 +37,7 @@ app.get('/news', async (req, res) => {
         q: req.query.q || 'poverty',
         lang: req.query.lang || 'en',
         country: req.query.country || 'us',
-        max: req.query.max || 10,
+        max: req.query.max || 3,
         token: process.env.GNEWS_API_KEY
       }
     });

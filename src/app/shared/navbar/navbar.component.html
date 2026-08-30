@@ -1,0 +1,47 @@
+<header class="navbar">
+  <div class="navbar-container">
+
+    <div class="navbar-left">
+
+      <a routerLink="/home" class="navbar-brand">
+        <i class="fas fa-hand-holding-heart"></i>
+        HelpLink
+      </a>
+
+      <nav class="desktop-nav">
+        <a routerLink="/resources" class="nav-link">News Dashboard</a>
+        <a routerLink="/resources" class="nav-link">Resources</a>
+        <a routerLink="/jobs" class="nav-link">Jobs</a>
+        <a routerLink="/shelter" class="nav-link">Shelters</a>
+        <a routerLink="/market" class="nav-link">Marketplace</a>
+      </nav>
+
+    </div>
+
+    <div class="navbar-right">
+
+      <div class="search-container">
+        <i class="fas fa-search search-icon"></i>
+        <input
+          class="search-input"
+          placeholder="Search resources..."
+          type="text"
+        />
+      </div>
+
+      <button routerLink="/help" class="btn-outline">
+        Get Help
+      </button>
+
+      <button routerLink="/volunteer" class="btn-primary">
+        Volunteer
+      </button>
+
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+
+    </div>
+
+  </div>
+</header>

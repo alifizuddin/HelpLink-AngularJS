@@ -1,1 +1,19 @@
-export { AppServerModule as default } from './app/app.module.server';
+import { bootstrapApplication, BootstrapContext } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { appConfig } from './app/app.config';
+import { provideServerRendering } from '@angular/platform-server';
+
+const bootstrap = (context: BootstrapContext) =>
+  bootstrapApplication(
+    AppComponent,
+    {
+      ...appConfig,
+      providers: [
+        ...appConfig.providers,
+        provideServerRendering()
+      ]
+    },
+    context
+  );
+
+export default bootstrap;
