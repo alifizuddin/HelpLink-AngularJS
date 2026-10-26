@@ -14,7 +14,7 @@ import { JobService } from '../../services/job.service';
 export class JobsComponent {
   jobs: any[] = [];
   loading = false;
-  query = 'Developer'; // default search query
+  query = ''; // default search query
 
   constructor(private jobService: JobService) {}
 
