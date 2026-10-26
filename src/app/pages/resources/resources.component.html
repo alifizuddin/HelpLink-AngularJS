@@ -1,69 +1,506 @@
-<section class="p-6">
-  <h2 id="header">Available Community Resources</h2>
-  <p class="subtitle">
-    Explore food banks, job programs, shelters, and more near your location.
-  </p>
+<div class="resources-page">
+  <!-- ================= PAGE HERO & BREADCRUMB ================= -->
+  <header class="page-hero">
 
-  <!-- First Row -->
-  <div id="container">
-    <!-- OpenStreetMap -->
-    <div class="resource-card">
-      <h2 class="text-2xl font-bold mb-2 text-left text-green-800">Food Banks</h2>
-      <iframe
-  [src]="mapSrc | safeUrl"
-  [attr.key]="mapSrc"
-  style="border:0; width: 100%; height: 400px;">
-</iframe>
+    <div class="hero-row">
+      <div class="hero-copy">
+        <h1>
+          Available Community Resources
+        </h1>
+        <p>
+          Explore verified food banks, job programs, emergency shelters, and local community aid
+          near your location or worldwide.
+        </p>
+      </div>
+    </div>
+  </header>
 
+  <!-- ================= QUICK SEARCH & FILTER CONTROL BAR ================= -->
+  <section class="filter-card" aria-labelledby="filter-title">
+    <h2 id="filter-title" class="sr-only">Search and filter community resources</h2>
+
+    <div class="filter-grid">
+      <!-- Location / Resource Search -->
+      <div class="field field--search">
+        <label for="location-input">Search Location or Resource</label>
+        <div class="input-shell">
+          <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
+          <input
+            id="location-input"
+            type="text"
+            [value]="searchQuery"
+            (input)="onSearch($event)"
+            placeholder="Enter city, region, postal code, or resource name..."
+            autocomplete="off"
+          />
+          <button
+            *ngIf="searchQuery"
+            type="button"
+            class="clear-btn"
+            (click)="clearSearch()"
+            title="Clear search"
+            aria-label="Clear search"
+          >
+            <span class="material-symbols-outlined" aria-hidden="true">cancel</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="field field--category">
+        <label for="category-select">Resource Category</label>
+        <div class="select-shell">
+          <select id="category-select" [value]="selectedCategory" (change)="onCategoryChange($event)">
+            <option value="food">Food Banks &amp; Pantries</option>
+            <option value="all">All Services Combined</option>
+            <option value="shelter">Emergency Shelters &amp; Beds</option>
+            <option value="jobs">Youth Job Training &amp; Connect</option>
+            <option value="artisan">Local Artisan Grants</option>
+            <option value="health">Healthcare &amp; Mental Health</option>
+          </select>
+          <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+        </div>
+      </div>
+
+      <!-- Radius Filter -->
+      <div class="field field--radius">
+        <label for="radius-select">Distance Radius</label>
+        <div class="select-shell">
+          <select id="radius-select" [value]="selectedRadius" (change)="onRadiusChange($event)">
+            <option value="5">Within 5 miles</option>
+            <option value="25">Within 25 miles</option>
+            <option value="50">Within 50 miles</option>
+            <option value="nationwide">Nationwide</option>
+            <option value="global">Global / Worldwide</option>
+          </select>
+          <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+        </div>
+      </div>
+
+      <!-- Detect Location -->
+      <div class="field field--detect">
+        <span class="field-label-spacer" aria-hidden="true">&nbsp;</span>
+        <button
+          type="button"
+          class="detect-btn"
+          (click)="detectLocation()"
+          title="Use browser GPS geolocation"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">my_location</span>
+          <span>Detect Me</span>
+        </button>
+      </div>
     </div>
 
-    <!-- Food Bank Data -->
-    <div id="foodbank" class="resource-card" *ngIf="foodbanks.length > 0; else loading">
-      <h3 class="section-title">Food Banks Around The World</h3>
-      <div class="scroll-area">
-        <div *ngFor="let bank of foodbanks" class="item-box">
-          <p class="font-semibold">{{ bank.name }}</p>
-          <p class="text-sm text-gray-600">
-            <a href="#" (click)="updateMap(bank.lat, bank.lon); $event.preventDefault()">
-              Lat: {{ bank.lat }} | Lon: {{ bank.lon }}
-            </a>
+    <div *ngIf="locationNotice" class="location-notice" role="status">
+      <span class="material-symbols-outlined" aria-hidden="true">info</span>
+      <span>{{ locationNotice }}</span>
+      <button *ngIf="userLocation" type="button" class="notice-clear" (click)="clearLocationFilter()">
+        Clear
+      </button>
+    </div>
+
+    <!-- Quick Category Pills -->
+  </section>
+
+  <!-- ================= SPLIT DISCOVERY SECTION: MAP + SERVICE LIST ================= -->
+  <section class="discovery-grid" aria-label="Resource map and food bank directory">
+    <!-- LEFT: INTERACTIVE MAP -->
+    <div class="panel map-panel" #mapPanel>
+      <div class="panel-header map-header">
+        <div class="panel-title">
+          <span class="material-symbols-outlined" aria-hidden="true">map</span>
+          <h2>Interactive Resource Map</h2>
+        </div>
+
+        <div class="map-tools">
+          <div class="segmented" role="group" aria-label="Map layer">
+            <button
+              type="button"
+              [class.is-active]="mapLayer === 'mapnik'"
+              (click)="setMapLayer('mapnik')"
+            >
+              Street
+            </button>
+            <button
+              type="button"
+              [class.is-active]="mapLayer === 'cyclemap'"
+              (click)="setMapLayer('cyclemap')"
+            >
+              Cycle
+            </button>
+            <button
+              type="button"
+              [class.is-active]="mapLayer === 'transportmap'"
+              (click)="setMapLayer('transportmap')"
+            >
+              Transit
+            </button>
+          </div>
+
+          <button
+            type="button"
+            class="icon-button"
+            (click)="toggleMapFullscreen(mapPanel)"
+            title="Toggle full screen map"
+            aria-label="Toggle full screen map"
+          >
+            <span class="material-symbols-outlined" aria-hidden="true">fullscreen</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="map-canvas">
+        <iframe
+          [src]="mapSrc | safeUrl"
+          title="OpenStreetMap view of the selected community resource"
+          loading="lazy"
+        ></iframe>
+
+        <ng-container *ngIf="selectedBank as bank">
+          <!-- Selected resource popover -->
+          <div class="map-overlay">
+            <div class="overlay-top">
+              <span class="badge badge-soft">Active Selection</span>
+              <span class="map-status">
+                <span class="status-dot"></span>
+                Mapped
+              </span>
+            </div>
+            <h3>{{ bankTitle(bank) }}</h3>
+            <p>{{ bankAddress(bank) }}</p>
+            <div class="overlay-footer">
+              <span>{{ formatCoord(bank.lat) }}°, {{ formatCoord(bank.lon) }}°</span>
+              <a
+                [href]="directionsUrl(bank)"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Directions →
+              </a>
+            </div>
+          </div>
+
+          <!-- GPS center pill -->
+          <div class="map-gps-pill">
+            <span class="status-dot status-dot--primary"></span>
+            <span>
+              GPS Center: <strong>{{ bankTitle(bank) }}</strong>
+              ({{ formatCoord(bank.lat) }}°, {{ formatCoord(bank.lon) }}°)
+            </span>
+          </div>
+        </ng-container>
+
+        <!-- OpenStreetMap attribution -->
+        <div class="map-attribution">
+          Map data ©
+          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">
+            OpenStreetMap
+          </a>
+          contributors | HelpLink Humanitarian GeoData
+        </div>
+      </div>
+
+      <div class="panel-ribbon">
+        <span>
+          <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
+          Live OpenStreetMap data — confirm opening hours before travelling
+        </span>
+        <a routerLink="/help" class="ribbon-link">
+          <span class="material-symbols-outlined" aria-hidden="true">report</span>
+          Report map update
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT: FOOD BANKS AROUND THE WORLD DIRECTORY -->
+    <div class="panel list-panel">
+      <div class="panel-header list-header">
+        <div class="panel-title">
+          <span class="material-symbols-outlined" aria-hidden="true">public</span>
+          <div>
+            <h2>Food Banks Around The World</h2>
+            <p>Nearest verified distribution hubs &amp; global relief partners</p>
+          </div>
+        </div>
+
+        <span class="count-badge">
+          {{ filteredFoodbanks.length }} Active {{ filteredFoodbanks.length === 1 ? 'Hit' : 'Hits' }}
+        </span>
+      </div>
+
+      <div class="bank-list">
+        <!-- Loading state -->
+        <div *ngIf="loading" class="state-box">
+          <span class="material-symbols-outlined spinner" aria-hidden="true">progress_activity</span>
+          <p>Loading verified food banks from OpenStreetMap…</p>
+        </div>
+
+        <!-- Error state -->
+        <div *ngIf="!loading && loadError" class="state-box">
+          <span class="material-symbols-outlined" aria-hidden="true">cloud_off</span>
+          <h3>Directory temporarily unavailable</h3>
+          <p>
+            We could not reach the OpenStreetMap service. Check that the local proxy server is
+            running, then try again.
           </p>
+          <button type="button" class="btn btn-primary btn-small" (click)="loadFoodbanks()">
+            Retry
+          </button>
+        </div>
+
+        <!-- Empty state -->
+        <div *ngIf="!loading && !loadError && filteredFoodbanks.length === 0" class="state-box">
+          <span class="material-symbols-outlined" aria-hidden="true">search_off</span>
+          <h3>No matching resources</h3>
+          <p>Try a broader search term, a different category, or a wider distance radius.</p>
+          <button type="button" class="btn btn-ghost btn-small" (click)="clearSearch()">
+            Clear search
+          </button>
+        </div>
+
+        <!-- Resource cards -->
+        <article
+          *ngFor="let bank of filteredFoodbanks; let i = index"
+          class="bank-card"
+          [class.is-selected]="i === selectedIndex"
+          role="button"
+          tabindex="0"
+          [attr.aria-pressed]="i === selectedIndex"
+          (click)="selectBank(i)"
+          (keydown)="onCardKeydown($event, i)"
+        >
+          <div class="badge-row">
+            <span class="badge badge-primary" *ngIf="i === selectedIndex">Active Selection</span>
+            <span class="badge badge-neutral" *ngIf="i !== selectedIndex">Verified Listing</span>
+            <span class="badge badge-success">
+              <span class="status-dot"></span>
+              On Map
+            </span>
+          </div>
+
+          <h3>{{ bankTitle(bank) }}</h3>
+
+          <p class="bank-address">
+            <span class="material-symbols-outlined" aria-hidden="true">pin_drop</span>
+            {{ bankAddress(bank) }}
+          </p>
+
+          <div class="tag-row">
+            <span class="tag">Food assistance</span>
+            <span class="tag">Community support</span>
+            <span class="tag">OpenStreetMap</span>
+          </div>
+
+          <div class="bank-card-footer">
+            <span class="coord-chip">
+              Lat: {{ formatCoord(bank.lat) }} | Lon: {{ formatCoord(bank.lon) }}
+            </span>
+
+            <div class="card-actions">
+              <a
+                class="text-action"
+                [href]="directionsUrl(bank)"
+                target="_blank"
+                rel="noopener noreferrer"
+                (click)="$event.stopPropagation()"
+              >
+                <span class="material-symbols-outlined" aria-hidden="true">directions</span>
+                Directions
+              </a>
+              <button
+                type="button"
+                class="btn btn-primary btn-small"
+                (click)="$event.stopPropagation(); navigateTo('/help')"
+              >
+                Request Aid
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="list-footer">
+        <span>
+          Showing <strong>{{ filteredFoodbanks.length }}</strong> of
+          <strong>{{ foodbanks.length }}</strong> centers
+        </span>
+
+        <div class="footer-actions">
+          <button type="button" class="btn btn-ghost btn-small" disabled>Previous</button>
+          <button
+            type="button"
+            class="btn btn-primary btn-small"
+            (click)="loadFoodbanks()"
+            [disabled]="loading"
+          >
+            Refresh Listings
+          </button>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Second Row -->
-  <div id="bottom-container">
+  <!-- ================= LOWER SECTION: FEATURED COMMUNITY INITIATIVES ================= -->
+  <section class="pathways" aria-labelledby="pathways-title">
+    <div class="section-heading">
+      <div>
+        <h2 id="pathways-title">Integrated Community Pathways</h2>
+        <p>
+          Moving beyond emergency handouts toward economic self-reliance, stable housing, and local
+          dignity.
+        </p>
+      </div>
 
-    <!-- Job -->
-    <div id="job" class="resource-card clickable" (click)="navigateTo('/jobs')">
-      <h3 class="section-title">Youth Job Connect</h3>
-      <p>Free training and job placements for youth.</p>
-      <p class="text-sm text-gray-600">Register online or on-site.</p>
-      <p class="text-sm text-blue-600 mt-2 italic">Click to view job listings</p>
+      <a routerLink="/help" class="view-all">
+        View All Support Networks
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+      </a>
     </div>
 
-        <!-- Shelter -->
-    <div id="shelter" class="resource-card clickable" (click)="navigateTo('/shelter')">
-      <h3 class="section-title">Safe Haven Shelter</h3>
-      <p>Provides temporary housing and meals.</p>
-      <p class="text-sm text-blue-600 mt-2 italic">Click to explore related products</p>
+    <div class="pathway-grid">
+      <!-- Youth Job Connect -->
+      <article class="path-card path-card--primary">
+        <div>
+          <div class="path-card-top">
+            <span class="path-icon material-symbols-outlined" aria-hidden="true">work</span>
+            <span class="path-badge">94% Placement</span>
+          </div>
+          <h3>Youth Job Connect</h3>
+          <p>
+            Free accredited technical training, resume workshops, and direct apprenticeship
+            placements for vulnerable youth ages 16–25.
+          </p>
+          <ul>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+              Online &amp; in-person options
+            </li>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+              Travel stipend available
+            </li>
+          </ul>
+        </div>
+
+        <a routerLink="/jobs" class="path-link">
+          <span>Explore Job Listings</span>
+          <span class="material-symbols-outlined" aria-hidden="true">north_east</span>
+        </a>
+      </article>
+
+      <!-- Safe Haven Shelter Network -->
+      <article class="path-card path-card--tertiary">
+        <div>
+          <div class="path-card-top">
+            <span class="path-icon material-symbols-outlined" aria-hidden="true">night_shelter</span>
+            <span class="path-badge">Immediate Intake</span>
+          </div>
+          <h3>Safe Haven Shelter Network</h3>
+          <p>
+            Emergency housing, clean family dormitories, warm nutritious meals, and transition case
+            managers standing by 24 hours a day.
+          </p>
+          <ul>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+              Pet-friendly units available
+            </li>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+              Family &amp; single gender floors
+            </li>
+          </ul>
+        </div>
+
+        <a routerLink="/shelter" class="path-link">
+          <span>Find Nearest Bed</span>
+          <span class="material-symbols-outlined" aria-hidden="true">near_me</span>
+        </a>
+      </article>
+
+      <!-- Local Artisan Highlight -->
+      <article class="path-card path-card--secondary">
+        <div>
+          <div class="path-card-top">
+            <span class="path-icon material-symbols-outlined" aria-hidden="true">storefront</span>
+            <span class="path-badge">Micro-Grants</span>
+          </div>
+          <h3>Local Artisan Highlight</h3>
+          <p>
+            Discover unique handmade creations, support talented grassroots creators, and access
+            zero-interest cooperative tool loans.
+          </p>
+          <ul>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+              100% proceeds to artists
+            </li>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+              Vendor registration free
+            </li>
+          </ul>
+        </div>
+
+        <a routerLink="/market" class="path-link">
+          <span>Browse Marketplace</span>
+          <span class="material-symbols-outlined" aria-hidden="true">shopping_bag</span>
+        </a>
+      </article>
+
+      <!-- Emergency Crisis Response -->
+      <article class="path-card path-card--error">
+        <div>
+          <div class="path-card-top">
+            <span class="path-icon material-symbols-outlined" aria-hidden="true">support_agent</span>
+            <span class="path-badge path-badge--urgent">
+              <span class="status-dot status-dot--error"></span>
+              24/7 Toll-Free
+            </span>
+          </div>
+          <h3>Emergency Crisis Response</h3>
+          <p>
+            Immediate mental health triage, urgent domestic protection escorts, and instant digital
+            food voucher authorizations.
+          </p>
+          <ul>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+              Confidential &amp; anonymous
+            </li>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+              Multi-lingual operators
+            </li>
+          </ul>
+        </div>
+
+        <a routerLink="/help" class="path-link path-link--solid">
+          <span class="material-symbols-outlined" aria-hidden="true">call</span>
+          <span>Emergency Dispatch</span>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= VOLUNTEER & CONTRIBUTION CALLOUT BANNER ================= -->
+  <section class="contribute-banner" aria-labelledby="contribute-title">
+    <div class="contribute-copy">
+      <div class="contribute-eyebrow">
+        <span class="material-symbols-outlined" aria-hidden="true">handshake</span>
+        <span>Community Empowerment Initiative</span>
+      </div>
+      <h2 id="contribute-title">Help Us Keep Community Records Updated</h2>
+      <p>
+        Are you running a food pantry, hot soup drive, or youth center? Register your facility for
+        free to ensure vulnerable individuals can find immediate sustenance and relief.
+      </p>
     </div>
 
-    <!-- local artist -->
-    <div id="artist" class="resource-card clickable" (click)="navigateTo('/market')">
-      <h3 class="section-title">Local Artisan Highlight</h3>
-      <p>Discover unique handmade creations and support talented artists from your community.</p>
-      <p class="text-sm text-gray-600">Register online or on-site.</p>
+    <div class="contribute-actions">
+      <a routerLink="/volunteer" class="btn btn-light">Register a Resource</a>
+      <a routerLink="/volunteer" class="btn btn-outline-light">Volunteer Driver</a>
     </div>
-  </div>
-
-  
-
-  
-
-  <ng-template #loading>
-    <p>Loading food banks from OpenStreetMap...</p>
-  </ng-template>
-</section>
+  </section>
+</div>
