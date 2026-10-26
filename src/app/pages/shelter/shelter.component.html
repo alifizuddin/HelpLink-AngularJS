@@ -1,40 +1,227 @@
-<section class="p-6">
-  <h2 id="header">Find Nearby Home Shelters</h2>
-  <p class="subtitle">
-    Choose your state to explore available temporary housing and support services near you.
-  </p>
-</section>
-
-<section class="market">
-  <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">
-    <span class="text-4xl">🏠</span> Shelter Finder
-  </h2>
-
-  <!-- Dropdown -->
-  <div id="dropdown" class="max-w-md mx-auto mb-6">
-    <select [(ngModel)]="selectedState">
-      <option value="">-- Select State --</option>
-      <option *ngFor="let state of states" [value]="state">{{ state }}</option>
-    </select>
-  </div>
-
-  <!-- Shelter Cards -->
-  <div class="product-grid" *ngIf="filteredShelters.length > 0; else noResults">
-    <div *ngFor="let shelter of filteredShelters" class="product-card">
-      <h3 class="text-xl font-semibold text-green-700">{{ shelter.name }}</h3>
-      <p class="text-gray-700">{{ shelter.address }}</p>
-      <p class="text-sm text-gray-500">Contact: {{ shelter.contact }}</p>
-      <p class="text-sm text-gray-500" *ngIf="shelter.link">
-      Website:
-        <a [href]="shelter.link" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">
-    {{ shelter.link }}
-        </a>
+<div class="shelter-page">
+  <!-- ================= PAGE HERO ================= -->
+  <header class="page-hero">
+    <div class="hero-copy">
+      <h1>Find Nearby Home Shelters</h1>
+      <p>
+        Choose your state to explore available temporary housing, emergency crisis refuges, and
+        dedicated support services near you.
       </p>
     </div>
-  </div>
+  </header>
 
-  <!-- No Results -->
-  <ng-template #noResults>
-    <p class="text-center text-gray-500">No shelters found for the selected state.</p>
-  </ng-template>
-</section>
+  <!-- ================= SHELTER FINDER ================= -->
+  <section class="finder-section" aria-labelledby="finder-title">
+    <div class="finder-card">
+      <div class="finder-heading">
+        <span class="finder-icon material-symbols-outlined" aria-hidden="true">home_work</span>
+        <h2 id="finder-title">Shelter Finder</h2>
+      </div>
+
+      <form class="finder-grid" (ngSubmit)="updateResults()" novalidate>
+        <!-- State Selector -->
+        <div class="field field--state">
+          <label for="state-selector">Select State / Federal Territory</label>
+          <div class="select-shell">
+            <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
+            <select id="state-selector" [(ngModel)]="selectedState" name="state">
+              <option value="">All States / Federal Territories</option>
+              <option *ngFor="let state of states" [value]="state">
+                {{ state }} ({{ stateCount(state) }} Shelters)
+              </option>
+            </select>
+            <span class="material-symbols-outlined chevron" aria-hidden="true">expand_more</span>
+          </div>
+        </div>
+
+        <!-- Keyword Search -->
+        <div class="field field--keyword">
+          <label for="shelter-keyword">Shelter Name, Town, or Service</label>
+          <div class="input-shell">
+            <span class="material-symbols-outlined" aria-hidden="true">search</span>
+            <input
+              id="shelter-keyword"
+              type="text"
+              name="keyword"
+              [(ngModel)]="keyword"
+              placeholder="e.g. Kajang, Meals, Residential Care, Baitul..."
+              autocomplete="off"
+            />
+            <button
+              *ngIf="keyword"
+              type="button"
+              class="clear-btn"
+              (click)="keyword = ''"
+              title="Clear search"
+              aria-label="Clear search"
+            >
+              <span class="material-symbols-outlined" aria-hidden="true">cancel</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Submit / Refresh Button -->
+        <div class="field field--action">
+          <button type="submit" class="update-btn">
+            <span class="material-symbols-outlined" aria-hidden="true">tune</span>
+            <span>Update Results</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ================= RESULTS HEADER ================= -->
+    <div class="results-header">
+      <div>
+        <h2>Shelters in {{ selectedState || 'Malaysia' }}</h2>
+        <p class="results-subtitle" *ngIf="keyword">
+          Matching keyword “{{ keyword }}”
+        </p>
+      </div>
+      <span class="count-badge">
+        {{ filteredShelters.length }} Verified
+        {{ filteredShelters.length === 1 ? 'Shelter' : 'Shelters' }}
+      </span>
+    </div>
+
+    <!-- ================= SHELTER FACILITY CARDS ================= -->
+    <div class="shelter-grid" *ngIf="filteredShelters.length > 0">
+      <article *ngFor="let shelter of filteredShelters; let i = index" class="shelter-card">
+        <!-- Availability / Verification Pill -->
+        <span class="status-pill">
+          <span class="status-dot"></span>
+          Verified Listing
+        </span>
+
+        <div class="card-body">
+          <div class="shelter-heading">
+            <div class="shelter-icon">
+              <span class="material-symbols-outlined" aria-hidden="true">
+                {{ shelterIcon(i) }}
+              </span>
+            </div>
+            <div class="shelter-title">
+              <h3>{{ shelter.name }}</h3>
+              <p class="shelter-type">{{ shelter.type || 'Community Shelter' }}</p>
+            </div>
+          </div>
+
+          <!-- Details Section -->
+          <div class="shelter-details">
+            <div class="detail-row">
+              <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
+              <span>{{ shelter.address }}, {{ shelter.state }}</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="material-symbols-outlined" aria-hidden="true">call</span>
+              <a class="detail-strong" [href]="telHref(shelter.contact)">
+                {{ shelter.contact }}
+              </a>
+            </div>
+
+            <div class="detail-row" *ngIf="shelter.link">
+              <span class="material-symbols-outlined" aria-hidden="true">public</span>
+              <a
+                class="detail-link"
+                [href]="shelter.link"
+                target="_blank"
+                rel="noopener noreferrer"
+                [title]="shelter.link"
+              >
+                {{ displayLink(shelter.link) }}
+              </a>
+            </div>
+
+            <div class="detail-row" *ngIf="shelter.note">
+              <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+              <span class="detail-note">{{ shelter.note }}</span>
+            </div>
+          </div>
+
+          <!-- Badge Cluster -->
+          <div class="tag-row" *ngIf="shelter.services as services">
+            <span *ngFor="let service of services" class="tag">{{ service }}</span>
+          </div>
+        </div>
+
+        <!-- Bottom Action Buttons -->
+        <div class="card-actions">
+          <a class="btn btn-outline" [href]="telHref(shelter.contact)">
+            <span class="material-symbols-outlined" aria-hidden="true">phone</span>
+            <span>Call Shelter</span>
+          </a>
+          <button type="button" class="btn btn-primary">Request Intake</button>
+        </div>
+      </article>
+    </div>
+
+    <!-- ================= EMPTY STATE ================= -->
+    <div *ngIf="filteredShelters.length === 0" class="state-box">
+      <span class="material-symbols-outlined" aria-hidden="true">night_shelter</span>
+      <h3>No shelters found</h3>
+      <p>
+        No verified shelter matches your current state or keyword. Try a broader search term or
+        browse every state.
+      </p>
+      <button type="button" class="btn btn-primary btn-small" (click)="clearFilters()">
+        Show All States
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= EMERGENCY & NGO CALLOUTS ================= -->
+  <section class="callouts" aria-label="Emergency assistance and shelter registration">
+    <!-- High-Priority Emergency Callout Card -->
+    <div class="emergency-card">
+      <span class="emergency-watermark material-symbols-outlined" aria-hidden="true">sos</span>
+
+      <div class="emergency-inner">
+        <div class="emergency-copy">
+          <span class="emergency-badge">
+            <span class="material-symbols-outlined" aria-hidden="true">emergency</span>
+            Immediate Life Safety
+          </span>
+          <h3>Facing acute homelessness or danger tonight?</h3>
+          <p>
+            Our central dispatch links directly with welfare responders, police crisis lines, and
+            mobile emergency shelters across all Malaysian districts. No fees or registration
+            paperwork required for urgent refuge.
+          </p>
+        </div>
+
+        <div class="emergency-actions">
+          <a class="btn btn-emergency" href="tel:1800884357">
+            <span class="material-symbols-outlined" aria-hidden="true">phone_in_talk</span>
+            <span>Call 1800-88-HELP (4357)</span>
+          </a>
+          <a class="btn btn-emergency-ghost" routerLink="/help">
+            <span class="material-symbols-outlined" aria-hidden="true">directions_bus</span>
+            <span>Find Emergency Transit</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- NGO Registration Banner -->
+    <div class="ngo-card">
+      <div class="ngo-copy">
+        <div class="ngo-icon">
+          <span class="material-symbols-outlined" aria-hidden="true">handshake</span>
+        </div>
+        <div>
+          <h4>Are you an NGO Care Shelter?</h4>
+          <p>
+            Register your facility to publish live bed capacities, receive bulk food distributions,
+            and request vetted volunteers under UN SDG 1.
+          </p>
+        </div>
+      </div>
+
+      <a class="btn btn-secondary" routerLink="/volunteer">
+        <span>Register Your Facility</span>
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+      </a>
+    </div>
+  </section>
+</div>

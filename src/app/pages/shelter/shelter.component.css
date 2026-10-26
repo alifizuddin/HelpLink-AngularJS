@@ -1,73 +1,858 @@
-#header {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #2f3e46;
-  text-align: center;
-  margin-top: 1rem;
+/* =========================================================
+   HELP LINK — FIND NEARBY HOME SHELTERS
+   Design system colours mirror the project's HelpLink palette
+   (primary teal #00685f, Atkinson Hyperlegible Next + Inter).
+   ========================================================= */
+
+:host {
+  display: block;
 }
 
-.subtitle {
-  color: #555;
-  font-size: 1rem;
-  text-align: center;
-  margin-bottom: 2rem;
-  font-family: 'Segoe UI', sans-serif;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.shelter {
-  padding: 2rem;
-  text-align: center;
-  background: url('https://images.unsplash.com/photo-1590080877429-d1d6dcf65f98?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
-  backdrop-filter: blur(2px);
-  min-height: 100vh;
-  color: #222;
-}
-#dropdown {
-  align-items: center;
-  max-width: 80%;
-}
-
-.shelter h2 {
-  background: rgba(255, 255, 255, 0.85);
-  display: inline-block;
-  padding: 0.5rem 1.5rem;
-  border-radius: 12px;
-}
-
-select {
+.shelter-page {
   width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 2rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
+  max-width: 1536px;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+  color: #151c27;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
-/* Grid for shelter cards */
-.product-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-  margin-top: 1rem;
+@media (min-width: 768px) {
+  .shelter-page {
+    padding: 4rem 2rem;
+  }
 }
 
-.product-card {
-  background: white;
-  padding: 1rem;
-  border-radius: 10px;
-  width: 260px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  transition: transform 0.2s ease;
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: 'Atkinson Hyperlegible Next', 'Segoe UI', sans-serif;
+  color: #151c27;
 }
 
-.product-card:hover {
-  transform: translateY(-4px);
+p {
+  margin: 0;
 }
 
 a {
-  word-break: break-all;
+  color: inherit;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* =========================================================
+   PAGE HERO
+   ========================================================= */
+
+.page-hero {
+  margin-bottom: 2.5rem;
+}
+
+.hero-copy {
+  max-width: 48rem;
+}
+
+.hero-copy h1 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.hero-copy p {
+  margin-top: 0.75rem;
+  color: #3d4947;
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   SHELTER FINDER CARD
+   ========================================================= */
+
+.finder-section {
+  margin-bottom: 3.5rem;
+}
+
+.finder-card {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid #bcc9c6;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06);
+}
+
+.finder-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.finder-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 104, 95, 0.1);
+  color: #00685f;
+  font-size: 1.4rem;
+}
+
+.finder-heading h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.finder-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: end;
+}
+
+.field--state {
+  grid-column: span 4;
+}
+
+.field--keyword {
+  grid-column: span 5;
+}
+
+.field--action {
+  grid-column: span 3;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #151c27;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.input-shell,
+.select-shell {
+  position: relative;
+}
+
+.input-shell input,
+.select-shell select {
+  width: 100%;
+  height: 2.85rem;
+  padding: 0 2.35rem 0 2.75rem;
+  border: 1px solid #bcc9c6;
+  border-radius: 0.5rem;
+  background: #f9f9ff;
+  color: #151c27;
+  font-size: 1rem;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.input-shell input::placeholder {
+  color: #6d7a77;
+}
+
+.input-shell input:focus,
+.select-shell select:focus {
+  outline: none;
+  border-color: #00685f;
+  box-shadow: 0 0 0 3px rgba(0, 104, 95, 0.14);
+}
+
+.input-shell > .material-symbols-outlined,
+.select-shell > .material-symbols-outlined {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  transform: translateY(-50%);
+  color: #6d7a77;
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+.select-shell select {
+  padding-right: 2.35rem;
+  appearance: none;
+  cursor: pointer;
+}
+
+.select-shell > .chevron {
+  right: 0.7rem;
+  left: auto;
+  font-size: 1rem;
+}
+
+.clear-btn {
+  position: absolute;
+  top: 50%;
+  right: 0.55rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #6d7a77;
+  transform: translateY(-50%);
+  transition: color 0.18s ease;
+}
+
+.clear-btn:hover {
+  color: #151c27;
+}
+
+.clear-btn .material-symbols-outlined {
+  font-size: 1.05rem;
+}
+
+.update-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: 100%;
+  height: 2.85rem;
+  padding: 0 1rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: #00685f;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 104, 95, 0.25);
+  transition: background 0.18s ease, transform 0.12s ease;
+}
+
+.update-btn:hover {
+  background: #008378;
+}
+
+.update-btn:active {
+  transform: translateY(1px);
+}
+
+.update-btn .material-symbols-outlined {
+  font-size: 1.05rem;
+}
+
+/* =========================================================
+   RESULTS HEADER
+   ========================================================= */
+
+.results-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .results-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.results-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.results-subtitle {
+  margin-top: 0.2rem;
+  color: #3d4947;
+  font-size: 0.875rem;
+}
+
+.count-badge {
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  background: #e2e8f8;
+  color: #3d4947;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   SHELTER CARD GRID
+   ========================================================= */
+
+.shelter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.shelter-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border: 1px solid rgba(188, 201, 198, 0.8);
+  border-radius: 0.75rem;
+  background: #ffffff;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.shelter-card:hover {
+  border-color: rgba(0, 104, 95, 0.4);
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.1);
+}
+
+.shelter-card:hover h3 {
+  color: #00685f;
+}
+
+.card-body {
+  min-width: 0;
+}
+
+.status-pill {
+  position: absolute;
+  top: 1.15rem;
+  right: 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  background: rgba(0, 104, 95, 0.1);
+  color: #00685f;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-dot {
   display: inline-block;
-  max-width: 100%;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background: #00685f;
+  flex-shrink: 0;
+}
+
+.shelter-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.shelter-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background: #f0f3ff;
+  color: #00685f;
+}
+
+.shelter-icon .material-symbols-outlined {
+  font-size: 1.5rem;
+}
+
+.shelter-title {
+  min-width: 0;
+  padding-right: 7rem;
+}
+
+.shelter-title h3 {
+  color: #151c27;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.3;
+  transition: color 0.18s ease;
+}
+
+.shelter-type {
+  margin-top: 0.15rem;
+  color: #855300;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ---------- Details ---------- */
+
+.shelter-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 1rem 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(188, 201, 198, 0.3);
+  color: #3d4947;
+  font-size: 0.875rem;
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.detail-row .material-symbols-outlined {
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  color: #6d7a77;
+  font-size: 1rem;
+}
+
+.detail-strong {
+  color: #151c27;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.detail-strong:hover {
+  color: #00685f;
+}
+
+.detail-link {
+  overflow: hidden;
+  color: #1d4ed8;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.detail-link:hover {
+  text-decoration: underline;
+}
+
+.detail-note {
+  color: #6d7a77;
+  font-size: 0.8125rem;
+}
+
+/* ---------- Badge cluster ---------- */
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag {
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
+  background: #e2e8f8;
+  color: #151c27;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+/* ---------- Card actions ---------- */
+
+.card-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(188, 201, 198, 0.3);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.btn .material-symbols-outlined {
+  font-size: 1rem;
+}
+
+.btn-outline {
+  border-color: #00685f;
+  background: transparent;
+  color: #00685f;
+}
+
+.btn-outline:hover {
+  background: #f0f3ff;
+}
+
+.btn-primary {
+  background: #00685f;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: #008378;
+}
+
+.btn-secondary {
+  background: #855300;
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.12);
+}
+
+.btn-secondary:hover {
+  background: #fea619;
+  color: #2a1700;
+}
+
+.btn-small {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8125rem;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.state-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 3.5rem 1rem;
+  border: 1px dashed #bcc9c6;
+  border-radius: 0.75rem;
+  background: rgba(249, 249, 255, 0.6);
+  color: #3d4947;
+  text-align: center;
+}
+
+.state-box > .material-symbols-outlined {
+  color: #00685f;
+  font-size: 2.25rem;
+}
+
+.state-box h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.state-box p {
+  max-width: 34rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.state-box .btn {
+  margin-top: 0.5rem;
+}
+
+/* =========================================================
+   EMERGENCY & NGO CALLOUTS
+   ========================================================= */
+
+.callouts {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.emergency-card {
+  position: relative;
+  overflow: hidden;
+  padding: 1.75rem;
+  border-radius: 1rem;
+  background: linear-gradient(to right, #2a313d, #0f172a);
+  color: #ebf1ff;
+  box-shadow: 0 10px 26px rgba(16, 24, 40, 0.22);
+}
+
+@media (min-width: 768px) {
+  .emergency-card {
+    padding: 2rem;
+  }
+}
+
+.emergency-watermark {
+  position: absolute;
+  right: -1.5rem;
+  bottom: -3rem;
+  color: #ffffff;
+  font-size: 11rem;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.emergency-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .emergency-inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.emergency-copy {
+  max-width: 42rem;
+}
+
+.emergency-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  background: #ba1a1a;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.emergency-badge .material-symbols-outlined {
+  font-size: 0.9rem;
+}
+
+.emergency-card h3 {
+  margin-top: 0.75rem;
+  color: #ffffff;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.emergency-card p {
+  margin-top: 0.5rem;
+  color: #bcc9c6;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.emergency-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .emergency-actions {
+    flex-direction: row;
+  }
+}
+
+.btn-emergency {
+  padding: 0.85rem 1.25rem;
+  background: #ba1a1a;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(186, 26, 26, 0.35);
+}
+
+.btn-emergency:hover {
+  background: #8f1414;
+}
+
+.btn-emergency .material-symbols-outlined {
+  font-size: 1.15rem;
+}
+
+.btn-emergency-ghost {
+  padding: 0.85rem 1.25rem;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.btn-emergency-ghost:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-emergency-ghost .material-symbols-outlined {
+  font-size: 1.15rem;
+}
+
+/* ---------- NGO registration banner ---------- */
+
+.ngo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid #bcc9c6;
+  border-radius: 0.75rem;
+  background: #e7eefe;
+}
+
+@media (min-width: 768px) {
+  .ngo-card {
+    flex-direction: row;
+    align-items: center;
+    padding: 2rem;
+  }
+}
+
+.ngo-copy {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 48rem;
+}
+
+.ngo-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background: #00685f;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 104, 95, 0.25);
+}
+
+.ngo-icon .material-symbols-outlined {
+  font-size: 1.5rem;
+}
+
+.ngo-card h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.ngo-card p {
+  margin-top: 0.25rem;
+  color: #3d4947;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .shelter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .finder-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .field--state {
+    grid-column: span 3;
+  }
+
+  .field--keyword {
+    grid-column: span 3;
+  }
+
+  .field--action {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero-copy p {
+    font-size: 1rem;
+  }
+
+  .finder-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field--state,
+  .field--keyword,
+  .field--action {
+    grid-column: auto;
+  }
+
+  .shelter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shelter-title {
+    padding-right: 6.5rem;
+  }
+
+  .emergency-actions .btn {
+    width: 100%;
+  }
+
+  .ngo-card .btn-secondary {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .status-pill {
+    position: static;
+    margin-bottom: 0.75rem;
+  }
+
+  .shelter-title {
+    padding-right: 0;
+  }
+
+  .card-actions {
+    grid-template-columns: 1fr;
+  }
 }
