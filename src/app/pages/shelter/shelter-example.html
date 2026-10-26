@@ -1,0 +1,700 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Find Nearby Home Shelters | HelpLink</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400..800;1,400..800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-tint": "#006a61",
+            "outline": "#6d7a77",
+            "error": "#ba1a1a",
+            "on-primary-fixed": "#00201d",
+            "surface-dim": "#d3daea",
+            "outline-variant": "#bcc9c6",
+            "secondary-fixed": "#ffddb8",
+            "surface-container-low": "#f0f3ff",
+            "surface-container-high": "#e2e8f8",
+            "primary-container": "#008378",
+            "on-primary-fixed-variant": "#005049",
+            "on-secondary-fixed-variant": "#653e00",
+            "surface-container-highest": "#dce2f3",
+            "surface-container": "#e7eefe",
+            "surface": "#f9f9ff",
+            "background": "#f9f9ff",
+            "on-surface-variant": "#3d4947",
+            "on-primary": "#ffffff",
+            "tertiary-container": "#4069f2",
+            "on-error": "#ffffff",
+            "inverse-surface": "#2a313d",
+            "on-secondary": "#ffffff",
+            "primary-fixed": "#89f5e7",
+            "tertiary-fixed-dim": "#b7c4ff",
+            "on-tertiary-fixed": "#001551",
+            "secondary-container": "#fea619",
+            "inverse-on-surface": "#ebf1ff",
+            "tertiary": "#1d4ed8",
+            "on-primary-container": "#f4fffc",
+            "tertiary-fixed": "#dce1ff",
+            "surface-variant": "#dce2f3",
+            "inverse-primary": "#6bd8cb",
+            "surface-bright": "#f9f9ff",
+            "error-container": "#ffdad6",
+            "on-tertiary-container": "#fffbff",
+            "on-background": "#151c27",
+            "on-tertiary": "#ffffff",
+            "primary-fixed-dim": "#6bd8cb",
+            "on-secondary-container": "#684000",
+            "on-error-container": "#93000a",
+            "secondary-fixed-dim": "#ffb95f",
+            "primary": "#00685f",
+            "surface-container-lowest": "#ffffff",
+            "on-surface": "#151c27",
+            "on-tertiary-fixed-variant": "#0039b5",
+            "secondary": "#855300",
+            "on-secondary-fixed": "#2a1700"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-mobile": "16px",
+            "lg": "40px",
+            "gutter": "24px",
+            "xs": "8px",
+            "md": "24px",
+            "xl": "64px",
+            "base": "4px",
+            "sm": "16px",
+            "margin-desktop": "48px"
+          },
+          "fontFamily": {
+            "display-lg": ["Atkinson Hyperlegible Next"],
+            "headline-md": ["Atkinson Hyperlegible Next"],
+            "label-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-lg-mobile": ["Atkinson Hyperlegible Next"],
+            "headline-lg": ["Atkinson Hyperlegible Next"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-sm": ["12px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md text-body-md antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Shared Top Navigation Anchor -->
+<header class="bg-surface dark:bg-on-background shadow-sm dark:shadow-none w-full sticky top-0 z-50 transition-all">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-md w-full max-w-screen-2xl mx-auto">
+<!-- Brand Logo Anchor -->
+<div class="flex items-center gap-6">
+<a class="flex items-center gap-2 group" href="#">
+<span class="p-1.5 rounded-lg bg-primary text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+</span>
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight">HelpLink</span>
+</a>
+<!-- Desktop Navigation Items with Shelters Active state -->
+<nav class="hidden lg:flex items-center gap-8 ml-4">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed font-label-md text-label-md transition-colors" href="#">News Dashboard</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed font-label-md text-label-md transition-colors" href="#">Jobs</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed font-label-md text-label-md transition-colors" href="#">Community Map</a>
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1 font-label-md text-label-md" href="#">Shelters</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed font-label-md text-label-md transition-colors" href="#">Marketplace</a>
+</nav>
+</div>
+<!-- Search Bar and Trailing Actions -->
+<div class="flex items-center gap-3 md:gap-4">
+<div class="relative hidden sm:block w-48 md:w-64">
+<span class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-lg">search</span>
+</span>
+<input class="w-full pl-9 pr-3 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-on-surface placeholder:text-outline text-body-sm font-body-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Search resources..." type="text">
+</div>
+<a class="px-4 py-2 rounded-lg border border-primary text-primary font-label-md text-label-md hover:bg-surface-container-low transition-colors whitespace-nowrap" href="#emergency">
+          Get Help
+        </a>
+<a class="px-4 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md shadow-sm transition-all whitespace-nowrap" href="#volunteer">
+          Volunteer
+        </a>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow">
+<!-- Hero / Headline Area -->
+<section class="relative overflow-hidden bg-gradient-to-b from-surface-container-low via-surface to-background pt-10 pb-12 border-b border-surface-container-highest">
+<div class="max-w-screen-2xl mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
+<!-- Breadcrumb / Status Badge Row -->
+<div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+
+
+</div>
+<!-- Headline & Context -->
+<div class="max-w-3xl">
+<h1 class="font-headline-lg md:font-display-lg text-headline-lg-mobile md:text-display-lg text-on-surface font-extrabold tracking-tight">
+            Find Nearby Home Shelters
+          </h1>
+<p class="mt-3 font-body-lg text-body-lg text-on-surface-variant">
+            Choose your state to explore available temporary housing, emergency crisis refuges, and dedicated support services near you.
+          </p>
+</div>
+<!-- Key Metrics Strip -->
+
+</div>
+</section>
+<!-- Search, Filter & Location Picker -->
+<section class="max-w-screen-2xl mx-auto px-margin-mobile md:px-margin-desktop py-8">
+<!-- Search & State Selector Card -->
+<div class="bg-surface-container-lowest rounded-xl p-5 md:p-6 border border-outline-variant shadow-sm mb-6">
+<div class="flex items-center gap-2 mb-4 text-on-surface font-headline-md text-headline-md">
+<span aria-label="Shelter finder" class="text-2xl" role="img">🏠</span>
+<span class="font-bold">Shelter Finder</span>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end" onsubmit="event.preventDefault();">
+<!-- State Selector -->
+<div class="md:col-span-4">
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1.5" for="state-selector">
+              Select State / Federal Territory
+            </label>
+<div class="relative">
+<span class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-xl">location_on</span>
+</span>
+<select class="w-full pl-10 pr-10 py-2.5 rounded-lg bg-surface border border-outline-variant text-on-surface font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-primary appearance-none cursor-pointer" id="state-selector">
+<option selected="" value="selangor">Selangor (38 Shelters)</option>
+<option value="kuala_lumpur">Kuala Lumpur (27 Shelters)</option>
+<option value="penang">Penang (19 Shelters)</option>
+<option value="johor">Johor (22 Shelters)</option>
+<option value="perak">Perak (15 Shelters)</option>
+<option value="melaka">Melaka (11 Shelters)</option>
+<option value="negeri_sembilan">Negeri Sembilan (9 Shelters)</option>
+</select>
+<span class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</span>
+</div>
+</div>
+<!-- Keyword Search -->
+<div class="md:col-span-5">
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1.5" for="shelter-keyword">
+              Shelter Name, Town, or Demographic
+            </label>
+<div class="relative">
+<span class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-xl">search</span>
+</span>
+<input class="w-full pl-10 pr-3 py-2.5 rounded-lg bg-surface border border-outline-variant text-on-surface placeholder:text-outline font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-primary" id="shelter-keyword" placeholder="e.g. Kajang, Elderly, Women &amp; Children, Baitul..." type="text">
+</div>
+</div>
+<!-- Submit / Refresh Button -->
+<div class="md:col-span-3">
+<button class="w-full py-2.5 px-4 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm transition-all" type="submit">
+<span class="material-symbols-outlined text-lg">tune</span>
+<span class="">Update Results</span>
+</button>
+</div>
+</form>
+<!-- Quick Demographic Filter Chips -->
+
+</div>
+<!-- Results Header & Utility Bar -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold flex items-center gap-2">
+<span class="">Shelters in Selangor</span>
+
+</h2>
+
+</div>
+
+</div>
+<!-- Shelter Facility Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1: Persatuan Rumah Caring Kajang -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/80 p-6 flex flex-col justify-between hover:shadow-md transition-all hover:border-primary/40 relative group">
+<div class="absolute top-4 right-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Intake Open: 3 Beds
+            </span>
+</div>
+<div>
+<div class="flex items-start gap-3 mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low text-primary flex items-center justify-center font-bold flex-shrink-0">
+<span class="material-symbols-outlined text-2xl">roofing</span>
+</div>
+<div class="pr-24">
+<h3 class="font-headline-md text-lg font-bold text-on-surface group-hover:text-primary transition-colors leading-snug">
+                  Persatuan Rumah Caring Kajang
+                </h3>
+<p class="font-label-sm text-label-sm text-secondary font-medium">Elderly &amp; Destitute Care</p>
+</div>
+</div>
+<!-- Details Section -->
+<div class="space-y-2.5 my-4 pt-3 border-t border-outline-variant/30 text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-outline text-base mt-0.5">location_on</span>
+<span class="">Taman Cahaya, Kajang, Selangor</span>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-base">call</span>
+<a class="font-semibold text-on-surface hover:text-primary" href="tel:0123456789">012-3456789</a>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-base">public</span>
+<a class="text-tertiary hover:underline truncate" href="https://www.facebook.com/PersatuanRumahCaringKajangSelangor/" rel="noopener noreferrer" target="_blank">
+                  facebook.com/PersatuanRumahCaringKajang...
+                </a>
+</div>
+</div>
+<!-- Badge Cluster -->
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Emergency Housing</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Senior Nutrition</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">24/7 Care</span>
+</div>
+</div>
+<!-- Bottom Action Buttons -->
+<div class="grid grid-cols-2 gap-2 pt-3 border-t border-outline-variant/30">
+<a class="py-2 px-3 rounded-lg border border-primary text-primary hover:bg-surface-container-low font-label-md text-label-md font-semibold text-center flex items-center justify-center gap-1" href="tel:0123456789">
+<span class="material-symbols-outlined text-base">phone</span>
+<span class="">Call Shelter</span>
+</a>
+<button class="py-2 px-3 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold text-center transition-colors">
+              Request Intake
+            </button>
+</div>
+</article>
+<!-- Card 2: Pusat Jagaan Baitul Amal -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/80 p-6 flex flex-col justify-between hover:shadow-md transition-all hover:border-primary/40 relative group">
+<div class="absolute top-4 right-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Immediate Intake
+            </span>
+</div>
+<div>
+<div class="flex items-start gap-3 mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low text-primary flex items-center justify-center font-bold flex-shrink-0">
+<span class="material-symbols-outlined text-2xl">cottage</span>
+</div>
+<div class="pr-24">
+<h3 class="font-headline-md text-lg font-bold text-on-surface group-hover:text-primary transition-colors leading-snug">
+                  Pusat Jagaan Baitul Amal
+                </h3>
+<p class="font-label-sm text-label-sm text-secondary font-medium">Women &amp; Orphans Sanctuary</p>
+</div>
+</div>
+<!-- Details Section -->
+<div class="space-y-2.5 my-4 pt-3 border-t border-outline-variant/30 text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-outline text-base mt-0.5">location_on</span>
+<span class="">Seksyen 14, Petaling Jaya, Selangor</span>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-base">call</span>
+<a class="font-semibold text-on-surface hover:text-primary" href="tel:0379609757">03-7960 9757</a>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-base">public</span>
+<a class="text-tertiary hover:underline truncate" href="https://www.facebook.com/p/Pusat-jagaan-baitul-hidayah-100064928700521/" rel="noopener noreferrer" target="_blank">
+                  facebook.com/Pusat-jagaan-baitul...
+                </a>
+</div>
+</div>
+<!-- Badge Cluster -->
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Family Sanctuary</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Child Support</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Medical Aid Provided</span>
+</div>
+</div>
+<!-- Bottom Action Buttons -->
+<div class="grid grid-cols-2 gap-2 pt-3 border-t border-outline-variant/30">
+<a class="py-2 px-3 rounded-lg border border-primary text-primary hover:bg-surface-container-low font-label-md text-label-md font-semibold text-center flex items-center justify-center gap-1" href="tel:0379609757">
+<span class="material-symbols-outlined text-base">phone</span>
+<span class="">Call Shelter</span>
+</a>
+<button class="py-2 px-3 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold text-center transition-colors">
+              Request Intake
+            </button>
+</div>
+</article>
+<!-- Card 3: Pusat Jagaan Al-Fikrah -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/80 p-6 flex flex-col justify-between hover:shadow-md transition-all hover:border-primary/40 relative group">
+<div class="absolute top-4 right-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              High Demand / Waitlist
+            </span>
+</div>
+<div>
+<div class="flex items-start gap-3 mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low text-primary flex items-center justify-center font-bold flex-shrink-0">
+<span class="material-symbols-outlined text-2xl">home_health</span>
+</div>
+<div class="pr-24">
+<h3 class="font-headline-md text-lg font-bold text-on-surface group-hover:text-primary transition-colors leading-snug">
+                  Pusat Jagaan Al-Fikrah
+                </h3>
+<p class="font-label-sm text-label-sm text-secondary font-medium">Senior Citizens &amp; Special Needs</p>
+</div>
+</div>
+<!-- Details Section -->
+<div class="space-y-2.5 my-4 pt-3 border-t border-outline-variant/30 text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-outline text-base mt-0.5">location_on</span>
+<span class="">Jalan Cheras, Kajang, Selangor</span>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-base">call</span>
+<a class="font-semibold text-on-surface hover:text-primary" href="tel:0387330715">03-8733 0715</a>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-base">public</span>
+<a class="text-tertiary hover:underline truncate" href="https://www.facebook.com/alfikrahmas/?locale=ms_MY" rel="noopener noreferrer" target="_blank">
+                  facebook.com/alfikrahmas/...
+                </a>
+</div>
+</div>
+<!-- Badge Cluster -->
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Palliative Support</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Nursing Care</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Subsidized Meals</span>
+</div>
+</div>
+<!-- Bottom Action Buttons -->
+<div class="grid grid-cols-2 gap-2 pt-3 border-t border-outline-variant/30">
+<a class="py-2 px-3 rounded-lg border border-primary text-primary hover:bg-surface-container-low font-label-md text-label-md font-semibold text-center flex items-center justify-center gap-1" href="tel:0387330715">
+<span class="material-symbols-outlined text-base">phone</span>
+<span class="">Call Shelter</span>
+</a>
+<button class="py-2 px-3 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md font-semibold text-center transition-colors">
+              Register Inquiry
+            </button>
+</div>
+</article>
+<!-- Card 4: Pusat Jagaan Kasih Murni -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/80 p-6 flex flex-col justify-between hover:shadow-md transition-all hover:border-primary/40 relative group">
+<div class="absolute top-4 right-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Intake Open: 5 Beds
+            </span>
+</div>
+<div>
+<div class="flex items-start gap-3 mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low text-primary flex items-center justify-center font-bold flex-shrink-0">
+<span class="material-symbols-outlined text-2xl">child_care</span>
+</div>
+<div class="pr-24">
+<h3 class="font-headline-md text-lg font-bold text-on-surface group-hover:text-primary transition-colors leading-snug">
+                  Pusat Jagaan Kasih Murni
+                </h3>
+<p class="font-label-sm text-label-sm text-secondary font-medium">Youth &amp; Foster Care Home</p>
+</div>
+</div>
+<!-- Details Section -->
+<div class="space-y-2.5 my-4 pt-3 border-t border-outline-variant/30 text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-outline text-base mt-0.5">location_on</span>
+<span class="">SS15, Subang Jaya, Selangor</span>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-base">call</span>
+<a class="font-semibold text-on-surface hover:text-primary" href="tel:0356321198">03-5632 1198</a>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-base">public</span>
+<span class="text-on-surface-variant">Community Supported (SDG 1 Partner)</span>
+</div>
+</div>
+<!-- Badge Cluster -->
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Education Support</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Daily Nutritious Meals</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Mentorship</span>
+</div>
+</div>
+<!-- Bottom Action Buttons -->
+<div class="grid grid-cols-2 gap-2 pt-3 border-t border-outline-variant/30">
+<a class="py-2 px-3 rounded-lg border border-primary text-primary hover:bg-surface-container-low font-label-md text-label-md font-semibold text-center flex items-center justify-center gap-1" href="tel:0356321198">
+<span class="material-symbols-outlined text-base">phone</span>
+<span class="">Call Shelter</span>
+</a>
+<button class="py-2 px-3 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold text-center transition-colors">
+              Request Intake
+            </button>
+</div>
+</article>
+<!-- Card 5: Rumah Hope Sanctuary -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/80 p-6 flex flex-col justify-between hover:shadow-md transition-all hover:border-primary/40 relative group">
+<div class="absolute top-4 right-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Intake Open: 2 Beds
+            </span>
+</div>
+<div>
+<div class="flex items-start gap-3 mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low text-primary flex items-center justify-center font-bold flex-shrink-0">
+<span class="material-symbols-outlined text-2xl">shield_person</span>
+</div>
+<div class="pr-24">
+<h3 class="font-headline-md text-lg font-bold text-on-surface group-hover:text-primary transition-colors leading-snug">
+                  Rumah Hope Sanctuary
+                </h3>
+<p class="font-label-sm text-label-sm text-secondary font-medium">Crisis Shelter for Women &amp; Children</p>
+</div>
+</div>
+<!-- Details Section -->
+<div class="space-y-2.5 my-4 pt-3 border-t border-outline-variant/30 text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-outline text-base mt-0.5">location_on</span>
+<span class="">Section 20, Petaling Jaya, Selangor</span>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-base">call</span>
+<a class="font-semibold text-on-surface hover:text-primary" href="tel:0379545678">03-7954 5678</a>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-base">emergency</span>
+<span class="text-error font-medium text-xs">Direct Emergency Intake Hotline active</span>
+</div>
+</div>
+<!-- Badge Cluster -->
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Confidential Haven</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Legal Advisory</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Child Daycare</span>
+</div>
+</div>
+<!-- Bottom Action Buttons -->
+<div class="grid grid-cols-2 gap-2 pt-3 border-t border-outline-variant/30">
+<a class="py-2 px-3 rounded-lg border border-primary text-primary hover:bg-surface-container-low font-label-md text-label-md font-semibold text-center flex items-center justify-center gap-1" href="tel:0379545678">
+<span class="material-symbols-outlined text-base">phone</span>
+<span class="">Call Shelter</span>
+</a>
+<button class="py-2 px-3 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold text-center transition-colors">
+              Request Intake
+            </button>
+</div>
+</article>
+<!-- Card 6: Grace Community Shelter -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant/80 p-6 flex flex-col justify-between hover:shadow-md transition-all hover:border-primary/40 relative group">
+<div class="absolute top-4 right-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Emergency Beds: 6 Available
+            </span>
+</div>
+<div>
+<div class="flex items-start gap-3 mb-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low text-primary flex items-center justify-center font-bold flex-shrink-0">
+<span class="material-symbols-outlined text-2xl">food_bank</span>
+</div>
+<div class="pr-24">
+<h3 class="font-headline-md text-lg font-bold text-on-surface group-hover:text-primary transition-colors leading-snug">
+                  Grace Community Shelter
+                </h3>
+<p class="font-label-sm text-label-sm text-secondary font-medium">Homeless Transit Hub &amp; Food Kitchen</p>
+</div>
+</div>
+<!-- Details Section -->
+<div class="space-y-2.5 my-4 pt-3 border-t border-outline-variant/30 text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-outline text-base mt-0.5">location_on</span>
+<span class="">Persiaran Raja Muda Musa, Klang, Selangor</span>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-base">call</span>
+<a class="font-semibold text-on-surface hover:text-primary" href="tel:0333414220">03-3341 4220</a>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-outline text-base">schedule</span>
+<span class="">Walk-in triage 8:00 AM - 10:00 PM</span>
+</div>
+</div>
+<!-- Badge Cluster -->
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Daily Soup Kitchen</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Job Re-Entry</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-xs font-label-sm">Hygiene Station</span>
+</div>
+</div>
+<!-- Bottom Action Buttons -->
+<div class="grid grid-cols-2 gap-2 pt-3 border-t border-outline-variant/30">
+<a class="py-2 px-3 rounded-lg border border-primary text-primary hover:bg-surface-container-low font-label-md text-label-md font-semibold text-center flex items-center justify-center gap-1" href="tel:0333414220">
+<span class="material-symbols-outlined text-base">phone</span>
+<span class="">Call Shelter</span>
+</a>
+<button class="py-2 px-3 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold text-center transition-colors">
+              Request Intake
+            </button>
+</div>
+</article>
+</div>
+</section>
+<!-- Emergency Crisis Banner & Partner Callout Section -->
+<section class="max-w-screen-2xl mx-auto px-margin-mobile md:px-margin-desktop py-8">
+<!-- High-Priority Emergency Callout Card -->
+<div class="bg-gradient-to-r from-inverse-surface to-slate-900 rounded-2xl p-6 md:p-8 text-inverse-on-surface shadow-lg relative overflow-hidden mb-8" id="emergency">
+<div class="absolute -right-10 -bottom-10 opacity-10 text-white pointer-events-none">
+<span class="material-symbols-outlined text-[180px]">sos</span>
+</div>
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="max-w-2xl">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-error text-on-error text-xs font-label-sm font-bold tracking-wide uppercase mb-3">
+<span class="material-symbols-outlined text-sm">emergency</span>
+              Immediate Life Safety
+            </span>
+<h3 class="font-headline-lg text-headline-lg font-bold text-white tracking-tight">
+              Facing acute homelessness or danger tonight?
+            </h3>
+<p class="font-body-md text-body-md text-outline-variant mt-2 leading-relaxed">
+              Our central dispatch links directly with welfare responders, police crisis lines, and mobile emergency shelters across all Malaysian districts. No fees or registration paperwork required for urgent refuge.
+            </p>
+</div>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+<a class="px-6 py-3.5 rounded-lg bg-error hover:bg-red-700 text-white font-label-md text-label-md font-bold flex items-center justify-center gap-2 shadow-md transition-all" href="tel:1800884357">
+<span class="material-symbols-outlined text-xl">phone_in_talk</span>
+<span class="">Call 1800-88-HELP (4357)</span>
+</a>
+<a class="px-6 py-3.5 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 font-label-md text-label-md font-semibold flex items-center justify-center gap-2 transition-all" href="#">
+<span class="material-symbols-outlined text-xl">directions_bus</span>
+<span class="">Find Emergency Transit</span>
+</a>
+</div>
+</div>
+</div>
+<!-- NGO Registration Banner -->
+<div class="bg-surface-container rounded-xl p-6 md:p-8 border border-outline-variant flex flex-col md:flex-row items-start md:items-center justify-between gap-6" id="volunteer">
+<div class="flex items-start gap-4 max-w-3xl">
+<div class="w-12 h-12 rounded-lg bg-primary text-on-primary flex items-center justify-center flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-2xl">handshake</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md font-bold text-on-surface">
+              Are you an NGO Care Shelter?
+            </h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+              Register your facility to publish live bed capacities, receive bulk food distributions, and request vetted volunteers under UN SDG 1.
+            </p>
+</div>
+</div>
+<button class="px-6 py-3 rounded-lg bg-secondary hover:bg-secondary-container text-on-secondary font-label-md text-label-md font-semibold whitespace-nowrap shadow-sm transition-all flex items-center gap-2">
+<span class="">Register Your Facility</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Shared Footer Component -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface mt-12 w-full">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-xl max-w-screen-2xl mx-auto w-full">
+<!-- Brand & Mission Column -->
+<div class="space-y-4 md:col-span-1">
+<div class="flex items-center gap-2">
+<span class="p-1.5 rounded-lg bg-primary text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+</span>
+<span class="text-headline-md font-headline-md font-extrabold text-on-surface dark:text-inverse-on-surface tracking-tight">HelpLink</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant">
+          Bridging immediate resources, shelter sanctuaries, and community care to eradicate vulnerability under United Nations SDG 1.
+        </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant font-medium pt-2">
+          © 2024 HelpLink. Supporting UN SDG 1: No Poverty.
+        </p>
+</div>
+<!-- Organization Links -->
+<div class="space-y-3">
+<h4 class="font-label-md text-label-md font-bold text-on-surface dark:text-inverse-on-surface tracking-wide uppercase text-xs">
+          Organization
+        </h4>
+<ul class="space-y-2 font-body-sm text-body-sm">
+<li class="">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">About HelpLink</a>
+</li>
+<li class="">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Our Impact</a>
+</li>
+<li class="">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">SDG 1 Goals</a>
+</li>
+</ul>
+</div>
+<!-- Resources Links -->
+<div class="space-y-3">
+<h4 class="font-label-md text-label-md font-bold text-on-surface dark:text-inverse-on-surface tracking-wide uppercase text-xs">
+          Resources
+        </h4>
+<ul class="space-y-2 font-body-sm text-body-sm">
+<li class="">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">News Dashboard</a>
+</li>
+<li class="">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Jobs Directory</a>
+</li>
+<li class="">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Community Map</a>
+</li>
+<li class="">
+<a class="text-primary dark:text-primary-fixed underline font-semibold" href="#">Shelters List</a>
+</li>
+<li class="">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Marketplace</a>
+</li>
+</ul>
+</div>
+<!-- Support & Helpdesk -->
+<div class="space-y-3">
+<h4 class="font-label-md text-label-md font-bold text-on-surface dark:text-inverse-on-surface tracking-wide uppercase text-xs">
+          Support &amp; Contact
+        </h4>
+<ul class="space-y-2 font-body-sm text-body-sm">
+<li class="">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Contact Us</a>
+</li>
+<li class="">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Privacy Policy</a>
+</li>
+<li class="pt-2">
+<span class="inline-flex items-center gap-1.5 text-xs text-on-surface-variant dark:text-outline-variant">
+<span class="material-symbols-outlined text-sm text-primary">verified_user</span>
+<span class="">256-bit encrypted directory</span>
+</span>
+</li>
+</ul>
+</div>
+</div>
+</footer>
+
+
+</body></html>
