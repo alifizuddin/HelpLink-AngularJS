@@ -1,0 +1,715 @@
+<!DOCTYPE html><html lang="en" style="width: 1280px; height: 3826px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>HelpLink - Explore Community Market</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400..800;1,400..800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-container": "#684000",
+            "on-error-container": "#93000a",
+            "error-container": "#ffdad6",
+            "on-primary-container": "#f4fffc",
+            "secondary-fixed-dim": "#ffb95f",
+            "surface-container": "#e7eefe",
+            "outline-variant": "#bcc9c6",
+            "surface-container-high": "#e2e8f8",
+            "on-tertiary-container": "#fffbff",
+            "on-background": "#151c27",
+            "surface-variant": "#dce2f3",
+            "tertiary-container": "#4069f2",
+            "surface-container-highest": "#dce2f3",
+            "surface-bright": "#f9f9ff",
+            "primary-fixed": "#89f5e7",
+            "secondary-fixed": "#ffddb8",
+            "on-primary-fixed": "#00201d",
+            "on-surface": "#151c27",
+            "on-secondary-fixed-variant": "#653e00",
+            "background": "#f9f9ff",
+            "inverse-on-surface": "#ebf1ff",
+            "surface-dim": "#d3daea",
+            "on-secondary-fixed": "#2a1700",
+            "surface": "#f9f9ff",
+            "on-primary": "#ffffff",
+            "primary-fixed-dim": "#6bd8cb",
+            "on-tertiary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed": "#dce1ff",
+            "on-tertiary-fixed-variant": "#0039b5",
+            "surface-tint": "#006a61",
+            "surface-container-low": "#f0f3ff",
+            "on-tertiary-fixed": "#001551",
+            "on-secondary": "#ffffff",
+            "tertiary-fixed-dim": "#b7c4ff",
+            "on-primary-fixed-variant": "#005049",
+            "error": "#ba1a1a",
+            "on-surface-variant": "#3d4947",
+            "tertiary": "#1d4ed8",
+            "primary-container": "#008378",
+            "secondary-container": "#fea619",
+            "inverse-surface": "#2a313d",
+            "inverse-primary": "#6bd8cb",
+            "primary": "#00685f",
+            "secondary": "#855300",
+            "on-error": "#ffffff",
+            "outline": "#6d7a77"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "md": "24px",
+            "gutter": "24px",
+            "base": "4px",
+            "margin-desktop": "48px",
+            "xs": "8px",
+            "xl": "64px",
+            "margin-mobile": "16px",
+            "lg": "40px",
+            "sm": "16px"
+          },
+          "fontFamily": {
+            "headline-lg": ["Atkinson Hyperlegible Next"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-lg": ["Atkinson Hyperlegible Next"],
+            "headline-md": ["Atkinson Hyperlegible Next"],
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-lg-mobile": ["Atkinson Hyperlegible Next"]
+          },
+          "fontSize": {
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "label-sm": ["12px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar Shared Component -->
+<header class="bg-surface dark:bg-on-background shadow-sm dark:shadow-none docked full-width top-0 sticky z-50 transition-all">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-md w-full max-w-screen-2xl mx-auto">
+<!-- Brand Logo -->
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="volunteer_activism" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight">HelpLink</span>
+</div>
+<!-- Navigation Links (Web Desktop) -->
+<nav class="hidden md:flex items-center gap-md font-body-md text-body-md">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed cursor-pointer transition-colors" href="#">News Dashboard</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed cursor-pointer transition-colors" href="#">Jobs</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed cursor-pointer transition-colors" href="#">Community Map</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed cursor-pointer transition-colors" href="#">Shelters</a>
+<!-- Active Nav: Marketplace -->
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1 cursor-pointer transition-colors" href="#">Marketplace</a>
+</nav>
+<!-- Search Bar & Trailing Action Buttons -->
+<div class="flex items-center gap-sm">
+<div class="hidden lg:flex items-center relative">
+<span class="material-symbols-outlined absolute left-3 text-outline text-lg" data-icon="search">search</span>
+<input class="pl-9 pr-4 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface placeholder:text-outline text-label-sm font-label-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all w-48 xl:w-64" placeholder="Search resources..." type="text">
+</div>
+<button class="px-4 py-1.5 rounded-full border border-primary text-primary font-label-md text-label-md hover:bg-surface-container-low transition-colors cursor-pointer">
+          Get Help
+        </button>
+<button class="px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm cursor-pointer">
+          Volunteer
+        </button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-screen-2xl mx-auto px-margin-mobile md:px-margin-desktop py-lg space-y-xl">
+<!-- 1. Header / Hero Section -->
+<section class="relative overflow-hidden rounded-xl bg-gradient-to-b from-surface-container-low to-surface-container-lowest border border-outline-variant/30 p-md md:p-lg text-center space-y-md">
+<!-- SDG 1 Sub-badge -->
+
+<!-- Main Headline & Subtitle -->
+<div class="max-w-3xl mx-auto space-y-xs">
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">
+          Explore Community Market
+        </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+          Find food, hygiene products, clothes, and handcrafted goods made by local artisans and micro-entrepreneurs to uplift underserved communities under UN SDG 1.
+        </p>
+</div>
+<!-- Trust Metrics Pills -->
+<div class="flex flex-wrap items-center justify-center gap-sm pt-xs">
+<div class="inline-flex items-center gap-xs px-4 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant/50 shadow-sm text-on-surface">
+<span class="material-symbols-outlined text-primary" data-icon="savings" style="font-variation-settings: 'FILL' 1;">savings</span>
+<span class="font-label-md text-label-md">100% Proceeds to Artisans</span>
+</div>
+<div class="inline-flex items-center gap-xs px-4 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant/50 shadow-sm text-on-surface">
+<span class="material-symbols-outlined text-secondary" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-md text-label-md">Verified Community Sellers</span>
+</div>
+<div class="inline-flex items-center gap-xs px-4 py-2 rounded-lg bg-surface-container-lowest border border-outline-variant/50 shadow-sm text-on-surface">
+<span class="material-symbols-outlined text-tertiary" data-icon="local_shipping" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+<span class="font-label-md text-label-md">Free Direct Shipping / Local Pickup</span>
+</div>
+</div>
+</section>
+<!-- 2. Support Local Artisans Catalog -->
+<section class="space-y-md">
+<!-- Section Header & Filter Toolbar -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md border-b border-outline-variant/40 pb-md">
+<div>
+<div class="flex items-center gap-xs text-secondary font-label-md text-label-md">
+
+
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Featured Community Crafts &amp; Essentials</h2>
+</div>
+<!-- Filter & Search Toolbar -->
+
+</div>
+<!-- High-Fidelity Product Cards Bento / Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1: Beaded Bracelet (From Reference) -->
+<article class="bg-surface-container-lowest rounded-lg border border-outline-variant/60 shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group">
+<div>
+<div class="relative overflow-hidden bg-surface-container-low aspect-square flex items-center justify-center p-sm">
+<img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" data-alt="Close up photography of vibrant multi colored handmade glass and stone beaded stretch bracelets stacked together against a clean white seamless studio backdrop. Soft diffuse daylight highlights the detailed artisanal string work, earthy natural textures, and bright colorful patterns. Clean light-mode institutional catalog aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjbk46EgZamT-FOabMobBV5lR-dGOn-NNjHxygrqHwMpzO46Is026cWed690mWLNbekkc4jgAAxMQFpsi6s4jDnukNXpJ0cp9jwf-1QE0mOgVO1i1anlDqQqywj6VxDvai62Oly18id4PcVN2AEeRKANMoU4PC5o20RmxEj7GSCSbjjr5q_QqtirTnSykyfi-VZqgJ-k9UEr_w_fS2bOEASRmHk1Pxxu7w973DYPUgugg1wqXet96pBA">
+<span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+                Youth Workshop
+              </span>
+<span class="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-surface-container-lowest/90 text-primary font-label-sm text-label-sm shadow-xs border border-outline-variant/30 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span> In Stock
+              </span>
+</div>
+<div class="p-md space-y-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="workspace_premium">workspace_premium</span>
+                  Local Youth Artisans
+                </span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed/40 text-on-primary-fixed font-label-sm text-label-sm">
+                  Direct Micro-Income
+                </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Beaded Bracelet</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Handmade bracelet crafted with colorful beads by local youth artisans in vocational community programs.
+              </p>
+</div>
+</div>
+<div class="p-md pt-0 border-t border-outline-variant/20 mt-xs">
+<div class="flex items-center justify-between pt-sm">
+<div>
+<span class="text-label-sm font-label-sm text-outline">Fair Price</span>
+<p class="text-headline-md font-headline-md text-primary font-bold">RM 15</p>
+</div>
+<button class="px-5 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-colors shadow-xs flex items-center gap-1.5 cursor-pointer">
+<span class="material-symbols-outlined text-base" data-icon="shopping_bag">shopping_bag</span>
+                Buy Now
+              </button>
+</div>
+</div>
+</article>
+<!-- Card 2: Woven Bag (From Reference) -->
+<article class="bg-surface-container-lowest rounded-lg border border-outline-variant/60 shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group">
+<div>
+<div class="relative overflow-hidden bg-surface-container-low aspect-square flex items-center justify-center p-sm">
+<img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" data-alt="Modern handcrafted black eco-friendly woven tote shoulder handbag made from tight recycled cord materials placed on a pure white studio pedestal. Soft directional daylight cast subtle shadows emphasizing the intricate basket weave craftmanship. Clean high contrast minimalist product photography with teal undertones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdGm1PJm3nemiqhRlQBqtzWMsmwzvS4fN3xJbbzn5qEVTqnXFEAgg0mRWxtpYczeJTQeT2iMJ4dWhBMx4dwBhFdKjTUuX6TxIMrMFquGdLGBgPLlTrYe9aX0uxzSVGBTvXdVoUyarExIj-8XncmODxqvj3I5-Az2BYFa-UOUaMAhBWfztxcOEWKsp7KcpKKE2rSRgM26hUWVmAPtBkzLgYo2zZXpbTqpI0BxrmzHBjWMyOCtBgLca33A">
+<span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+                Recycled Materials
+              </span>
+<span class="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-surface-container-lowest/90 text-primary font-label-sm text-label-sm shadow-xs border border-outline-variant/30 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span> In Stock
+              </span>
+</div>
+<div class="p-md space-y-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="eco">eco</span>
+                  Green Weavers Collective
+                </span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-tertiary font-label-sm text-label-sm">
+                  Funds Skill Training
+                </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Woven Bag</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Eco-friendly woven bag made from durable recycled materials, designed for daily groceries and lifestyle use.
+              </p>
+</div>
+</div>
+<div class="p-md pt-0 border-t border-outline-variant/20 mt-xs">
+<div class="flex items-center justify-between pt-sm">
+<div>
+<span class="text-label-sm font-label-sm text-outline">Fair Price</span>
+<p class="text-headline-md font-headline-md text-primary font-bold">RM 40</p>
+</div>
+<button class="px-5 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-colors shadow-xs flex items-center gap-1.5 cursor-pointer">
+<span class="material-symbols-outlined text-base" data-icon="shopping_bag">shopping_bag</span>
+                Buy Now
+              </button>
+</div>
+</div>
+</article>
+<!-- Card 3: Natural Batik Scarf -->
+<article class="bg-surface-container-lowest rounded-lg border border-outline-variant/60 shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group">
+<div>
+<div class="relative overflow-hidden bg-surface-container-low aspect-square flex items-center justify-center p-sm">
+<img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" data-alt="Artisanal hand-dyed organic batik silk cotton scarf folded delicately on smooth light grey oak surface. Botanical traditional patterns dyed with indigo and deep teal natural plant extracts. Studio ambient lighting highlighting the premium organic fabric weave and meticulous edge hems. Clean modern catalog styling." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtIbs1mbJzzFu7Znm6EETEmDneX3O0odqwd3QBgJo5aD29_dpwWCwKJnH8dkPS-kDjcxJ-knRrLJg3pbSYmooM1BkUqybWSK2Rls55WQvJD39S2DykxYfeFxY_7Lyf_tnNfZx1zKKicgqXi_HmyHJAYccG7FJp5LwjU4ZPwEnUjDZIK7aivVQ9MWWum595b_iNesq_kOL3bxyiJ-4Qhou3wy5UXZcObgO7udBvvKWZEAfNRQTIgqFb-Q">
+<span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+                Single Mothers Co-op
+              </span>
+<span class="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-surface-container-lowest/90 text-primary font-label-sm text-label-sm shadow-xs border border-outline-variant/30 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span> 4 Left
+              </span>
+</div>
+<div class="p-md space-y-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="favorite">favorite</span>
+                  Matahari Women Guild
+                </span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed/40 text-on-primary-fixed font-label-sm text-label-sm">
+                  Direct Micro-Income
+                </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Natural Batik Scarf</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Hand-dyed organic cotton scarf handcrafted by single mothers collective using heritage botanical dyes.
+              </p>
+</div>
+</div>
+<div class="p-md pt-0 border-t border-outline-variant/20 mt-xs">
+<div class="flex items-center justify-between pt-sm">
+<div>
+<span class="text-label-sm font-label-sm text-outline">Fair Price</span>
+<p class="text-headline-md font-headline-md text-primary font-bold">RM 35</p>
+</div>
+<button class="px-5 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-colors shadow-xs flex items-center gap-1.5 cursor-pointer">
+<span class="material-symbols-outlined text-base" data-icon="shopping_bag">shopping_bag</span>
+                Buy Now
+              </button>
+</div>
+</div>
+</article>
+<!-- Card 4: Handcrafted Ceramic Mug -->
+<article class="bg-surface-container-lowest rounded-lg border border-outline-variant/60 shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group">
+<div>
+<div class="relative overflow-hidden bg-surface-container-low aspect-square flex items-center justify-center p-sm">
+<img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" data-alt="Handcrafted rustic ceramic coffee mug with speckles of unglazed natural terracotta and a matte mint green glaze trim. Studio product shot illuminated by bright diffuse window light against a white minimalist setting. Organic clay textures and sturdy pottery handle crafted by shelter pottery apprentices." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvn8y4v0rPR1HVL6eSFVfuSiuzxoEl31Y6-ws4TmF59JWwdMtHLCgSg1arwVVE2lZ5H7wVIWEXf5Ww5BhnNGVuTUgemDn64EwARrW8BMTqQnakrgEeXovpTGi-0hc7XHidf6Ngqpj2c22VM4-2xALIa4KVqADBmW40yZlDi5BKi8uQYi7NIoQecN_FGX4PikxVWbqSXKs8NWe2D8r16C6TlkohgdBwBfs1y5ed_K-NvlIVfcqqhw9WuA">
+<span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+                Shelter Pottery Guild
+              </span>
+<span class="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-surface-container-lowest/90 text-primary font-label-sm text-label-sm shadow-xs border border-outline-variant/30 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span> In Stock
+              </span>
+</div>
+<div class="p-md space-y-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="handyman">handyman</span>
+                  Hope Haven Shelter
+                </span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-tertiary font-label-sm text-label-sm">
+                  Funds Skill Training
+                </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Handcrafted Ceramic Mug</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Sturdy artisanal clay mug made in the local shelter craft workshop to fund transitional housing initiatives.
+              </p>
+</div>
+</div>
+<div class="p-md pt-0 border-t border-outline-variant/20 mt-xs">
+<div class="flex items-center justify-between pt-sm">
+<div>
+<span class="text-label-sm font-label-sm text-outline">Fair Price</span>
+<p class="text-headline-md font-headline-md text-primary font-bold">RM 25</p>
+</div>
+<button class="px-5 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-colors shadow-xs flex items-center gap-1.5 cursor-pointer">
+<span class="material-symbols-outlined text-base" data-icon="shopping_bag">shopping_bag</span>
+                Buy Now
+              </button>
+</div>
+</div>
+</article>
+<!-- Card 5: Upcycled Denim Tote -->
+<article class="bg-surface-container-lowest rounded-lg border border-outline-variant/60 shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group">
+<div>
+<div class="relative overflow-hidden bg-surface-container-low aspect-square flex items-center justify-center p-sm">
+<img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" data-alt="Durable upcycled indigo blue denim tote bag with reinforced canvas stitching and vintage brass rivets shown on a bright studio flat-lay. Clean minimalist photography capturing rich textile seams and pockets repurposed from reclaimed jeans. High clarity, modern product composition with daylight illumination." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqwbe5AiG7UGaKeywabYKkMywmBY8gdvtTXN7IfOHLiTqHp9jdQk0OF9_7yl7uvmC-FPbRvoZGGzCTETwAOp1sJCnePdVleBNV1aPqJ3gyfaCWJU2-LiL9TRDXE8Ub3CzEZZMbHBMHq40UaUKQN1qrKvp2bcxPfe4pJjqTtRMgncXu0iSLe55UcQB_YU5bUkgVIWqtAc3NYbEUZl1LkL0HSXWGsyLr_p8mxtm2KNAIxMrQwH-kFxuVlg">
+<span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+                Upcycled Circular
+              </span>
+<span class="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-surface-container-lowest/90 text-primary font-label-sm text-label-sm shadow-xs border border-outline-variant/30 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span> In Stock
+              </span>
+</div>
+<div class="p-md space-y-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="recycling">recycling</span>
+                  Youth Stitch Studio
+                </span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed/40 text-on-primary-fixed font-label-sm text-label-sm">
+                  Direct Micro-Income
+                </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Upcycled Denim Tote</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Strong tote bag made from repurposed surplus jeans by vocational youth training students.
+              </p>
+</div>
+</div>
+<div class="p-md pt-0 border-t border-outline-variant/20 mt-xs">
+<div class="flex items-center justify-between pt-sm">
+<div>
+<span class="text-label-sm font-label-sm text-outline">Fair Price</span>
+<p class="text-headline-md font-headline-md text-primary font-bold">RM 30</p>
+</div>
+<button class="px-5 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-colors shadow-xs flex items-center gap-1.5 cursor-pointer">
+<span class="material-symbols-outlined text-base" data-icon="shopping_bag">shopping_bag</span>
+                Buy Now
+              </button>
+</div>
+</div>
+</article>
+<!-- Card 6: Artisan Honey & Organic Soap Gift Box -->
+<article class="bg-surface-container-lowest rounded-lg border border-outline-variant/60 shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group">
+<div>
+<div class="relative overflow-hidden bg-surface-container-low aspect-square flex items-center justify-center p-sm">
+<img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" data-alt="Eco-friendly craft cardboard gift box featuring a jar of raw amber forest honey with a wooden dipper alongside two bars of handmade botanical herbal cold-process soap tied with jute twine. Bright overhead studio lighting against an off-white linen background. Wholesome organic co-op aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY9SKNqn843qVPRk8oHcROHOHr4Aq_8IYK2Sn-csBZDpe0Pyb9my2GAxz4edyPw6xUCm46b9batoczZO3wWdcgGq2J7FGAD51G4c37AbhwPU9yEZOwwXwH5CQWORYqmAelRCK56Y6BugIHRd3pWoObqZtPsgm5o2daOKhDLGHy1qS52l6nGHz3Qxnj5a9qLt_R6CGk3o4SAs7l9ekQlYAvoiLPBzUw6ExxQVNYGFHfibfGfQw71LcQfw">
+<span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+                Rural Farm Co-op
+              </span>
+<span class="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-surface-container-lowest/90 text-primary font-label-sm text-label-sm shadow-xs border border-outline-variant/30 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span> In Stock
+              </span>
+</div>
+<div class="p-md space-y-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="grass">grass</span>
+                  Desa Sejahtera Co-op
+                </span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-tertiary font-label-sm text-label-sm">
+                  Funds Rural Farmers
+                </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Artisan Honey &amp; Soap Box</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                Pure forest honey paired with olive &amp; lemongrass cold-process soap made by rural smallholders.
+              </p>
+</div>
+</div>
+<div class="p-md pt-0 border-t border-outline-variant/20 mt-xs">
+<div class="flex items-center justify-between pt-sm">
+<div>
+<span class="text-label-sm font-label-sm text-outline">Fair Price</span>
+<p class="text-headline-md font-headline-md text-primary font-bold">RM 45</p>
+</div>
+<button class="px-5 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-colors shadow-xs flex items-center gap-1.5 cursor-pointer">
+<span class="material-symbols-outlined text-base" data-icon="shopping_bag">shopping_bag</span>
+                Buy Now
+              </button>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- 3. Redesigned 'Add Your Product' Artisan Seller Onboarding Section -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 shadow-sm p-md md:p-lg space-y-lg">
+<!-- Header with Zero Fee Badge -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-sm border-b border-outline-variant/30 pb-md">
+<div>
+<div class="flex items-center gap-xs text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-base" data-icon="add_circle">add_circle</span>
+<span class="">Artisan Seller Portal</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Sell Your Handcrafted Goods</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Empowering local micro-entrepreneurs with direct market access and fair income.</p>
+</div>
+
+</div>
+<!-- Grid: Form + Seller Perks -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Form Area (7 Cols) -->
+<form class="lg:col-span-8 space-y-md" onsubmit="event.preventDefault();">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Product Title -->
+<div class="space-y-1">
+<label class="block font-label-md text-label-md text-on-surface">Product Title</label>
+<input class="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-bright text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="e.g., Hand-carved Wooden Spoon" required="" type="text">
+</div>
+<!-- Category -->
+<div class="space-y-1">
+<label class="block font-label-md text-label-md text-on-surface">Category</label>
+<select class="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-bright text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+<option>Handmade Jewelry</option>
+<option>Bags &amp; Accessories</option>
+<option>Home &amp; Living</option>
+<option>Pantry &amp; Food Essentials</option>
+<option>Hygiene &amp; Wellness</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Price (RM) -->
+<div class="space-y-1">
+<label class="block font-label-md text-label-md text-on-surface">Price (RM)</label>
+<div class="relative">
+<span class="absolute left-3 top-2 font-label-md text-label-md text-outline">RM</span>
+<input class="w-full pl-10 pr-3 py-2 rounded-lg border border-outline-variant bg-surface-bright text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" min="1" placeholder="25.00" required="" step="0.5" type="number">
+</div>
+</div>
+<!-- Available Stock / Batch Quantity -->
+<div class="space-y-1">
+<label class="block font-label-md text-label-md text-on-surface">Available Stock Units</label>
+<input class="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-bright text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" min="1" placeholder="10" type="number">
+</div>
+</div>
+<!-- Product Description -->
+<div class="space-y-1">
+<label class="block font-label-md text-label-md text-on-surface">Product Description &amp; Materials</label>
+<textarea class="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-bright text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Tell buyers about your process, materials used, and your community story..." rows="3"></textarea>
+</div>
+<!-- Image Upload Dropzone -->
+<div class="space-y-1">
+<label class="block font-label-md text-label-md text-on-surface">Product Photos</label>
+<div class="border-2 border-dashed border-outline-variant hover:border-primary rounded-xl p-md text-center bg-surface-container-low transition-colors cursor-pointer group">
+<div class="flex flex-col items-center justify-center space-y-1">
+<span class="material-symbols-outlined text-3xl text-outline group-hover:text-primary transition-colors" data-icon="cloud_upload">cloud_upload</span>
+<p class="font-label-md text-label-md text-on-surface">
+<span class="text-primary font-bold">Click to upload</span> or drag and drop photos
+                </p>
+<p class="font-body-sm text-body-sm text-outline">High resolution PNG, JPG up to 10MB (Square 1:1 recommended)</p>
+</div>
+</div>
+</div>
+<!-- Submit CTA -->
+<div class="pt-xs flex items-center gap-md">
+<button class="px-6 py-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-all shadow-sm flex items-center gap-2 cursor-pointer" type="submit">
+<span class="material-symbols-outlined text-base" data-icon="send">send</span>
+              Submit Product for Review
+            </button>
+<span class="font-body-sm text-body-sm text-outline">Reviewed by community coordinators within 24 hours</span>
+</div>
+</form>
+<!-- Direct Seller Perks Card (5 Cols) -->
+<div class="lg:col-span-4 bg-surface-container-low rounded-xl p-md space-y-md border border-outline-variant/40 flex flex-col justify-between">
+<div class="space-y-md">
+<div class="flex items-center gap-xs text-primary font-headline-md text-headline-md">
+<span class="material-symbols-outlined text-2xl" data-icon="handshake">handshake</span>
+<span class="">Seller Support Program</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Every approved artisan on HelpLink receives full institutional backing under our poverty alleviation initiative:
+            </p>
+<ul class="space-y-sm">
+<li class="flex items-start gap-xs">
+<span class="material-symbols-outlined text-primary text-base mt-0.5" data-icon="inventory_2">inventory_2</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Free Packaging Starter Kits</p>
+<p class="font-body-sm text-body-sm text-outline">Eco-friendly boxes, tags, and protective wrap supplied free of charge.</p>
+</div>
+</li>
+<li class="flex items-start gap-xs">
+<span class="material-symbols-outlined text-primary text-base mt-0.5" data-icon="account_balance">account_balance</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Direct Instant Payouts</p>
+<p class="font-body-sm text-body-sm text-outline">Full earnings transferred into your bank account or local digital wallet within 48 hours.</p>
+</div>
+</li>
+<li class="flex items-start gap-xs">
+<span class="material-symbols-outlined text-primary text-base mt-0.5" data-icon="campaign">campaign</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Community Promotion</p>
+<p class="font-body-sm text-body-sm text-outline">Featured spotlights on the HelpLink dashboard and corporate gifting catalogs.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="p-sm bg-surface-container-lowest rounded-lg border border-outline-variant/30 flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary text-2xl" data-icon="support_agent">support_agent</span>
+<div>
+<p class="font-label-sm text-label-sm font-bold text-on-surface">Need help taking product photos?</p>
+<a class="font-body-sm text-body-sm text-primary hover:underline" href="#">Book a free community photo session →</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Artisan Story Highlights / Educational Workshop -->
+<section class="space-y-md">
+<div>
+<div class="flex items-center gap-xs text-secondary font-label-md text-label-md">
+<span class="material-symbols-outlined text-base" data-icon="smart_display">smart_display</span>
+<span class="">Community Impact &amp; Skills</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Artisan Story Highlights &amp; Workshops</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch">
+<!-- Video Card Showcase (7 Cols) -->
+<article class="lg:col-span-7 bg-surface-container-lowest rounded-xl border border-outline-variant/60 shadow-sm overflow-hidden flex flex-col justify-between">
+<div>
+<!-- Video Thumbnail with Play Button Overlay -->
+<div class="relative bg-on-background aspect-video overflow-hidden group cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300 opacity-90" data-alt="Instructor in a brightly lit craft maker space demonstrating how to upcycle an old cotton T-shirt into a seamless durable reusable tote bag. Scissors, textile chalk, and navy blue fabric on a wooden work table. Natural window lighting in a community center classroom with cheerful participants in background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvcmGl45IdXJm2g1x5H88PCEOlVP5pBwC93ckJmA_wUOIIhlQfcpS_ZMJaQTw3wKeyIhkaYdq64MaVUbe9YF5FcFJD-wIKyUXPEGYRqh0FxwCIBSz6pIyvAMjt_H0rizJLRx_86uq0oLS6PxS8sp3u0YgF_G59YujSNc1mjbQLnTJpHtqTko0PouKlgwsmnDcvLQjVwxNc9OQ9o35iz_cgxePHcKfF9456K1PdnThX84qT4YDEuqVTaA">
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/80 via-transparent to-transparent"></div>
+<!-- Play Icon Center Overlay -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-primary/90 text-on-primary flex items-center justify-center shadow-lg group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-3xl ml-0.5" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<!-- Video Badges Top and Bottom -->
+<div class="absolute top-3 left-3 flex items-center gap-2">
+<span class="px-2.5 py-1 rounded bg-surface-container-lowest/90 text-on-surface font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-error text-base" data-icon="smart_display" style="font-variation-settings: 'FILL' 1;">smart_display</span>
+                  Blacktown City Council / Community Makers
+                </span>
+</div>
+<div class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-on-background/90 text-on-primary font-label-sm text-label-sm">
+                8 mins • DIY Tutorial
+              </div>
+</div>
+<!-- Video Info -->
+<div class="p-md space-y-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">
+                Let's Get Crafty: DIY No-Sew T-shirt Tote Bag
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Discover step-by-step techniques to repurpose everyday discarded textiles into durable, saleable market tote bags without needles or sewing machines.
+              </p>
+</div>
+</div>
+<div class="p-md pt-0 flex items-center justify-between border-t border-outline-variant/20 mt-xs">
+<span class="font-body-sm text-body-sm text-outline">Part of our SDG 1 Circular Economy Curriculum</span>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline cursor-pointer">
+              Watch Full Series <span class="material-symbols-outlined text-base" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Micro-Story Success Tiles (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col justify-between gap-md">
+<!-- Story Tile 1 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 p-md shadow-sm space-y-xs flex gap-md">
+<div class="w-16 h-16 rounded-lg bg-surface-container-low overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait of an empowered smiling southeast asian female micro-artisan tailor standing proudly in her sunlit home workshop with colorful spools of thread and completed fabric craft bags in the background. Soft warm daylight and inspiring uplifting atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1a6kUHFJhT8qMkFN63WEVg6rBXDoRHGd7XVN7aE2SbolrkAkIlTcd6sKBY55KXC5o8USMehWyXXh22w3rw1m4ClgoHjxZizd2sw4FvsMhbcRqzv2E0km0m2ySHuRibibR0GFMMb2tlrfOgvM1g5C_smthnVeiFq5eHWulHnlf398KzrH3fVKOL4a4fklM25g3E3aogqcfEXhpvFqNr0ZOxaHsa1ihFvXcIbO4oA3HSYIdorf9lGk_0Q">
+</div>
+<div class="space-y-1">
+<span class="px-2 py-0.5 rounded bg-primary-fixed/40 text-on-primary-fixed font-label-sm text-label-sm">
+                Artisan Spotlight
+              </span>
+<h4 class="font-label-md text-label-md text-on-surface font-bold">
+                From shelter resident to self-employed micro-tailor
+              </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                "HelpLink gave me my first sewing kit and a community that bought my bags within 24 hours. Today I support my two children."
+              </p>
+<p class="text-label-sm font-label-sm text-outline">— Siti R., Hope Shelter Alumni</p>
+</div>
+</div>
+<!-- Story Tile 2 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 p-md shadow-sm space-y-xs flex gap-md">
+<div class="w-16 h-16 rounded-lg bg-surface-container-low overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A smiling young male artisan sitting at a pottery wheel shaping an earthy clay bowl with wet hands. Natural sunlit ceramics workshop with shelves of handcrafted pottery in warm earthen tones. Positive vocational empowerment aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs8gYtDIZ0sMhT6v250RhjhrnEtbAvqMdA0TuhScFpanHkrLBz4-Hm9zr-ET-oHYv7Oapj3lFgJlsu6hgjpdmV-FkoGWRFfPXM9DEXMRJ27AGgHmLqFMi8KA6OwB8RbH2h4te5RTrWJrJzs7wN923Ojhz2eYoTMs-Ay94ercGXmL3h2Ij4VZgoGFSXTj4LRLFjm9AcEU4bH1yjLviq6-_TfSsx2MaKhFQzA5P1DWXxxGDnJ7DghhiY2Q">
+</div>
+<div class="space-y-1">
+<span class="px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+                Vocational Cohort
+              </span>
+<h4 class="font-label-md text-label-md text-on-surface font-bold">
+                Youth Ceramics Workshop: 18 youth certified
+              </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                100% of sales from our handmade mugs fund accredited pottery vocational certifications for youth transitioning out of foster care.
+              </p>
+<p class="text-label-sm font-label-sm text-outline">— Youth Vocational Collective</p>
+</div>
+</div>
+<!-- Community Callout Box -->
+<div class="bg-primary/5 rounded-xl border border-primary/20 p-md flex items-center justify-between">
+<div class="space-y-0.5">
+<p class="font-label-md text-label-md text-primary font-bold">Share Your Craft Story</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Are you an artisan overcoming hardship? We'd love to spotlight you.</p>
+</div>
+<button class="px-3.5 py-1.5 rounded-lg border border-primary text-primary font-label-md text-label-md hover:bg-surface-container-low transition-colors cursor-pointer flex-shrink-0">
+              Apply
+            </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shared Component -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface full-width mt-xl transition-colors">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-xl max-w-screen-2xl mx-auto font-body-sm text-body-sm">
+<!-- Column 1: Brand & Mission -->
+<div class="space-y-sm md:col-span-1">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-2xl" data-icon="volunteer_activism" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+<span class="text-headline-md font-headline-md font-extrabold text-on-surface dark:text-inverse-on-surface">HelpLink</span>
+</div>
+<p class="text-on-surface-variant dark:text-outline-variant">
+          Bridging support, fair work, and sustainable community markets.
+        </p>
+<p class="text-on-surface-variant dark:text-outline-variant font-label-sm text-label-sm">
+          © 2024 HelpLink. Supporting UN SDG 1: No Poverty.
+        </p>
+</div>
+<!-- Column 2: Mission & About -->
+<div class="space-y-xs">
+<h4 class="font-label-md text-label-md text-on-surface dark:text-inverse-on-surface font-bold uppercase tracking-wider">About</h4>
+<ul class="space-y-xs">
+<li class=""><a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer" href="#">About HelpLink</a></li>
+<li class=""><a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer" href="#">Our Impact</a></li>
+<li class=""><a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer" href="#">SDG 1 Goals</a></li>
+<li class=""><a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer" href="#">News Dashboard</a></li>
+</ul>
+</div>
+<!-- Column 3: Community Services -->
+<div class="space-y-xs">
+<h4 class="font-label-md text-label-md text-on-surface dark:text-inverse-on-surface font-bold uppercase tracking-wider">Services</h4>
+<ul class="space-y-xs">
+<li class=""><a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer" href="#">Jobs Directory</a></li>
+<li class=""><a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer" href="#">Community Map</a></li>
+<li class=""><a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer" href="#">Shelters List</a></li>
+<!-- Active Page Link in Footer -->
+<li class=""><a class="text-primary dark:text-primary-fixed underline transition-colors cursor-pointer" href="#">Marketplace</a></li>
+</ul>
+</div>
+<!-- Column 4: Support & Governance -->
+<div class="space-y-xs">
+<h4 class="font-label-md text-label-md text-on-surface dark:text-inverse-on-surface font-bold uppercase tracking-wider">Legal &amp; Help</h4>
+<ul class="space-y-xs">
+<li class=""><a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer" href="#">Contact Us</a></li>
+<li class=""><a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+</footer>
+
+
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>
