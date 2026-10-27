@@ -1,24 +1,22 @@
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
 }
 
 .background {
   position: relative;
   min-height: 100vh;
-  background: url('https://images.unsplash.com/photo-1651372381086-9861c9c81db5?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
-  background-size: cover;
+  /* background: url('https://jeanetteshealthyliving.com/wp-content/uploads/blogger/_cUenbvuVQ1w/TS_JvW654HI/AAAAAAAAAoU/Mvucx7pvWjM/s1600/helpinghands.jpg') no-repeat center center; */
+  background-size: 100% auto;
 }
 
 .layout-overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(255, 255, 255, 0.7); /* white transparent overlay */
+  background-color: rgba(253, 253, 253, 0.815); /* white transparent overlay */
   z-index: 0;
 }
 
 .layout-content {
   position: relative;
   z-index: 1;
-  padding: 2rem;
 }

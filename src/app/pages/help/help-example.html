@@ -1,0 +1,618 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Request Support &amp; Community Aid | HelpLink</title>
+<!-- Google Fonts: Atkinson Hyperlegible Next & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400..800;1,400..800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-container": "#fffbff",
+            "on-surface": "#151c27",
+            "tertiary-fixed": "#dce1ff",
+            "on-tertiary": "#ffffff",
+            "surface-variant": "#dce2f3",
+            "surface-container-low": "#f0f3ff",
+            "on-primary-fixed": "#00201d",
+            "on-primary-container": "#f4fffc",
+            "secondary-container": "#fea619",
+            "on-error": "#ffffff",
+            "secondary-fixed": "#ffddb8",
+            "on-secondary-container": "#684000",
+            "primary": "#00685f",
+            "outline-variant": "#bcc9c6",
+            "outline": "#6d7a77",
+            "surface-dim": "#d3daea",
+            "error": "#ba1a1a",
+            "surface-bright": "#f9f9ff",
+            "on-tertiary-fixed": "#001551",
+            "tertiary": "#1d4ed8",
+            "on-error-container": "#93000a",
+            "on-secondary": "#ffffff",
+            "on-tertiary-fixed-variant": "#0039b5",
+            "on-primary": "#ffffff",
+            "surface-container-high": "#e2e8f8",
+            "background": "#f9f9ff",
+            "tertiary-container": "#4069f2",
+            "on-secondary-fixed-variant": "#653e00",
+            "inverse-surface": "#2a313d",
+            "surface-container-lowest": "#ffffff",
+            "error-container": "#ffdad6",
+            "surface": "#f9f9ff",
+            "primary-fixed": "#89f5e7",
+            "secondary": "#855300",
+            "on-secondary-fixed": "#2a1700",
+            "surface-container": "#e7eefe",
+            "on-background": "#151c27",
+            "tertiary-fixed-dim": "#b7c4ff",
+            "on-primary-fixed-variant": "#005049",
+            "surface-tint": "#006a61",
+            "on-surface-variant": "#3d4947",
+            "inverse-primary": "#6bd8cb",
+            "inverse-on-surface": "#ebf1ff",
+            "secondary-fixed-dim": "#ffb95f",
+            "primary-fixed-dim": "#6bd8cb",
+            "surface-container-highest": "#dce2f3",
+            "primary-container": "#008378"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "base": "4px",
+            "sm": "16px",
+            "margin-desktop": "48px",
+            "xl": "64px",
+            "margin-mobile": "16px",
+            "gutter": "24px",
+            "lg": "40px",
+            "xs": "8px",
+            "md": "24px"
+          },
+          "fontFamily": {
+            "label-md": ["Inter"],
+            "headline-md": ["Atkinson Hyperlegible Next"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-lg-mobile": ["Atkinson Hyperlegible Next"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Atkinson Hyperlegible Next"],
+            "body-md": ["Inter"],
+            "display-lg": ["Atkinson Hyperlegible Next"]
+          },
+          "fontSize": {
+            "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-sm": ["12px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md text-body-md min-h-screen flex flex-col">
+<!-- TOP APP BAR (Per Shared Components JSON & Design System) -->
+<header class="bg-surface shadow-sm sticky top-0 z-50 w-full">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-md w-full max-w-screen-2xl mx-auto">
+<!-- Brand Logo -->
+<a class="flex items-center gap-2 group cursor-pointer" href="#">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="volunteer_activism">volunteer_activism</span>
+</div>
+<span class="text-headline-md font-headline-md font-bold text-primary tracking-tight">HelpLink</span>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center gap-6 font-body-md text-body-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">News Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Jobs</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Community Map</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Shelters</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Marketplace</a>
+</nav>
+<!-- Search Bar & Actions -->
+<div class="flex items-center gap-3">
+<div class="relative hidden lg:block w-64">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-xl" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all" placeholder="Search resources, aid..." type="text">
+</div>
+<!-- Trailing Actions: Secondary 'Get Help' (Active context) and Primary 'Volunteer' -->
+<a class="px-4 py-2 rounded-lg border border-primary bg-primary text-on-primary font-label-md text-label-md transition-colors shadow-sm flex items-center gap-1.5 cursor-pointer" href="#request-form">
+<span class="material-symbols-outlined text-lg" data-icon="support_agent">support_agent</span>
+          Get Help
+        </a>
+<a class="hidden sm:inline-flex px-4 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-primary hover:bg-surface-container-low font-label-md text-label-md transition-colors cursor-pointer" href="#">
+          Volunteer
+        </a>
+</div>
+</div>
+</header>
+<!-- MAIN CANVAS -->
+<main class="flex-grow">
+<!-- HERO SECTION WITH ASSURANCE BADGES -->
+<section class="relative bg-surface-container-low border-b border-surface-container py-12 md:py-16">
+<div class="max-w-screen-2xl mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<!-- Supporting SDG 1 Badge -->
+
+<h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-on-surface tracking-tight max-w-3xl mx-auto">
+          Request Support &amp; Community Aid
+        </h1>
+<p class="mt-4 text-body-lg font-body-lg text-on-surface-variant max-w-2xl mx-auto">
+          If you or someone you know is facing urgent challenges related to food, emergency shelter, youth employment, healthcare, or family welfare, let us know. Our verified community caseworkers and local non-profit partners respond within 24 hours.
+        </p>
+<!-- Trust & Privacy Assurance Pill Bar -->
+<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+
+
+
+
+</div>
+</div>
+</section>
+<!-- MAIN FORM & SIDEBAR BENTO GRID -->
+<section class="max-w-screen-2xl mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-16">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- LEFT COLUMN: ELEVATED INTAKE FORM (8 Cols) -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-xl border border-outline-variant p-6 md:p-8 shadow-sm" id="request-form">
+<div class="border-b border-surface-container-high pb-6 mb-8">
+<h2 class="text-headline-md font-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="edit_document">edit_document</span>
+              Intake &amp; Needs Assessment Form
+            </h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+              Please provide accurate details so we can connect you directly with the nearest food banks, emergency shelters, or welfare officers.
+            </p>
+</div>
+<form action="#" class="space-y-8" method="POST" onsubmit="event.preventDefault(); alert('Help request submitted successfully. A case coordinator has received your notice.');">
+<!-- SECTION 1: ASSISTANCE CATEGORY -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">
+                1. Select Assistance Category <span class="text-error">*</span>
+</label>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4">You may choose more than one category if applicable.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<label class="relative flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant hover:border-primary hover:bg-surface-container-low transition-colors cursor-pointer bg-surface">
+<input checked="" class="mt-1 h-4 w-4 rounded text-primary focus:ring-primary border-outline" name="category" type="checkbox" value="food">
+<div>
+<div class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base" data-icon="soup_kitchen">soup_kitchen</span>
+                      Food &amp; Groceries
+                    </div>
+<div class="text-body-sm font-body-sm text-on-surface-variant text-xs mt-0.5">Emergency food baskets, community kitchen</div>
+</div>
+</label>
+<label class="relative flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant hover:border-primary hover:bg-surface-container-low transition-colors cursor-pointer bg-surface">
+<input class="mt-1 h-4 w-4 rounded text-primary focus:ring-primary border-outline" name="category" type="checkbox" value="shelter">
+<div>
+<div class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base" data-icon="cottage">cottage</span>
+                      Safe Shelter &amp; Housing
+                    </div>
+<div class="text-body-sm font-body-sm text-on-surface-variant text-xs mt-0.5">Immediate transit bed, family refuge</div>
+</div>
+</label>
+<label class="relative flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant hover:border-primary hover:bg-surface-container-low transition-colors cursor-pointer bg-surface">
+<input class="mt-1 h-4 w-4 rounded text-primary focus:ring-primary border-outline" name="category" type="checkbox" value="jobs">
+<div>
+<div class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base" data-icon="work">work</span>
+                      Youth Job &amp; Skills Placement
+                    </div>
+<div class="text-body-sm font-body-sm text-on-surface-variant text-xs mt-0.5">Job coaching, urgent income, apprenticeships</div>
+</div>
+</label>
+<label class="relative flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant hover:border-primary hover:bg-surface-container-low transition-colors cursor-pointer bg-surface">
+<input class="mt-1 h-4 w-4 rounded text-primary focus:ring-primary border-outline" name="category" type="checkbox" value="family">
+<div>
+<div class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base" data-icon="family_restroom">family_restroom</span>
+                      Family &amp; Child Welfare
+                    </div>
+<div class="text-body-sm font-body-sm text-on-surface-variant text-xs mt-0.5">School assistance, infant formula, diapers</div>
+</div>
+</label>
+<label class="relative flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant hover:border-primary hover:bg-surface-container-low transition-colors cursor-pointer bg-surface">
+<input class="mt-1 h-4 w-4 rounded text-primary focus:ring-primary border-outline" name="category" type="checkbox" value="health">
+<div>
+<div class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base" data-icon="medication">medication</span>
+                      Healthcare &amp; Elderly Support
+                    </div>
+<div class="text-body-sm font-body-sm text-on-surface-variant text-xs mt-0.5">Medication subsidy, mobility gear, checkups</div>
+</div>
+</label>
+<label class="relative flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant hover:border-primary hover:bg-surface-container-low transition-colors cursor-pointer bg-surface">
+<input class="mt-1 h-4 w-4 rounded text-primary focus:ring-primary border-outline" name="category" type="checkbox" value="other">
+<div>
+<div class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base" data-icon="help_outline">help_outline</span>
+                      Other Urgent Need
+                    </div>
+<div class="text-body-sm font-body-sm text-on-surface-variant text-xs mt-0.5">Legal aid, document recovery, translation</div>
+</div>
+</label>
+</div>
+</div>
+<!-- SECTION 2: URGENCY LEVEL -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">
+                2. Urgency Level <span class="text-error">*</span>
+</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<label class="flex items-center gap-3 p-3.5 rounded-lg border border-outline-variant hover:border-primary bg-surface cursor-pointer">
+<input class="h-4 w-4 text-primary focus:ring-primary border-outline" name="urgency" type="radio" value="standard">
+<div>
+<div class="font-label-md text-label-md text-on-surface">Standard</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant text-xs">Within 48 hours</div>
+</div>
+</label>
+<label class="flex items-center gap-3 p-3.5 rounded-lg border border-secondary-container bg-surface-container-low cursor-pointer">
+<input checked="" class="h-4 w-4 text-secondary focus:ring-secondary border-outline" name="urgency" type="radio" value="urgent">
+<div>
+<div class="font-label-md text-label-md text-on-surface font-semibold">Urgent</div>
+<div class="text-body-sm font-body-sm text-secondary text-xs">Within 24 hours</div>
+</div>
+</label>
+<label class="flex items-center gap-3 p-3.5 rounded-lg border border-error-container bg-error-container/20 cursor-pointer">
+<input class="h-4 w-4 text-error focus:ring-error border-outline" name="urgency" type="radio" value="crisis">
+<div>
+<div class="font-label-md text-label-md text-error font-semibold">Immediate Crisis</div>
+<div class="text-body-sm font-body-sm text-error text-xs">Tonight / Urgent safety</div>
+</div>
+</label>
+</div>
+<!-- Urgent Notice Pill -->
+<div class="mt-3 flex items-start gap-2.5 p-3 rounded-lg bg-surface-container border border-surface-container-high text-on-surface-variant text-body-sm font-body-sm">
+<span class="material-symbols-outlined text-secondary text-lg mt-0.5" data-icon="info">info</span>
+<span class="">For immediate life safety or danger tonight, please call our 24/7 hotline directly at <strong>1800-88-HELP (4357)</strong>.</span>
+</div>
+</div>
+<!-- SECTION 3: PERSONAL INFORMATION -->
+<div class="border-t border-surface-container pt-6">
+<h3 class="font-label-md text-label-md text-on-surface mb-4">3. Personal &amp; Contact Details</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-1" for="fullName">
+                    Full Name <span class="text-error">*</span>
+</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg border border-outline-variant bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" id="fullName" placeholder="e.g. Siti Aminah binti Razali" required="" type="text">
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-1" for="phoneNumber">
+                    Contact Phone Number <span class="text-error">*</span>
+</label>
+<div class="flex">
+<span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-outline-variant bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                      +60
+                    </span>
+<input class="w-full px-3.5 py-2.5 rounded-r-lg border border-outline-variant bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" id="phoneNumber" placeholder="12 345 6789" required="" type="tel">
+</div>
+<span class="text-xs text-on-surface-variant mt-1 block">Receives SMS/WhatsApp case updates</span>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-1" for="emailAddress">
+                    Email Address <span class="text-outline text-xs font-normal">(Optional if phone provided)</span>
+</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg border border-outline-variant bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" id="emailAddress" placeholder="name@example.com" type="email">
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-1" for="contactMethod">
+                    Preferred Contact Method
+                  </label>
+<select class="w-full px-3.5 py-2.5 rounded-lg border border-outline-variant bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" id="contactMethod">
+<option value="whatsapp">WhatsApp (Fastest response)</option>
+<option value="phone">Direct Phone Call</option>
+<option value="sms">SMS Text</option>
+<option value="email">Email</option>
+</select>
+</div>
+<div class="md:col-span-2">
+<label class="block font-label-sm text-label-sm text-on-surface mb-1" for="languagePreference">
+                    Preferred Language for Communication
+                  </label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+<label class="flex items-center gap-2 p-2 rounded-lg border border-outline-variant bg-surface cursor-pointer text-body-sm font-body-sm">
+<input checked="" class="text-primary focus:ring-primary" name="language" type="radio" value="bm">
+                      Bahasa Melayu
+                    </label>
+<label class="flex items-center gap-2 p-2 rounded-lg border border-outline-variant bg-surface cursor-pointer text-body-sm font-body-sm">
+<input class="text-primary focus:ring-primary" name="language" type="radio" value="en">
+                      English
+                    </label>
+<label class="flex items-center gap-2 p-2 rounded-lg border border-outline-variant bg-surface cursor-pointer text-body-sm font-body-sm">
+<input class="text-primary focus:ring-primary" name="language" type="radio" value="zh">
+                      中文 (Mandarin)
+                    </label>
+<label class="flex items-center gap-2 p-2 rounded-lg border border-outline-variant bg-surface cursor-pointer text-body-sm font-body-sm">
+<input class="text-primary focus:ring-primary" name="language" type="radio" value="ta">
+                      தமிழ் (Tamil)
+                    </label>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 4: LOCATION DETAILS -->
+<div class="border-t border-surface-container pt-6">
+<h3 class="font-label-md text-label-md text-on-surface mb-4">4. Location &amp; Region</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-1" for="stateRegion">
+                    State / Federal Territory <span class="text-error">*</span>
+</label>
+<select class="w-full px-3.5 py-2.5 rounded-lg border border-outline-variant bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" id="stateRegion" required="">
+<option value="">Select State</option>
+<option selected="" value="selangor">Selangor</option>
+<option value="kl">Kuala Lumpur</option>
+<option value="penang">Penang</option>
+<option value="johor">Johor</option>
+<option value="perak">Perak</option>
+<option value="sabah">Sabah</option>
+<option value="sarawak">Sarawak</option>
+<option value="other_state">Other States</option>
+</select>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-1" for="cityDistrict">
+                    City / District <span class="text-error">*</span>
+</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg border border-outline-variant bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" id="cityDistrict" placeholder="e.g. Petaling Jaya, Kajang, Klang" required="" type="text">
+</div>
+</div>
+</div>
+<!-- SECTION 5: SITUATION DETAILS & UPLOAD -->
+<div class="border-t border-surface-container pt-6">
+<h3 class="font-label-md text-label-md text-on-surface mb-2">5. Describe Your Situation</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-3">
+                Feel free to mention number of dependents, dietary needs, or immediate shelter requirements. This helps us dispatch the exact support you need.
+              </p>
+<div class="relative">
+<textarea class="w-full p-4 rounded-lg border border-outline-variant bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary resize-y" id="situationDescription" placeholder="Tell us what you are experiencing. For example: 'Single parent with 2 toddlers needing urgent food basket and diapers in Klang area; landlord given 3 days eviction notice...'" required="" rows="5"></textarea>
+<div class="text-right text-xs text-outline mt-1">Maximum 1,000 words • Confidential</div>
+</div>
+<!-- Document Upload Zone -->
+<div class="mt-4">
+<label class="block font-label-sm text-label-sm text-on-surface mb-1">
+                  Upload Supporting Documents <span class="text-outline text-xs font-normal">(Optional: helps fast-track verification)</span>
+</label>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-6 text-center hover:bg-surface-container-low transition-colors cursor-pointer bg-surface">
+<span class="material-symbols-outlined text-outline text-3xl mb-1" data-icon="cloud_upload">cloud_upload</span>
+<div class="font-label-md text-label-md text-on-surface">Click to upload or drag and drop</div>
+<div class="text-xs text-on-surface-variant mt-1">Utility bill, medical memo, or identification (PDF, PNG, JPG up to 10MB)</div>
+</div>
+</div>
+</div>
+<!-- SECTION 6: CONSENT & SUBMISSION -->
+<div class="border-t border-surface-container pt-6 space-y-4">
+<label class="flex items-start gap-3 cursor-pointer">
+<input class="mt-1 h-4 w-4 rounded text-primary focus:ring-primary border-outline" required="" type="checkbox">
+<span class="text-body-sm font-body-sm text-on-surface-variant">
+                  I agree to have HelpLink coordinate with verified local welfare caseworkers and non-profit partners to provide assistance. Data is encrypted and protected under national privacy guidelines.
+                </span>
+</label>
+<button class="w-full py-4 px-6 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-headline-md text-headline-md flex items-center justify-center gap-2 shadow-md transition-all active:scale-[0.99] cursor-pointer" type="submit">
+<span class="material-symbols-outlined text-2xl" data-icon="security">security</span>
+<span class="">Submit Request for Aid</span>
+</button>
+<div class="text-center font-label-sm text-label-sm text-outline flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+<span class="">Encrypted 256-bit submission • Zero fees • No commercial sharing</span>
+</div>
+</div>
+</form>
+</div>
+<!-- RIGHT COLUMN: SUPPORT SIDEBAR & REASSURANCE (4 Cols) -->
+<div class="lg:col-span-4 space-y-6">
+<!-- 24/7 CRISIS SOS CARD -->
+<div class="bg-error-container/40 rounded-xl border border-error/30 p-6 shadow-sm">
+<div class="flex items-center gap-2 text-error mb-2">
+<span class="material-symbols-outlined text-2xl" data-icon="emergency">emergency</span>
+<h3 class="font-headline-md text-headline-md font-bold text-on-error-container">Facing an Immediate Crisis?</h3>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface mb-4">
+              If you are facing acute hunger tonight, sudden displacement, or personal danger, do not wait for the intake form response.
+            </p>
+<a class="w-full py-3 px-4 rounded-lg bg-error hover:bg-on-error-container text-on-error font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm transition-all mb-3 cursor-pointer" href="tel:1800884357">
+<span class="material-symbols-outlined text-xl" data-icon="call">call</span>
+<span class="">Call 24/7 Hotline: 1800-88-HELP (4357)</span>
+</a>
+<a class="w-full py-2.5 px-4 rounded-lg border border-outline bg-surface-container-lowest text-on-surface hover:bg-surface-container-low font-label-md text-label-md flex items-center justify-center gap-2 transition-colors cursor-pointer" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="domain">domain</span>
+<span class="">Find Emergency Walk-in Shelters</span>
+</a>
+</div>
+<!-- TIMELINE: WHAT HAPPENS NEXT -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="timeline">timeline</span>
+              What Happens Next?
+            </h3>
+<ol class="relative border-l border-surface-variant ml-3 space-y-6">
+<li class="mb-4 ml-6">
+<span class="absolute flex items-center justify-center w-6 h-6 bg-primary-fixed rounded-full -left-3 ring-4 ring-surface-container-lowest text-on-primary-fixed font-bold text-xs">
+                  1
+                </span>
+<h4 class="font-label-md text-label-md text-on-surface">Case Intake &amp; Triage</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                  You receive an instant confirmation SMS with your tracking token. An intake caseworker reviews urgency within 2 hours.
+                </p>
+</li>
+<li class="mb-4 ml-6">
+<span class="absolute flex items-center justify-center w-6 h-6 bg-secondary-fixed rounded-full -left-3 ring-4 ring-surface-container-lowest text-on-secondary-fixed font-bold text-xs">
+                  2
+                </span>
+<h4 class="font-label-md text-label-md text-on-surface">Local Partner Matching</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                  Your case is matched with a nearby verified food bank, youth employment officer, or emergency shelter partner.
+                </p>
+</li>
+<li class="ml-6">
+<span class="absolute flex items-center justify-center w-6 h-6 bg-primary rounded-full -left-3 ring-4 ring-surface-container-lowest text-on-primary font-bold text-xs">
+                  3
+                </span>
+<h4 class="font-label-md text-label-md text-on-surface">Direct Support Delivery</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                  Arrangements are finalized for immediate grocery parcel pickup, emergency bed allocation, or career stipend intake.
+                </p>
+</li>
+</ol>
+<div class="mt-6 pt-4 border-t border-surface-container flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Need case status updates?</span>
+<a class="text-primary font-label-md hover:underline cursor-pointer" href="#">Track My Case</a>
+</div>
+</div>
+<!-- COMMUNITY DIRECTORY QUICK ACCESS CARD -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
+<h4 class="font-label-md text-label-md text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="explore">explore</span>
+              Direct Community Portals
+            </h4>
+<div class="space-y-2.5">
+<a class="flex items-center justify-between p-2.5 rounded-lg hover:bg-surface-container-low transition-colors group cursor-pointer border border-transparent hover:border-outline-variant" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="night_shelter">night_shelter</span>
+<span class="text-body-sm font-body-sm font-medium text-on-surface group-hover:text-primary">Shelters &amp; Transit Housing</span>
+</div>
+<span class="material-symbols-outlined text-outline text-lg" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-2.5 rounded-lg hover:bg-surface-container-low transition-colors group cursor-pointer border border-transparent hover:border-outline-variant" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="nutrition">nutrition</span>
+<span class="text-body-sm font-body-sm font-medium text-on-surface group-hover:text-primary">Community Food Banks</span>
+</div>
+<span class="material-symbols-outlined text-outline text-lg" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-2.5 rounded-lg hover:bg-surface-container-low transition-colors group cursor-pointer border border-transparent hover:border-outline-variant" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-xl" data-icon="work_outline">work_outline</span>
+<span class="text-body-sm font-body-sm font-medium text-on-surface group-hover:text-primary">Youth Job &amp; Skills Directory</span>
+</div>
+<span class="material-symbols-outlined text-outline text-lg" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FREQUENTLY ASKED QUESTIONS SECTION -->
+<section class="bg-surface-container-low border-t border-surface-container py-12 md:py-16">
+<div class="max-w-screen-2xl mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center max-w-2xl mx-auto mb-10">
+<h2 class="text-headline-md font-headline-md text-on-surface">Frequently Asked Questions</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-2">
+            Clear, transparent answers to help you access community resources with peace of mind.
+          </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-3">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-base font-bold text-on-surface mb-2">Who is eligible for assistance?</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              Any individual or family experiencing urgent socioeconomic distress, food insecurity, homelessness, or sudden income loss is eligible. HelpLink operates without discrimination.
+            </p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-3">
+<span class="material-symbols-outlined" data-icon="vpn_key">vpn_key</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-base font-bold text-on-surface mb-2">Is my information kept private?</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              Yes. Your data is strictly shared with assigned caseworkers and verified NGO aid providers directly assisting your request. We never share details commercially.
+            </p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-3">
+<span class="material-symbols-outlined" data-icon="group_add">group_add</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-base font-bold text-on-surface mb-2">Can I request on behalf of others?</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              Yes. You can submit aid requests for neighbors, elderly relatives, or community members in need. Simply specify their location and situation in the form above.
+            </p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER (Adheres to Shared Components JSON) -->
+<footer class="bg-surface-container-highest text-on-surface w-full mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-xl w-full max-w-screen-2xl mx-auto font-body-sm text-body-sm">
+<!-- Brand & Mission Column -->
+<div class="md:col-span-1">
+<a class="flex items-center gap-2 mb-3" href="#">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-lg" data-icon="volunteer_activism">volunteer_activism</span>
+</div>
+<span class="text-headline-md font-headline-md font-extrabold text-on-surface">HelpLink</span>
+</a>
+<p class="text-on-surface-variant mb-4">
+          © 2024 HelpLink. Supporting UN SDG 1: No Poverty.
+        </p>
+<p class="text-xs text-on-surface-variant">
+          In direct partnership with local social welfare departments, registered non-profits, and mutual aid cooperatives across Southeast Asia.
+        </p>
+</div>
+<!-- Links Col 1: Organization -->
+<div>
+<h4 class="font-label-md text-label-md text-on-surface mb-3 uppercase tracking-wider text-xs">Organization</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">About HelpLink</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Our Impact</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">SDG 1 Goals</a></li>
+<li class=""><a class="text-primary underline cursor-pointer" href="#">Request Support</a></li>
+</ul>
+</div>
+<!-- Links Col 2: Resources -->
+<div>
+<h4 class="font-label-md text-label-md text-on-surface mb-3 uppercase tracking-wider text-xs">Resources</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">News Dashboard</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Jobs Directory</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Community Map</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Shelters List</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Marketplace</a></li>
+</ul>
+</div>
+<!-- Links Col 3: Support & Contact -->
+<div>
+<h4 class="font-label-md text-label-md text-on-surface mb-3 uppercase tracking-wider text-xs">Support</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Contact Us</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Privacy Policy</a></li>
+<li class="pt-2">
+<span class="block text-xs text-on-surface-variant font-semibold">Crisis Hotlines:</span>
+<span class="text-on-surface font-label-md text-label-md">1800-88-HELP (4357)</span>
+</li>
+</ul>
+</div>
+</div>
+</footer>
+
+
+</body></html>

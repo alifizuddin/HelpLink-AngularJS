@@ -1,19 +1,412 @@
-<section class="p-6">
-  <h2 id="header" class="text-3xl font-bold text-gray-800 mb-4">Request Help</h2>
-  <p class="text-gray-700 mb-4">
-    If you are facing challenges related to food, housing, employment, or education, let us know.
-  </p>
-  
-  <form id="form" class="grid gap-4 max-w-xl mx-auto mt-6">
-    <div>
-      <li><input type="text" placeholder="Your Name" class="border p-2 rounded w-full"></li>
-      <li><input type="email" placeholder="Email Address" class="border p-2 rounded w-full"></li>
-      <li><input type="text" placeholder="Phone Number" class="border p-2 rounded w-full"></li>
-      <li><textarea rows="4" placeholder="Describe your situation" class="border p-2 rounded w-full"></textarea></li>
-      <li><button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-      Submit Request
-    </button></li>
-  </div>
-  </form>
-</section>
+<div class="help-page">
+  <!-- HERO SECTION -->
+  <section class="page-hero">
+    <div class="hero-inner">
+      <h1>Request Support &amp; Community Aid</h1>
+      <p>
+        If you or someone you know is facing urgent challenges related to food, emergency shelter,
+        youth employment, healthcare, or family welfare, let us know. Our verified community
+        caseworkers and local non-profit partners respond within 24 hours.
+      </p>
+    </div>
+  </section>
 
+  <!-- MAIN FORM & SIDEBAR -->
+  <section class="main-section">
+    <div class="layout-grid">
+      <!-- LEFT COLUMN: INTAKE FORM -->
+      <div class="form-card" id="request-form">
+        <div class="form-header">
+          <div class="form-title-row">
+            <span class="form-icon material-symbols-outlined" aria-hidden="true">edit_document</span>
+            <h2>Intake &amp; Needs Assessment Form</h2>
+          </div>
+          <p>
+            Please provide accurate details so we can connect you directly with the nearest food
+            banks, emergency shelters, or welfare officers.
+          </p>
+        </div>
+
+        <form class="help-form" (ngSubmit)="onSubmit()" novalidate>
+          <!-- SECTION 1: ASSISTANCE CATEGORY -->
+          <section class="form-section">
+            <div class="section-label">
+              <span>1. Select Assistance Category</span>
+              <span class="required">*</span>
+            </div>
+            <p class="section-hint">You may choose more than one category if applicable.</p>
+
+            <div class="category-grid">
+              <label
+                *ngFor="let cat of categories"
+                class="category-card"
+                [class.category-card--active]="selectedCategories.includes(cat.id)"
+              >
+                <input
+                  type="checkbox"
+                  [checked]="selectedCategories.includes(cat.id)"
+                  (change)="toggleCategory(cat.id)"
+                  name="category"
+                  [value]="cat.id"
+                />
+                <div class="category-content">
+                  <div class="category-header">
+                    <span class="material-symbols-outlined" aria-hidden="true">{{ cat.icon }}</span>
+                    <span class="category-name">{{ cat.label }}</span>
+                  </div>
+                  <p class="category-desc">{{ cat.description }}</p>
+                </div>
+              </label>
+            </div>
+          </section>
+
+          <!-- SECTION 2: URGENCY LEVEL -->
+          <section class="form-section">
+            <div class="section-label">
+              <span>2. Urgency Level</span>
+              <span class="required">*</span>
+            </div>
+
+            <div class="urgency-grid">
+              <label
+                *ngFor="let opt of urgencyOptions"
+                class="urgency-card"
+                [class.urgency-card--standard]="opt.id === 'standard'"
+                [class.urgency-card--urgent]="opt.id === 'urgent'"
+                [class.urgency-card--crisis]="opt.id === 'crisis'"
+                [class.urgency-card--active]="urgency === opt.id"
+              >
+                <input type="radio" name="urgency" [(ngModel)]="urgency" [value]="opt.id" />
+                <div class="urgency-content">
+                  <div class="urgency-label">{{ opt.label }}</div>
+                  <div class="urgency-sublabel">{{ opt.sublabel }}</div>
+                </div>
+              </label>
+            </div>
+
+            <div class="notice-banner">
+              <span class="material-symbols-outlined" aria-hidden="true">info</span>
+              <span>
+                For immediate life safety or danger tonight, please call our 24/7 hotline directly
+                at <strong>1800-88-HELP (4357)</strong>.
+              </span>
+            </div>
+          </section>
+
+          <!-- SECTION 3: PERSONAL & CONTACT DETAILS -->
+          <section class="form-section form-section--bordered">
+            <h3 class="subsection-title">3. Personal &amp; Contact Details</h3>
+
+            <div class="field-grid field-grid--two">
+              <div class="field">
+                <label for="fullName">Full Name <span class="required">*</span></label>
+                <input
+                  id="fullName"
+                  type="text"
+                  [(ngModel)]="formData.fullName"
+                  name="fullName"
+                  placeholder="e.g. Siti Aminah binti Razali"
+                  required
+                />
+              </div>
+
+              <div class="field">
+                <label for="phone">Contact Phone Number <span class="required">*</span></label>
+                <div class="phone-input">
+                  <span class="phone-prefix">+60</span>
+                  <input
+                    id="phone"
+                    type="tel"
+                    [(ngModel)]="formData.phone"
+                    name="phone"
+                    placeholder="12 345 6789"
+                    required
+                  />
+                </div>
+                <span class="field-hint">Receives SMS/WhatsApp case updates</span>
+              </div>
+
+              <div class="field">
+                <label for="email">
+                  Email Address
+                  <span class="optional">(Optional if phone provided)</span>
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  [(ngModel)]="formData.email"
+                  name="email"
+                  placeholder="name@example.com"
+                />
+              </div>
+
+              <div class="field">
+                <label for="contactMethod">Preferred Contact Method</label>
+                <div class="select-shell">
+                  <select
+                    id="contactMethod"
+                    [(ngModel)]="formData.contactMethod"
+                    name="contactMethod"
+                  >
+                    <option *ngFor="let m of contactMethods" [value]="m.id">{{ m.label }}</option>
+                  </select>
+                  <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+                </div>
+              </div>
+
+              <div class="field field--full">
+                <label>Preferred Language for Communication</label>
+                <div class="language-grid">
+                  <label
+                    *ngFor="let lang of languages"
+                    class="language-option"
+                    [class.language-option--active]="formData.language === lang.id"
+                  >
+                    <input type="radio" [(ngModel)]="formData.language" name="language" [value]="lang.id" />
+                    <span>{{ lang.label }}</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 4: LOCATION DETAILS -->
+          <section class="form-section form-section--bordered">
+            <h3 class="subsection-title">4. Location &amp; Region</h3>
+
+            <div class="field-grid field-grid--two">
+              <div class="field">
+                <label for="state">State / Federal Territory <span class="required">*</span></label>
+                <div class="select-shell">
+                  <select id="state" [(ngModel)]="formData.state" name="state" required>
+                    <option value="">Select State</option>
+                    <option *ngFor="let s of states" [value]="s.id">{{ s.label }}</option>
+                  </select>
+                  <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="city">City / District <span class="required">*</span></label>
+                <input
+                  id="city"
+                  type="text"
+                  [(ngModel)]="formData.city"
+                  name="city"
+                  placeholder="e.g. Petaling Jaya, Kajang, Klang"
+                  required
+                />
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 5: SITUATION DETAILS & UPLOAD -->
+          <section class="form-section form-section--bordered">
+            <h3 class="subsection-title">5. Describe Your Situation</h3>
+            <p class="section-hint">
+              Feel free to mention number of dependents, dietary needs, or immediate shelter
+              requirements. This helps us dispatch the exact support you need.
+            </p>
+
+            <div class="textarea-wrapper">
+              <textarea
+                id="situation"
+                [(ngModel)]="formData.situation"
+                name="situation"
+                rows="6"
+                placeholder="Tell us what you are experiencing. For example: 'Single parent with 2 toddlers needing urgent food basket and diapers in Klang area; landlord given 3 days eviction notice...'"
+                required
+              ></textarea>
+              <div class="textarea-footer">
+                <span>Maximum 1,000 words • Confidential</span>
+              </div>
+            </div>
+
+            <div class="upload-section">
+              <label class="upload-label">
+                Upload Supporting Documents
+                <span class="optional">(Optional: helps fast-track verification)</span>
+              </label>
+              <div class="upload-dropzone">
+                <span class="material-symbols-outlined upload-icon" aria-hidden="true">cloud_upload</span>
+                <div class="upload-title">Click to upload or drag and drop</div>
+                <div class="upload-hint">
+                  Utility bill, medical memo, or identification (PDF, PNG, JPG up to 10MB)
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 6: CONSENT & SUBMISSION -->
+          <section class="form-section form-section--bordered form-section--last">
+            <label class="consent-row">
+              <input type="checkbox" [(ngModel)]="formData.consent" name="consent" required />
+              <span>
+                I agree to have HelpLink coordinate with verified local welfare caseworkers and
+                non-profit partners to provide assistance. Data is encrypted and protected under
+                national privacy guidelines.
+              </span>
+            </label>
+
+            <button type="submit" class="submit-btn">
+              <span class="material-symbols-outlined" aria-hidden="true">security</span>
+              <span>Submit Request for Aid</span>
+            </button>
+
+            <div class="submit-note">
+              <span class="material-symbols-outlined" aria-hidden="true">lock</span>
+              <span>Encrypted 256-bit submission • Zero fees • No commercial sharing</span>
+            </div>
+          </section>
+        </form>
+      </div>
+
+      <!-- RIGHT COLUMN: SIDEBAR -->
+      <aside class="sidebar">
+        <!-- CRISIS SOS CARD -->
+        <div class="sos-card">
+          <div class="sos-header">
+            <span class="material-symbols-outlined" aria-hidden="true">emergency</span>
+            <h3>Facing an Immediate Crisis?</h3>
+          </div>
+          <p>
+            If you are facing acute hunger tonight, sudden displacement, or personal danger, do not
+            wait for the intake form response.
+          </p>
+          <a class="sos-btn sos-btn--primary" href="tel:1800884357">
+            <span class="material-symbols-outlined" aria-hidden="true">call</span>
+            <span>Call 24/7 Hotline: 1800-88-HELP (4357)</span>
+          </a>
+          <a class="sos-btn sos-btn--ghost" routerLink="/shelter">
+            <span class="material-symbols-outlined" aria-hidden="true">domain</span>
+            <span>Find Emergency Walk-in Shelters</span>
+          </a>
+        </div>
+
+        <!-- TIMELINE -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">
+            <span class="material-symbols-outlined" aria-hidden="true">timeline</span>
+            <h3>What Happens Next?</h3>
+          </div>
+
+          <ol class="timeline">
+            <li class="timeline-item">
+              <span class="timeline-dot timeline-dot--one">1</span>
+              <div>
+                <h4>Case Intake &amp; Triage</h4>
+                <p>
+                  You receive an instant confirmation SMS with your tracking token. An intake
+                  caseworker reviews urgency within 2 hours.
+                </p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-dot timeline-dot--two">2</span>
+              <div>
+                <h4>Local Partner Matching</h4>
+                <p>
+                  Your case is matched with a nearby verified food bank, youth employment officer,
+                  or emergency shelter partner.
+                </p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-dot timeline-dot--three">3</span>
+              <div>
+                <h4>Direct Support Delivery</h4>
+                <p>
+                  Arrangements are finalized for immediate grocery parcel pickup, emergency bed
+                  allocation, or career stipend intake.
+                </p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="timeline-footer">
+            <span>Need case status updates?</span>
+            <a href="#">Track My Case</a>
+          </div>
+        </div>
+
+        <!-- QUICK PORTALS -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">
+            <span class="material-symbols-outlined" aria-hidden="true">explore</span>
+            <h4>Direct Community Portals</h4>
+          </div>
+
+          <div class="portal-list">
+            <a class="portal-link" routerLink="/shelter">
+              <div class="portal-left">
+                <span class="material-symbols-outlined portal-icon portal-icon--primary" aria-hidden="true">night_shelter</span>
+                <span>Shelters &amp; Transit Housing</span>
+              </div>
+              <span class="material-symbols-outlined portal-chevron" aria-hidden="true">chevron_right</span>
+            </a>
+            <a class="portal-link" routerLink="/resources">
+              <div class="portal-left">
+                <span class="material-symbols-outlined portal-icon portal-icon--secondary" aria-hidden="true">nutrition</span>
+                <span>Community Food Banks</span>
+              </div>
+              <span class="material-symbols-outlined portal-chevron" aria-hidden="true">chevron_right</span>
+            </a>
+            <a class="portal-link" routerLink="/jobs">
+              <div class="portal-left">
+                <span class="material-symbols-outlined portal-icon portal-icon--tertiary" aria-hidden="true">work_outline</span>
+                <span>Youth Job &amp; Skills Directory</span>
+              </div>
+              <span class="material-symbols-outlined portal-chevron" aria-hidden="true">chevron_right</span>
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="faq-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>Clear, transparent answers to help you access community resources with peace of mind.</p>
+      </div>
+
+      <div class="faq-grid">
+        <article class="faq-card">
+          <div class="faq-icon">
+            <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+          </div>
+          <h3>Who is eligible for assistance?</h3>
+          <p>
+            Any individual or family experiencing urgent socioeconomic distress, food insecurity,
+            homelessness, or sudden income loss is eligible. HelpLink operates without
+            discrimination.
+          </p>
+        </article>
+
+        <article class="faq-card">
+          <div class="faq-icon">
+            <span class="material-symbols-outlined" aria-hidden="true">vpn_key</span>
+          </div>
+          <h3>Is my information kept private?</h3>
+          <p>
+            Yes. Your data is strictly shared with assigned caseworkers and verified NGO aid
+            providers directly assisting your request. We never share details commercially.
+          </p>
+        </article>
+
+        <article class="faq-card">
+          <div class="faq-icon">
+            <span class="material-symbols-outlined" aria-hidden="true">group_add</span>
+          </div>
+          <h3>Can I request on behalf of others?</h3>
+          <p>
+            Yes. You can submit aid requests for neighbors, elderly relatives, or community members
+            in need. Simply specify their location and situation in the form above.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+</div>
