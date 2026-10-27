@@ -1,0 +1,667 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Join as a Volunteer | HelpLink</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts: Inter and Atkinson Hyperlegible Next -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400..800;1,400..800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config verbatim from Theme Guidance -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#b7c4ff",
+            "on-surface": "#151c27",
+            "surface-tint": "#006a61",
+            "tertiary-container": "#4069f2",
+            "on-tertiary-fixed-variant": "#0039b5",
+            "on-secondary-fixed": "#2a1700",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#684000",
+            "background": "#f9f9ff",
+            "surface": "#f9f9ff",
+            "surface-bright": "#f9f9ff",
+            "secondary-container": "#fea619",
+            "primary": "#00685f",
+            "surface-container-low": "#f0f3ff",
+            "surface-variant": "#dce2f3",
+            "secondary": "#855300",
+            "on-tertiary-fixed": "#001551",
+            "on-primary-fixed": "#00201d",
+            "tertiary-fixed": "#dce1ff",
+            "on-tertiary": "#ffffff",
+            "inverse-surface": "#2a313d",
+            "surface-container-highest": "#dce2f3",
+            "inverse-on-surface": "#ebf1ff",
+            "secondary-fixed": "#ffddb8",
+            "surface-container-high": "#e2e8f8",
+            "primary-fixed": "#89f5e7",
+            "secondary-fixed-dim": "#ffb95f",
+            "surface-dim": "#d3daea",
+            "outline-variant": "#bcc9c6",
+            "primary-fixed-dim": "#6bd8cb",
+            "on-error": "#ffffff",
+            "on-tertiary-container": "#fffbff",
+            "tertiary": "#1d4ed8",
+            "error": "#ba1a1a",
+            "on-surface-variant": "#3d4947",
+            "on-primary": "#ffffff",
+            "outline": "#6d7a77",
+            "on-secondary-fixed-variant": "#653e00",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-primary-fixed-variant": "#005049",
+            "on-primary-container": "#f4fffc",
+            "primary-container": "#008378",
+            "surface-container": "#e7eefe",
+            "on-background": "#151c27",
+            "inverse-primary": "#6bd8cb",
+            "error-container": "#ffdad6"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "sm": "16px",
+            "lg": "40px",
+            "gutter": "24px",
+            "base": "4px",
+            "xl": "64px",
+            "margin-mobile": "16px",
+            "margin-desktop": "48px",
+            "md": "24px",
+            "xs": "8px"
+          },
+          "fontFamily": {
+            "label-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Atkinson Hyperlegible Next"],
+            "headline-lg-mobile": ["Atkinson Hyperlegible Next"],
+            "headline-md": ["Atkinson Hyperlegible Next"],
+            "display-lg": ["Atkinson Hyperlegible Next"]
+          },
+          "fontSize": {
+            "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-sm": ["12px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #00685f;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TOP APP BAR / NAVIGATION (From Shared Components JSON) -->
+<header class="bg-surface shadow-sm docked full-width top-0 z-50 sticky">
+<div class="flex justify-between items-center px-margin-desktop py-md w-full max-w-screen-2xl mx-auto">
+<!-- Brand Logo Anchor -->
+<div class="flex items-center gap-xs">
+<a class="flex items-center gap-2 group" href="#">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-2xl" data-icon="volunteer_activism">volunteer_activism</span>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-md font-headline-md font-bold text-primary tracking-tight leading-tight">HelpLink</span>
+<span class="text-label-sm font-label-sm text-outline tracking-wider">UN SDG 1 • MALAYSIA</span>
+</div>
+</a>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer py-1 font-label-md text-label-md" href="#">News Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer py-1 font-label-md text-label-md" href="#">Jobs</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer py-1 font-label-md text-label-md" href="#">Community Map</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer py-1 font-label-md text-label-md" href="#">Shelters</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer py-1 font-label-md text-label-md" href="#">Marketplace</a>
+</nav>
+<!-- Trailing Action Group & Search -->
+<div class="flex items-center gap-4">
+<!-- Search bar on right -->
+<div class="relative hidden lg:block w-56">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-lg" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-full pl-9 pr-3 py-1.5 text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:border-primary" placeholder="Search resources..." type="text">
+</div>
+<div class="flex items-center gap-3">
+<!-- Get Help (Secondary Action) -->
+<a class="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-surface-container-low transition-colors font-label-md text-label-md cursor-pointer flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="support">support</span>
+<span class="">Get Help</span>
+</a>
+<!-- Volunteer (Primary Active Highlighted CTA) -->
+<a class="px-4 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container shadow-sm transition-all font-label-md text-label-md cursor-pointer flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="how_to_reg">how_to_reg</span>
+<span class="">Volunteer</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN CONTENT CONTAINER -->
+<main class="flex-grow w-full max-w-screen-2xl mx-auto px-margin-mobile md:px-margin-desktop py-lg">
+<!-- HERO SECTION -->
+<section class="mb-lg">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 md:p-8 relative overflow-hidden shadow-sm">
+<!-- SDG 1 Badge Banner -->
+
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<div class="lg:col-span-8">
+<h1 class="text-display-lg font-headline-lg text-on-surface tracking-tight mb-3">
+              Join as a Community Volunteer
+            </h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-3xl leading-relaxed mb-6">
+              Help us eradicate poverty and empower local communities across Malaysia. Contribute your time, professional skills, or grassroots mentorship to make lasting, measurable impact where it is needed most.
+            </p>
+<!-- Trust / Impact stats strip -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-surface-container-high">
+
+
+
+
+</div>
+</div>
+<!-- Hero Image Banner Reference from Request -->
+
+</div>
+</div>
+</section>
+<!-- TWO-COLUMN WORKFLOW GRID (Left: Form, Right: Sidebar) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-xl">
+<!-- LEFT COLUMN: MAIN VOLUNTEER APPLICATION FORM (8 Cols) -->
+<section class="lg:col-span-8 flex flex-col gap-6">
+<form class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 md:p-8 shadow-sm flex flex-col gap-8">
+<!-- Section Header -->
+<div class="border-b border-surface-container-high pb-4">
+<h2 class="text-headline-md font-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="assignment_ind">assignment_ind</span>
+              Volunteer Application &amp; Skills Profile
+            </h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+              Please complete this short registration form. We match volunteers based on geographical proximity, schedule flexibility, and specialist expertise.
+            </p>
+</div>
+<!-- STEP 1: Areas of Interest / Expertise -->
+<div>
+<div class="flex items-center justify-between mb-3">
+<label class="text-label-md font-label-md text-on-surface flex items-center gap-1.5">
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold">1</span>
+                Areas of Interest &amp; Skills Contribution <span class="text-error">*</span>
+</label>
+<span class="text-label-sm font-label-sm text-outline">Select all that apply</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<!-- Item 1 -->
+<label class="flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant bg-surface-bright hover:bg-surface-container-low cursor-pointer transition-colors has-[:checked]:border-primary has-[:checked]:bg-surface-container-low">
+<input checked="" class="mt-1 w-4 h-4 rounded text-primary focus:ring-primary border-outline" type="checkbox">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="local_shipping">local_shipping</span>
+                    Food Bank &amp; Logistics
+                  </span>
+<span class="text-label-sm font-label-sm text-on-surface-variant mt-0.5">Sorting parcels, cold-chain packing &amp; distribution.</span>
+</div>
+</label>
+<!-- Item 2 -->
+<label class="flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant bg-surface-bright hover:bg-surface-container-low cursor-pointer transition-colors has-[:checked]:border-primary has-[:checked]:bg-surface-container-low">
+<input checked="" class="mt-1 w-4 h-4 rounded text-primary focus:ring-primary border-outline" type="checkbox">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="school">school</span>
+                    Youth Mentorship &amp; Tutoring
+                  </span>
+<span class="text-label-sm font-label-sm text-on-surface-variant mt-0.5">STEM coaching, exam support, and career guidance.</span>
+</div>
+</label>
+<!-- Item 3 -->
+<label class="flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant bg-surface-bright hover:bg-surface-container-low cursor-pointer transition-colors has-[:checked]:border-primary has-[:checked]:bg-surface-container-low">
+<input class="mt-1 w-4 h-4 rounded text-primary focus:ring-primary border-outline" type="checkbox">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="handyman">handyman</span>
+                    Skill Training &amp; Workshops
+                  </span>
+<span class="text-label-sm font-label-sm text-on-surface-variant mt-0.5">Sewing, crafts, micro-entrepreneurship &amp; culinary skills.</span>
+</div>
+</label>
+<!-- Item 4 -->
+<label class="flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant bg-surface-bright hover:bg-surface-container-low cursor-pointer transition-colors has-[:checked]:border-primary has-[:checked]:bg-surface-container-low">
+<input class="mt-1 w-4 h-4 rounded text-primary focus:ring-primary border-outline" type="checkbox">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="night_shelter">night_shelter</span>
+                    Shelter Support &amp; Senior Care
+                  </span>
+<span class="text-label-sm font-label-sm text-on-surface-variant mt-0.5">Onsite shelter assistance, companionship &amp; meals.</span>
+</div>
+</label>
+<!-- Item 5 -->
+<label class="flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant bg-surface-bright hover:bg-surface-container-low cursor-pointer transition-colors has-[:checked]:border-primary has-[:checked]:bg-surface-container-low">
+<input class="mt-1 w-4 h-4 rounded text-primary focus:ring-primary border-outline" type="checkbox">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="translate">translate</span>
+                    Translation &amp; Casework
+                  </span>
+<span class="text-label-sm font-label-sm text-on-surface-variant mt-0.5">Malay, English, Tamil, Mandarin &amp; indigenous dialects.</span>
+</div>
+</label>
+<!-- Item 6 -->
+<label class="flex items-start gap-3 p-3.5 rounded-lg border border-outline-variant bg-surface-bright hover:bg-surface-container-low cursor-pointer transition-colors has-[:checked]:border-primary has-[:checked]:bg-surface-container-low">
+<input class="mt-1 w-4 h-4 rounded text-primary focus:ring-primary border-outline" type="checkbox">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="devices">devices</span>
+                    Digital, Admin &amp; IT Support
+                  </span>
+<span class="text-label-sm font-label-sm text-on-surface-variant mt-0.5">Portal updates, intake form digitization &amp; social media.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- STEP 2: Availability & Commitment Level -->
+<div>
+<label class="text-label-md font-label-md text-on-surface flex items-center gap-1.5 mb-3">
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold">2</span>
+              Availability &amp; Commitment Level <span class="text-error">*</span>
+</label>
+<div class="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-4">
+<label class="p-3 border border-outline-variant rounded-lg flex flex-col text-center cursor-pointer hover:bg-surface-container-low has-[:checked]:border-primary has-[:checked]:bg-surface-container-low">
+<input checked="" class="mx-auto mb-2 text-primary focus:ring-primary" name="commitment" type="radio">
+<span class="font-label-md text-label-md text-on-surface">Weekly Commitment</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">4-8 hrs / week</span>
+</label>
+<label class="p-3 border border-outline-variant rounded-lg flex flex-col text-center cursor-pointer hover:bg-surface-container-low has-[:checked]:border-primary has-[:checked]:bg-surface-container-low">
+<input class="mx-auto mb-2 text-primary focus:ring-primary" name="commitment" type="radio">
+<span class="font-label-md text-label-md text-on-surface">Bi-Weekly</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">2-4 hrs / fortnight</span>
+</label>
+<label class="p-3 border border-outline-variant rounded-lg flex flex-col text-center cursor-pointer hover:bg-surface-container-low has-[:checked]:border-primary has-[:checked]:bg-surface-container-low">
+<input class="mx-auto mb-2 text-primary focus:ring-primary" name="commitment" type="radio">
+<span class="font-label-md text-label-md text-on-surface">Monthly Events</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Weekend drives</span>
+</label>
+<label class="p-3 border border-outline-variant rounded-lg flex flex-col text-center cursor-pointer hover:bg-surface-container-low has-[:checked]:border-primary has-[:checked]:bg-surface-container-low">
+<input class="mx-auto mb-2 text-primary focus:ring-primary" name="commitment" type="radio">
+<span class="font-label-md text-label-md text-on-surface">On-Demand</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Emergency Relief</span>
+</label>
+</div>
+<!-- Time Slots -->
+<div class="bg-surface-container-low p-3.5 rounded-lg border border-outline-variant">
+<span class="font-label-md text-label-md text-on-surface mb-2 block">Preferred Shift Windows:</span>
+<div class="flex flex-wrap gap-4">
+<label class="inline-flex items-center gap-2 text-body-sm font-body-sm text-on-surface cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-primary border-outline" type="checkbox">
+                  Weekday Mornings
+                </label>
+<label class="inline-flex items-center gap-2 text-body-sm font-body-sm text-on-surface cursor-pointer">
+<input class="rounded text-primary focus:ring-primary border-outline" type="checkbox">
+                  Weekday Afternoons
+                </label>
+<label class="inline-flex items-center gap-2 text-body-sm font-body-sm text-on-surface cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-primary border-outline" type="checkbox">
+                  Weekend Full Day
+                </label>
+<label class="inline-flex items-center gap-2 text-body-sm font-body-sm text-on-surface cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-primary border-outline" type="checkbox">
+                  Evenings (Remote / Tutoring)
+                </label>
+</div>
+</div>
+</div>
+<!-- STEP 3: Personal & Contact Information -->
+<div>
+<label class="text-label-md font-label-md text-on-surface flex items-center gap-1.5 mb-3">
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold">3</span>
+              Personal &amp; Contact Information <span class="text-error">*</span>
+</label>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Full Name -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Full Legal Name</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 py-2 text-body-md font-body-md text-on-surface focus:border-primary" placeholder="e.g. Farah binti Ahmad" type="text" value="Farah binti Ahmad">
+</div>
+<!-- Email -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Email Address</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-3.5 py-2 text-body-md font-body-md text-on-surface focus:border-primary" placeholder="e.g. farah@example.com" type="email" value="farah.ahmad@mail.my">
+</div>
+<!-- Phone with +60 prefix -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Contact Phone Number</label>
+<div class="flex">
+<span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-outline-variant bg-surface-container-high text-on-surface-variant text-body-sm font-body-sm">
+                    +60
+                  </span>
+<input class="w-full rounded-r-lg border border-outline-variant px-3.5 py-2 text-body-md font-body-md text-on-surface focus:border-primary" placeholder="12 345 6789" type="tel" value="12 884 9210">
+</div>
+</div>
+<!-- State & District -->
+<div class="grid grid-cols-2 gap-2">
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">State</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface focus:border-primary">
+<option selected="">Selangor</option>
+<option>Kuala Lumpur</option>
+<option>Penang</option>
+<option>Johor</option>
+<option>Perak</option>
+<option>Sabah</option>
+<option>Sarawak</option>
+<option>Pahang</option>
+</select>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">District / City</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface focus:border-primary" placeholder="Petaling Jaya" type="text" value="Petaling Jaya / Subang">
+</div>
+</div>
+</div>
+</div>
+<!-- STEP 4: Motivation & Experience -->
+<div>
+<label class="text-label-md font-label-md text-on-surface flex items-center gap-1.5 mb-3">
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold">4</span>
+              Motivation, Background &amp; Credentials
+            </label>
+<div class="mb-4">
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-1">
+                Why do you want to volunteer and what relevant experience or background do you bring?
+                <span class="text-outline text-xs float-right">Max 500 words</span>
+</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3 text-body-md font-body-md text-on-surface focus:border-primary" placeholder="Briefly describe your passion, previous community volunteer involvement, languages spoken, or technical proficiencies..." rows="4">I have 2 years of prior experience assisting weekly community feeding initiatives in Petaling Jaya and mentor high school students in mathematics. I am fluent in Bahasa Melayu and English, and eager to assist with both emergency logistics and online tutoring.</textarea>
+</div>
+<!-- Optional Document / Resume / Certifications upload box -->
+<div>
+<span class="block text-label-sm font-label-sm text-on-surface-variant mb-1">Supporting Credentials, Resume or ID Verification (Optional)</span>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-6 text-center bg-surface-bright hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-outline text-3xl mb-1" data-icon="cloud_upload">cloud_upload</span>
+<p class="font-label-md text-label-md text-on-surface">Click to upload or drag and drop</p>
+<p class="text-label-sm font-label-sm text-outline mt-0.5">PDF, DOCX, PNG or JPG (Max file size 5MB each)</p>
+<div class="mt-3 inline-flex items-center gap-2 px-3 py-1 bg-surface-container text-on-surface-variant rounded border border-outline-variant text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-sm" data-icon="attachment">attachment</span>
+                  Resume_FarahAhmad_2024.pdf (1.2 MB)
+                  <button class="text-error hover:text-on-error-container ml-1" type="button">×</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Code of conduct agreement & Submit CTA -->
+<div class="border-t border-surface-container-high pt-5 flex flex-col gap-4">
+<label class="flex items-start gap-3 cursor-pointer">
+<input checked="" class="mt-1 w-4 h-4 rounded text-primary focus:ring-primary border-outline" type="checkbox">
+<span class="text-body-sm font-body-sm text-on-surface-variant">
+                I agree to uphold the <a class="text-primary font-semibold underline" href="#">HelpLink Volunteer Code of Conduct</a> and community safeguard guidelines. I confirm that all submitted particulars are authentic.
+              </span>
+</label>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-outline">
+<span class="material-symbols-outlined text-primary text-base" data-icon="security">security</span>
+<span class="">Verified NGO onboarding • Free onboarding orientation provided</span>
+</div>
+<button class="px-6 py-3 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2" type="button">
+<span class="">Submit Volunteer Application</span>
+<span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</form>
+</section>
+<!-- RIGHT COLUMN: SIDEBAR WITH REASSURANCE & CONTEXT (4 Cols) -->
+<aside class="lg:col-span-4 flex flex-col gap-6">
+<!-- CARD 1: Why Volunteer with HelpLink? -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="stars">stars</span>
+            Why Volunteer with Us?
+          </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4">
+            Be part of Malaysia’s united front against poverty under the UN SDG 1 framework.
+          </p>
+<ul class="space-y-3.5">
+<li class="flex items-start gap-3">
+<div class="w-7 h-7 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0 text-primary mt-0.5">
+<span class="material-symbols-outlined text-base" data-icon="public">public</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">Direct SDG 1 Grassroots Impact</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Channel support directly to B40 households and welfare centers.</span>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-7 h-7 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0 text-primary mt-0.5">
+<span class="material-symbols-outlined text-base" data-icon="health_and_safety">health_and_safety</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">Free Safeguarding &amp; First-Aid</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Accredited safety modules before any community deployment.</span>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-7 h-7 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0 text-primary mt-0.5">
+<span class="material-symbols-outlined text-base" data-icon="badge">badge</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">Official Certificate &amp; References</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Verified service logs recognized by universities and employers.</span>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-7 h-7 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0 text-primary mt-0.5">
+<span class="material-symbols-outlined text-base" data-icon="diversity_3">diversity_3</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">Welcoming Volunteer Network</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Connect with like-minded changemakers, leaders, and allies.</span>
+</div>
+</li>
+</ul>
+</div>
+<!-- CARD 2: Volunteer Onboarding Journey (Timeline) -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="timeline">timeline</span>
+            Onboarding Journey
+          </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4">
+            How we get you ready to serve safely and productively:
+          </p>
+<div class="relative pl-6 border-l-2 border-primary/30 space-y-6">
+<!-- Step 1 -->
+<div class="relative">
+<div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-primary border-2 border-surface-container-lowest"></div>
+<div class="font-label-md text-label-md text-on-surface">1. Application Review</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Our coordinator validates your availability and profile within 48 hours.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative">
+<div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-primary border-2 border-surface-container-lowest"></div>
+<div class="font-label-md text-label-md text-on-surface">2. 30-Min Virtual Orientation</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Join a concise online briefing covering safety, etiquette, and tools.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative">
+<div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-secondary-container border-2 border-surface-container-lowest"></div>
+<div class="font-label-md text-label-md text-on-surface">3. Community Matching</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Receive your official badge and start your first shift at a local shelter or food hub.</p>
+</div>
+</div>
+</div>
+<!-- CARD 3: Corporate or Group Volunteering -->
+
+<!-- CARD 4: Quick Contact or FAQ Link -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-2xl" data-icon="contact_support">contact_support</span>
+<div>
+<div class="font-label-md text-label-md text-on-surface">Have a quick question?</div>
+<div class="text-label-sm font-label-sm text-on-surface-variant">Speak with our Volunteer desk</div>
+</div>
+</div>
+<a class="px-3 py-1.5 rounded-lg border border-outline-variant hover:bg-surface-container text-primary font-label-sm text-label-sm" href="tel:1800884357">
+            Call Desk
+          </a>
+</div>
+</aside>
+</div>
+<!-- FAQ SECTION BELOW FORM -->
+<section class="mb-xl">
+<div class="mb-6">
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Frequently Asked Questions</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Essential information regarding volunteer participation, hours, and roles.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- FAQ 1 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-primary flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-lg" data-icon="help">help</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Do I need prior experience?</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+              No prior experience is necessary. All community volunteers undergo our free virtual orientation and receive on-the-ground mentorship from seasoned field leaders.
+            </p>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container-high text-label-sm font-label-sm text-primary flex items-center gap-1">
+<span class="">Orientation modules provided</span>
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<!-- FAQ 2 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-primary flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-lg" data-icon="laptop_chromebook">laptop_chromebook</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Can I volunteer remotely?</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+              Yes! We offer remote opportunities including virtual language translation, online school tutoring, caseworker documentation, and digital media administration.
+            </p>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container-high text-label-sm font-label-sm text-primary flex items-center gap-1">
+<span class="">Digital tracks available</span>
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<!-- FAQ 3 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-primary flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-lg" data-icon="workspace_premium">workspace_premium</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Are volunteer hours certified?</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+              Yes. HelpLink issues tamper-proof digital certificates, hour verification logs, and official recommendation letters valid for academic or professional credit.
+            </p>
+</div>
+<div class="mt-4 pt-3 border-t border-surface-container-high text-label-sm font-label-sm text-primary flex items-center gap-1">
+<span class="">Official digital verification</span>
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER (From Shared Components JSON) -->
+<footer class="bg-surface-container-highest mt-auto border-t border-surface-variant/40">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-xl w-full max-w-screen-2xl mx-auto font-body-sm text-body-sm">
+<!-- Col 1: Organization & SDG Mission -->
+<div class="space-y-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="volunteer_activism">volunteer_activism</span>
+</div>
+<span class="text-headline-md font-headline-md font-extrabold text-on-surface">HelpLink</span>
+</div>
+<p class="text-on-surface-variant">
+          Empowering communities and mobilizing grassroots support across Malaysia to advance the United Nations Sustainable Development Goal 1: No Poverty.
+        </p>
+<div class="pt-2 flex items-center gap-2 text-label-sm font-label-sm text-primary font-semibold">
+<span class="material-symbols-outlined text-base" data-icon="handshake">handshake</span>
+<span class="">Verified Humanitarian Platform</span>
+</div>
+</div>
+<!-- Col 2: Ecosystem & Navigation Links -->
+<div class="space-y-2">
+<div class="font-label-md text-label-md text-on-surface mb-3 uppercase tracking-wider text-xs">Ecosystem</div>
+<ul class="space-y-2">
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">About HelpLink</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Our Impact</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">SDG 1 Goals</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">News Dashboard</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Jobs Directory</a></li>
+</ul>
+</div>
+<!-- Col 3: Resources & Directory -->
+<div class="space-y-2">
+<div class="font-label-md text-label-md text-on-surface mb-3 uppercase tracking-wider text-xs">Community Resources</div>
+<ul class="space-y-2">
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Community Map</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Shelters List</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Marketplace</a></li>
+<li class=""><a class="text-primary underline font-medium cursor-pointer" href="#">Volunteer Portal</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+<!-- Col 4: Emergency Contacts & Support -->
+<div class="space-y-3">
+<div class="font-label-md text-label-md text-on-surface mb-3 uppercase tracking-wider text-xs">Assistance Desk</div>
+<div class="p-3 bg-surface rounded-lg border border-outline-variant">
+<span class="text-label-sm font-label-sm text-outline block">National Relief Toll-Free Hotline</span>
+<span class="text-headline-md font-headline-md font-bold text-primary block mt-0.5">1800-88-HELP (4357)</span>
+<span class="text-xs text-on-surface-variant block mt-1">Operating 24/7 in 4 languages</span>
+</div>
+<div class="pt-2">
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer block" href="#">Contact Us</a>
+<span class="text-xs text-outline mt-1 block">Level 4, Wisma Harapan, Jalan Syed Putra, Kuala Lumpur</span>
+</div>
+</div>
+</div>
+<!-- Copyright Bar -->
+<div class="border-t border-surface-variant/60 py-4 px-margin-desktop text-center text-on-surface-variant text-label-sm font-label-sm">
+<div class="max-w-screen-2xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+<span class="">© 2024 HelpLink. Supporting UN SDG 1: No Poverty.</span>
+<div class="flex items-center gap-4 text-xs">
+<a class="hover:underline" href="#">Volunteer Code of Conduct</a>
+<span class="">•</span>
+<a class="hover:underline" href="#">Child Safeguarding Policy</a>
+<span class="">•</span>
+<a class="hover:underline" href="#">Whistleblower Channel</a>
+</div>
+</div>
+</div>
+</footer>
+
+
+</body></html>

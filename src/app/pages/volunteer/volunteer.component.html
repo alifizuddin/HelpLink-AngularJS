@@ -1,20 +1,387 @@
-<section class="p-6">
-  <h2 id= "header" class="text-3xl font-bold text-gray-800 mb-4">Join as a Volunteer</h2>
-  <p class="text-gray-700 mb-4">
-    Help us make a difference by volunteering your time or skills. Fill in your details below.
-  </p>
+<div class="volunteer-page">
+  <!-- HERO SECTION -->
+  <header class="page-hero">
+    <div class="hero-copy">
+      <div class="hero-title-row">
+        <h1>Join as a Community Volunteer</h1>
+      </div>
+      <p>
+        Help us eradicate poverty and empower local communities across Malaysia. Contribute your
+        time, professional skills, or grassroots mentorship to make lasting, measurable impact
+        where it is needed most.
+      </p>
+    </div>
+  </header>
 
-  <form id="form" class="grid gap-4 max-w-xl mx-auto mt-6">
-    <div>
-      <li><input type="text" placeholder="Full Name" class="border p-2 rounded w-full"></li>
-      <li><input type="email" placeholder="Email Address" class="border p-2 rounded w-full"></li>
-      <li><input type="text" placeholder="Area of Expertise (e.g., teaching, cooking)" class="border p-2 rounded w-full"></li>
-      <li><textarea rows="3" placeholder="Why do you want to volunteer?" class="border p-2 rounded w-full"></textarea></li>
-      <li><button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-      Sign Up
-    </button></li>
-  </div> 
-  </form>
+  <!-- MAIN LAYOUT -->
+  <section class="main-section">
+    <div class="layout-grid">
+      <!-- LEFT COLUMN: APPLICATION FORM -->
+      <div class="form-card">
+        <div class="form-header">
+          <div class="form-title-row">
+            <span class="form-icon material-symbols-outlined" aria-hidden="true">assignment_ind</span>
+            <h2>Volunteer Application &amp; Skills Profile</h2>
+          </div>
+          <p>
+            Please complete this short registration form. We match volunteers based on geographical
+            proximity, schedule flexibility, and specialist expertise.
+          </p>
+        </div>
 
-</section>
+        <form class="volunteer-form" (ngSubmit)="onSubmit()" novalidate>
+          <!-- SECTION 1: AREAS OF INTEREST -->
+          <section class="form-section">
+            <div class="section-label">
+              <span>1. Areas of Interest &amp; Skills Contribution</span>
+              <span class="required">*</span>
+            </div>
+            <p class="section-hint">Select all that apply</p>
 
+            <div class="interest-grid">
+              <label
+                *ngFor="let interest of interests"
+                class="interest-card"
+                [class.interest-card--active]="selectedInterests.includes(interest.id)"
+              >
+                <input
+                  type="checkbox"
+                  [checked]="selectedInterests.includes(interest.id)"
+                  (change)="toggleInterest(interest.id)"
+                />
+                <div class="interest-content">
+                  <div class="interest-header">
+                    <span class="material-symbols-outlined" aria-hidden="true">{{ interest.icon }}</span>
+                    <span class="interest-name">{{ interest.label }}</span>
+                  </div>
+                  <p class="interest-desc">{{ interest.description }}</p>
+                </div>
+              </label>
+            </div>
+          </section>
+
+          <!-- SECTION 2: AVAILABILITY -->
+          <section class="form-section">
+            <div class="section-label">
+              <span>2. Availability &amp; Commitment Level</span>
+              <span class="required">*</span>
+            </div>
+
+            <div class="commitment-grid">
+              <label
+                *ngFor="let opt of commitments"
+                class="commitment-card"
+                [class.commitment-card--active]="commitment === opt.id"
+              >
+                <input type="radio" name="commitment" [(ngModel)]="commitment" [value]="opt.id" />
+                <div class="commitment-content">
+                  <div class="commitment-label">{{ opt.label }}</div>
+                  <div class="commitment-sublabel">{{ opt.sublabel }}</div>
+                </div>
+              </label>
+            </div>
+
+            <div class="shift-panel">
+              <span class="shift-title">Preferred Shift Windows:</span>
+              <div class="shift-grid">
+                <label class="shift-option">
+                  <input type="checkbox" [(ngModel)]="shifts.weekdayMorning" name="shiftMorning" />
+                  <span>Weekday Mornings</span>
+                </label>
+                <label class="shift-option">
+                  <input type="checkbox" [(ngModel)]="shifts.weekdayAfternoon" name="shiftAfternoon" />
+                  <span>Weekday Afternoons</span>
+                </label>
+                <label class="shift-option">
+                  <input type="checkbox" [(ngModel)]="shifts.weekendFullDay" name="shiftWeekend" />
+                  <span>Weekend Full Day</span>
+                </label>
+                <label class="shift-option">
+                  <input type="checkbox" [(ngModel)]="shifts.eveningsRemote" name="shiftEvenings" />
+                  <span>Evenings (Remote / Tutoring)</span>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 3: PERSONAL & CONTACT -->
+          <section class="form-section form-section--bordered">
+            <h3 class="subsection-title">3. Personal &amp; Contact Information</h3>
+
+            <div class="field-grid field-grid--two">
+              <div class="field">
+                <label for="fullName">Full Legal Name <span class="required">*</span></label>
+                <input
+                  id="fullName"
+                  type="text"
+                  [(ngModel)]="formData.fullName"
+                  name="fullName"
+                  placeholder="e.g. Farah binti Ahmad"
+                  required
+                />
+              </div>
+
+              <div class="field">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input
+                  id="email"
+                  type="email"
+                  [(ngModel)]="formData.email"
+                  name="email"
+                  placeholder="e.g. farah@example.com"
+                  required
+                />
+              </div>
+
+              <div class="field">
+                <label for="phone">Contact Phone Number <span class="required">*</span></label>
+                <div class="phone-input">
+                  <span class="phone-prefix">+60</span>
+                  <input
+                    id="phone"
+                    type="tel"
+                    [(ngModel)]="formData.phone"
+                    name="phone"
+                    placeholder="12 345 6789"
+                    required
+                  />
+                </div>
+                <span class="field-hint">Receives SMS/WhatsApp case updates</span>
+              </div>
+
+              <div class="field-grid field-grid--nested">
+                <div class="field">
+                  <label for="state">State</label>
+                  <div class="select-shell">
+                    <select id="state" [(ngModel)]="formData.state" name="state">
+                      <option *ngFor="let s of states" [value]="s.id">{{ s.label }}</option>
+                    </select>
+                    <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="district">District / City <span class="required">*</span></label>
+                  <input
+                    id="district"
+                    type="text"
+                    [(ngModel)]="formData.district"
+                    name="district"
+                    placeholder="Petaling Jaya"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 4: MOTIVATION -->
+          <section class="form-section form-section--bordered">
+            <h3 class="subsection-title">4. Motivation, Background &amp; Credentials</h3>
+            <p class="section-hint">
+              Max 500 words. Describe your passion, previous community volunteer involvement, languages spoken, or technical proficiencies.
+            </p>
+
+            <div class="textarea-wrapper">
+              <textarea
+                id="motivation"
+                [(ngModel)]="formData.motivation"
+                name="motivation"
+                rows="6"
+                placeholder="Briefly describe your passion, previous community volunteer involvement, languages spoken, or technical proficiencies..."
+                required
+              ></textarea>
+              <div class="textarea-footer">
+                <span>Maximum 1,000 words • Confidential</span>
+              </div>
+            </div>
+
+            <div class="upload-section">
+              <label class="upload-label">
+                Upload Supporting Documents
+                <span class="optional">(Optional: helps fast-track verification)</span>
+              </label>
+              <div class="upload-dropzone">
+                <span class="material-symbols-outlined upload-icon" aria-hidden="true">cloud_upload</span>
+                <div class="upload-title">Click to upload or drag and drop</div>
+                <div class="upload-hint">
+                  Utility bill, medical memo, or identification (PDF, PNG, JPG up to 10MB)
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 5: CONSENT & SUBMISSION -->
+          <section class="form-section form-section--bordered form-section--last">
+            <label class="consent-row">
+              <input type="checkbox" [(ngModel)]="formData.consent" name="consent" required />
+              <span>
+                I agree to uphold the
+                <a href="#">HelpLink Volunteer Code of Conduct</a> and community safeguard guidelines.
+                I confirm that all submitted particulars are authentic.
+              </span>
+            </label>
+
+            <button type="submit" class="submit-btn">
+              <span class="material-symbols-outlined" aria-hidden="true">security</span>
+              <span>Submit Volunteer Application</span>
+            </button>
+
+            <div class="submit-note">
+              <span class="material-symbols-outlined" aria-hidden="true">lock</span>
+              <span>Verified NGO onboarding • Free onboarding orientation provided</span>
+            </div>
+          </section>
+        </form>
+      </div>
+
+      <!-- RIGHT COLUMN: SIDEBAR -->
+      <aside class="sidebar">
+        <!-- WHY VOLUNTEER -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">
+            <span class="material-symbols-outlined icon-secondary" aria-hidden="true">stars</span>
+            <h3>Why Volunteer with Us?</h3>
+          </div>
+          <p class="sidebar-card-subtitle">
+            Be part of Malaysia's united front against poverty under the UN SDG 1 framework.
+          </p>
+
+          <ul class="benefit-list">
+            <li>
+              <span class="benefit-icon material-symbols-outlined" aria-hidden="true">public</span>
+              <div>
+                <p class="benefit-title">Direct SDG 1 Grassroots Impact</p>
+                <p class="benefit-text">Channel support directly to B40 households and welfare centers.</p>
+              </div>
+            </li>
+            <li>
+              <span class="benefit-icon material-symbols-outlined" aria-hidden="true">health_and_safety</span>
+              <div>
+                <p class="benefit-title">Free Safeguarding &amp; First-Aid</p>
+                <p class="benefit-text">Accredited safety modules before any community deployment.</p>
+              </div>
+            </li>
+            <li>
+              <span class="benefit-icon material-symbols-outlined" aria-hidden="true">badge</span>
+              <div>
+                <p class="benefit-title">Official Certificate &amp; References</p>
+                <p class="benefit-text">Verified service logs recognized by universities and employers.</p>
+              </div>
+            </li>
+            <li>
+              <span class="benefit-icon material-symbols-outlined" aria-hidden="true">diversity_3</span>
+              <div>
+                <p class="benefit-title">Welcoming Volunteer Network</p>
+                <p class="benefit-text">Connect with like-minded changemakers, leaders, and allies.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ONBOARDING JOURNEY -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">
+            <span class="material-symbols-outlined icon-primary" aria-hidden="true">timeline</span>
+            <h3>Onboarding Journey</h3>
+          </div>
+          <p class="sidebar-card-subtitle">
+            How we get you ready to serve safely and productively:
+          </p>
+
+          <ol class="journey-list">
+            <li class="journey-item">
+              <span class="journey-dot journey-dot--active"></span>
+              <div>
+                <p class="journey-title">1. Application Review</p>
+                <p class="journey-text">Our coordinator validates your availability and profile within 48 hours.</p>
+              </div>
+            </li>
+            <li class="journey-item">
+              <span class="journey-dot journey-dot--active"></span>
+              <div>
+                <p class="journey-title">2. 30-Min Virtual Orientation</p>
+                <p class="journey-text">Join a concise online briefing covering safety, etiquette, and tools.</p>
+              </div>
+            </li>
+            <li class="journey-item">
+              <span class="journey-dot"></span>
+              <div>
+                <p class="journey-title">3. Community Matching</p>
+                <p class="journey-text">Receive your official badge and start your first shift at a local shelter or food hub.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="contact-card">
+          <div class="contact-left">
+            <span class="material-symbols-outlined" aria-hidden="true">contact_support</span>
+            <div>
+              <p class="contact-title">Have a quick question?</p>
+              <p class="contact-subtitle">Speak with our Volunteer desk</p>
+            </div>
+          </div>
+          <a class="contact-btn" href="tel:1800884357">Call Desk</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="faq-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>Essential information regarding volunteer participation, hours, and roles.</p>
+      </div>
+
+      <div class="faq-grid">
+        <article class="faq-card">
+          <div class="faq-icon">
+            <span class="material-symbols-outlined" aria-hidden="true">help</span>
+          </div>
+          <h3>Do I need prior experience?</h3>
+          <p>
+            No prior experience is necessary. All community volunteers undergo our free virtual
+            orientation and receive on-the-ground mentorship from seasoned field leaders.
+          </p>
+          <div class="faq-footer">
+            <span>Orientation modules provided</span>
+            <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+          </div>
+        </article>
+
+        <article class="faq-card">
+          <div class="faq-icon">
+            <span class="material-symbols-outlined" aria-hidden="true">laptop_chromebook</span>
+          </div>
+          <h3>Can I volunteer remotely?</h3>
+          <p>
+            Yes! We offer remote opportunities including virtual language translation, online school
+            tutoring, caseworker documentation, and digital media administration.
+          </p>
+          <div class="faq-footer">
+            <span>Digital tracks available</span>
+            <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+          </div>
+        </article>
+
+        <article class="faq-card">
+          <div class="faq-icon">
+            <span class="material-symbols-outlined" aria-hidden="true">workspace_premium</span>
+          </div>
+          <h3>Are volunteer hours certified?</h3>
+          <p>
+            Yes. HelpLink issues tamper-proof digital certificates, hour verification logs, and
+            official recommendation letters valid for academic or professional credit.
+          </p>
+          <div class="faq-footer">
+            <span>Official digital verification</span>
+            <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</div>
