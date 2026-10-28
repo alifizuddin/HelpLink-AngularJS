@@ -44,16 +44,6 @@
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-.navbar-brand i {
-  font-size: 1.5rem;
-  color: #f0c45e;
-}
-
-.navbar-brand:hover,
-.navbar-brand.nav-link-active {
-  color: #f6d783;
-}
-
 .desktop-nav {
   display: none;
   gap: 1.5rem;
