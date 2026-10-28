@@ -3,17 +3,23 @@
 
     <div class="navbar-left">
 
-      <a routerLink="/home" class="navbar-brand">
+      <a
+        routerLink="/home"
+        routerLinkActive="nav-link-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ariaCurrentWhenActive="page"
+        class="navbar-brand"
+      >
         <i class="fas fa-hand-holding-heart"></i>
         HelpLink
       </a>
 
       <nav class="desktop-nav">
-        <a routerLink="/news" class="nav-link">News Dashboard</a>
-        <a routerLink="/resources" class="nav-link">Resources</a>
-        <a routerLink="/jobs" class="nav-link">Jobs</a>
-        <a routerLink="/shelter" class="nav-link">Shelters</a>
-        <a routerLink="/market" class="nav-link">Marketplace</a>
+        <a routerLink="/news" routerLinkActive="nav-link-active" ariaCurrentWhenActive="page" class="nav-link">News Dashboard</a>
+        <a routerLink="/resources" routerLinkActive="nav-link-active" ariaCurrentWhenActive="page" class="nav-link">Resources</a>
+        <a routerLink="/jobs" routerLinkActive="nav-link-active" ariaCurrentWhenActive="page" class="nav-link">Jobs</a>
+        <a routerLink="/shelter" routerLinkActive="nav-link-active" ariaCurrentWhenActive="page" class="nav-link">Shelters</a>
+        <a routerLink="/market" routerLinkActive="nav-link-active" ariaCurrentWhenActive="page" class="nav-link">Marketplace</a>
       </nav>
 
     </div>
@@ -29,11 +35,11 @@
         />
       </div>
 
-      <button routerLink="/help" class="btn-outline">
+      <button routerLink="/help" routerLinkActive="nav-link-active" ariaCurrentWhenActive="page" class="btn-outline">
         Get Help
       </button>
 
-      <button routerLink="/volunteer" class="btn-primary">
+      <button routerLink="/volunteer" routerLinkActive="nav-link-active" ariaCurrentWhenActive="page" class="btn-primary">
         Volunteer
       </button>
 
