@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MarketService } from '../../services/market.service';
 
 interface Product {
   name: string;
@@ -15,6 +16,9 @@ interface Product {
   impact?: string;
   impactType?: 'income' | 'training';
   stock?: string;
+  id?: string;
+  createdAt?: string;
+  status?: string;
 }
 
 @Component({
@@ -24,8 +28,8 @@ interface Product {
   templateUrl: './market.component.html',
   styleUrls: ['./market.component.css']
 })
-export class MarketComponent {
-  products: Product[] = [
+export class MarketComponent implements OnInit {
+  defaultProducts: Product[] = [
     {
       name: 'Beaded Bracelet',
       description:
@@ -163,6 +167,8 @@ export class MarketComponent {
     }
   ];
 
+  products: Product[] = [];
+
   categories: string[] = [
     'Handmade Jewelry',
     'Bags & Accessories',
@@ -182,6 +188,38 @@ export class MarketComponent {
 
   selectedProduct: any = null;
 
+  isLoadingProducts = false;
+  isAddingProduct = false;
+  isPurchasing = false;
+  productStatus: 'idle' | 'success' | 'error' = 'idle';
+  productMessage = '';
+  purchaseStatus: 'idle' | 'success' | 'error' = 'idle';
+  purchaseMessage = '';
+
+  constructor(private marketService: MarketService) {
+    this.products = [...this.defaultProducts];
+  }
+
+  ngOnInit(): void {
+    this.loadProducts();
+  }
+
+  loadProducts(): void {
+    this.isLoadingProducts = true;
+    this.marketService.getProducts().subscribe({
+      next: (storedProducts) => {
+        this.isLoadingProducts = false;
+        // Merge stored products with defaults, stored products might come first
+        this.products = [...storedProducts, ...this.defaultProducts];
+      },
+      error: (error) => {
+        this.isLoadingProducts = false;
+        // Keep defaults on error
+        this.products = [...this.defaultProducts];
+      }
+    });
+  }
+
   handleImageUpload(event: any): void {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -196,39 +234,69 @@ export class MarketComponent {
   }
 
   addProduct() {
-    if (
-      this.newProduct.name &&
-      this.newProduct.description &&
-      this.newProduct.price &&
-      this.newProduct.image
-    ) {
-      this.products.push({
-        name: this.newProduct.name,
-        description: this.newProduct.description,
-        price: this.newProduct.price,
-        image: this.newProduct.image,
-        category: this.newProduct.category,
-        seller: 'Community Artisan',
-        sellerIcon: 'storefront',
-        badge: this.newProduct.category,
-        impact: 'Direct Micro-Income',
-        impactType: 'income',
-        stock: this.newProduct.stock > 0 ? `${this.newProduct.stock} Available` : 'In Stock'
-      });
+    this.productStatus = 'idle';
+    this.productMessage = '';
 
-      this.newProduct = {
-        name: '',
-        category: this.categories[0],
-        description: '',
-        price: 0,
-        stock: 0,
-        image: ''
-      };
+    if (
+      !this.newProduct.name ||
+      !this.newProduct.description ||
+      !this.newProduct.price ||
+      !this.newProduct.image
+    ) {
+      alert('Please fill in all required fields and upload an image.');
+      return;
     }
+
+    this.isAddingProduct = true;
+    const productToAdd: Product = {
+      name: this.newProduct.name,
+      description: this.newProduct.description,
+      price: Number(this.newProduct.price),
+      image: this.newProduct.image,
+      category: this.newProduct.category,
+      seller: 'Community Artisan',
+      sellerIcon: 'storefront',
+      badge: this.newProduct.category,
+      impact: 'Direct Micro-Income',
+      impactType: 'income',
+      stock: Number(this.newProduct.stock) > 0 ? `${this.newProduct.stock} Available` : 'In Stock'
+    };
+
+    this.marketService.addProduct(productToAdd).subscribe({
+      next: (response) => {
+        this.isAddingProduct = false;
+        this.productStatus = 'success';
+        this.productMessage = 'Product submitted for review successfully!';
+        alert(this.productMessage);
+        // Add to local list
+        this.products.unshift({
+          ...productToAdd,
+          id: response.id,
+          createdAt: response.product?.createdAt,
+          status: 'pending_review'
+        });
+        this.newProduct = {
+          name: '',
+          category: this.categories[0],
+          description: '',
+          price: 0,
+          stock: 0,
+          image: ''
+        };
+      },
+      error: (error) => {
+        this.isAddingProduct = false;
+        this.productStatus = 'error';
+        this.productMessage = 'Failed to submit product. Please try again.';
+        alert(this.productMessage);
+      }
+    });
   }
 
   openProduct(product: any) {
     this.selectedProduct = product;
+    this.purchaseStatus = 'idle';
+    this.purchaseMessage = '';
   }
 
   closeProduct() {
@@ -236,9 +304,32 @@ export class MarketComponent {
   }
 
   buyProduct() {
-    alert(
-      `You have purchased "${this.selectedProduct.name}" for RM ${this.selectedProduct.price}`
-    );
-    this.closeProduct();
+    if (!this.selectedProduct) return;
+    
+    this.purchaseStatus = 'idle';
+    this.purchaseMessage = '';
+    this.isPurchasing = true;
+
+    const purchase = {
+      productId: this.selectedProduct.id || this.selectedProduct.name,
+      productName: this.selectedProduct.name,
+      price: this.selectedProduct.price
+    };
+
+    this.marketService.purchaseProduct(purchase).subscribe({
+      next: (response) => {
+        this.isPurchasing = false;
+        this.purchaseStatus = 'success';
+        this.purchaseMessage = `You have purchased "${this.selectedProduct.name}" for RM ${this.selectedProduct.price}. Thank you for supporting the community!`;
+        alert(this.purchaseMessage);
+        this.closeProduct();
+      },
+      error: (error) => {
+        this.isPurchasing = false;
+        this.purchaseStatus = 'error';
+        this.purchaseMessage = 'Failed to process purchase. Please try again.';
+        alert(this.purchaseMessage);
+      }
+    });
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { VolunteerService } from '../../services/volunteer.service';
 
 interface VolunteerInterest {
   id: string;
@@ -72,6 +73,12 @@ export class VolunteerComponent {
     { id: 'sarawak', label: 'Sarawak' }
   ];
 
+  isSubmitting = false;
+  submitStatus: 'idle' | 'success' | 'error' = 'idle';
+  submitMessage = '';
+
+  constructor(private volunteerService: VolunteerService) {}
+
   toggleInterest(id: string): void {
     const index = this.selectedInterests.indexOf(id);
     if (index > -1) {
@@ -82,6 +89,9 @@ export class VolunteerComponent {
   }
 
   onSubmit(): void {
+    this.submitStatus = 'idle';
+    this.submitMessage = '';
+
     if (this.selectedInterests.length === 0) {
       alert('Please select at least one area of interest.');
       return;
@@ -94,6 +104,46 @@ export class VolunteerComponent {
       alert('Please agree to the Volunteer Code of Conduct to proceed.');
       return;
     }
-    alert('Volunteer application submitted successfully. Our coordinator will contact you within 48 hours.');
+
+    this.isSubmitting = true;
+    const application = {
+      selectedInterests: this.selectedInterests,
+      commitment: this.commitment,
+      shifts: { ...this.shifts },
+      formData: { ...this.formData }
+    };
+
+    this.volunteerService.submitVolunteerApplication(application).subscribe({
+      next: (response) => {
+        this.isSubmitting = false;
+        this.submitStatus = 'success';
+        this.submitMessage = 'Volunteer application submitted successfully. Our coordinator will contact you within 48 hours.';
+        alert(this.submitMessage);
+        // Reset form
+        this.formData = {
+          fullName: '',
+          email: '',
+          phone: '',
+          state: 'selangor',
+          district: '',
+          motivation: '',
+          consent: false
+        };
+        this.selectedInterests = ['foodbank', 'mentorship'];
+        this.commitment = 'weekly';
+        this.shifts = {
+          weekdayMorning: true,
+          weekdayAfternoon: false,
+          weekendFullDay: true,
+          eveningsRemote: true
+        };
+      },
+      error: (error) => {
+        this.isSubmitting = false;
+        this.submitStatus = 'error';
+        this.submitMessage = 'Failed to submit volunteer application. Please try again or contact support.';
+        alert(this.submitMessage);
+      }
+    });
   }
 }

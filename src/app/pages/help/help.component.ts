@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HelpService } from '../../services/help.service';
 
 interface HelpCategory {
   id: string;
@@ -80,6 +81,12 @@ export class HelpComponent {
     { id: 'email', label: 'Email' }
   ];
 
+  isSubmitting = false;
+  submitStatus: 'idle' | 'success' | 'error' = 'idle';
+  submitMessage = '';
+
+  constructor(private helpService: HelpService) {}
+
   toggleCategory(id: string): void {
     const index = this.selectedCategories.indexOf(id);
     if (index > -1) {
@@ -90,6 +97,9 @@ export class HelpComponent {
   }
 
   onSubmit(): void {
+    this.submitStatus = 'idle';
+    this.submitMessage = '';
+
     if (this.selectedCategories.length === 0) {
       alert('Please select at least one assistance category.');
       return;
@@ -102,6 +112,41 @@ export class HelpComponent {
       alert('Please agree to the consent terms to proceed.');
       return;
     }
-    alert('Help request submitted successfully. A case coordinator has received your notice.');
+
+    this.isSubmitting = true;
+    const request = {
+      selectedCategories: this.selectedCategories,
+      urgency: this.urgency,
+      formData: { ...this.formData }
+    };
+
+    this.helpService.submitHelpRequest(request).subscribe({
+      next: (response) => {
+        this.isSubmitting = false;
+        this.submitStatus = 'success';
+        this.submitMessage = 'Help request submitted successfully. A case coordinator has received your notice.';
+        alert(this.submitMessage);
+        // Optionally reset form
+        this.formData = {
+          fullName: '',
+          phone: '',
+          email: '',
+          contactMethod: 'whatsapp',
+          language: 'bm',
+          state: 'selangor',
+          city: '',
+          situation: '',
+          consent: false
+        };
+        this.selectedCategories = ['food'];
+        this.urgency = 'urgent';
+      },
+      error: (error) => {
+        this.isSubmitting = false;
+        this.submitStatus = 'error';
+        this.submitMessage = 'Failed to submit help request. Please try again or contact support.';
+        alert(this.submitMessage);
+      }
+    });
   }
 }

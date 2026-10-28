@@ -221,9 +221,9 @@
               </span>
             </label>
 
-            <button type="submit" class="submit-btn">
+            <button type="submit" class="submit-btn" [disabled]="isSubmitting">
               <span class="material-symbols-outlined" aria-hidden="true">security</span>
-              <span>Submit Volunteer Application</span>
+              <span>{{ isSubmitting ? 'Submitting...' : 'Submit Volunteer Application' }}</span>
             </button>
 
             <div class="submit-note">

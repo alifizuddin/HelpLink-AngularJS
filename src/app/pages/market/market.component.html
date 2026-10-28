@@ -201,9 +201,9 @@
 
         <!-- Submit CTA -->
         <div class="submit-row">
-          <button type="submit" class="submit-btn" [disabled]="productForm.invalid">
+          <button type="submit" class="submit-btn" [disabled]="productForm.invalid || isAddingProduct">
             <span class="material-symbols-outlined" aria-hidden="true">send</span>
-            Submit Product for Review
+            {{ isAddingProduct ? 'Submitting...' : 'Submit Product for Review' }}
           </button>
           <span class="submit-note">Reviewed by community coordinators within 24 hours</span>
         </div>
@@ -415,9 +415,9 @@
           <span class="price-label">Fair Price</span>
           <p class="price">RM {{ selectedProduct.price }}</p>
         </div>
-        <button type="button" class="buy-btn modal-buy" (click)="buyProduct()">
+        <button type="button" class="buy-btn modal-buy" (click)="buyProduct()" [disabled]="isPurchasing">
           <span class="material-symbols-outlined" aria-hidden="true">shopping_cart</span>
-          Buy Now
+          {{ isPurchasing ? 'Processing...' : 'Buy Now' }}
         </button>
       </div>
     </div>
