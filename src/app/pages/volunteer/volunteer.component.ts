@@ -77,7 +77,23 @@ export class VolunteerComponent {
   submitStatus: 'idle' | 'success' | 'error' = 'idle';
   submitMessage = '';
 
+  showModal = false;
+  modalTitle = '';
+  modalMessage = '';
+  modalType: 'success' | 'error' | 'info' = 'success';
+
   constructor(private volunteerService: VolunteerService) {}
+
+  openModal(title: string, message: string, type: 'success' | 'error' | 'info' = 'success'): void {
+    this.modalTitle = title;
+    this.modalMessage = message;
+    this.modalType = type;
+    this.showModal = true;
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+  }
 
   toggleInterest(id: string): void {
     const index = this.selectedInterests.indexOf(id);
@@ -93,15 +109,15 @@ export class VolunteerComponent {
     this.submitMessage = '';
 
     if (this.selectedInterests.length === 0) {
-      alert('Please select at least one area of interest.');
+      this.openModal('Validation Error', 'Please select at least one area of interest.', 'error');
       return;
     }
     if (!this.formData.fullName || !this.formData.email || !this.formData.phone || !this.formData.district) {
-      alert('Please fill in all required fields (marked with *).');
+      this.openModal('Validation Error', 'Please fill in all required fields (marked with *).', 'error');
       return;
     }
     if (!this.formData.consent) {
-      alert('Please agree to the Volunteer Code of Conduct to proceed.');
+      this.openModal('Validation Error', 'Please agree to the Volunteer Code of Conduct to proceed.', 'error');
       return;
     }
 
@@ -118,7 +134,7 @@ export class VolunteerComponent {
         this.isSubmitting = false;
         this.submitStatus = 'success';
         this.submitMessage = 'Volunteer application submitted successfully. Our coordinator will contact you within 48 hours.';
-        alert(this.submitMessage);
+        this.openModal('Application Submitted', this.submitMessage, 'success');
         // Reset form
         this.formData = {
           fullName: '',
@@ -142,7 +158,7 @@ export class VolunteerComponent {
         this.isSubmitting = false;
         this.submitStatus = 'error';
         this.submitMessage = 'Failed to submit volunteer application. Please try again or contact support.';
-        alert(this.submitMessage);
+        this.openModal('Submission Failed', this.submitMessage, 'error');
       }
     });
   }

@@ -85,7 +85,23 @@ export class HelpComponent {
   submitStatus: 'idle' | 'success' | 'error' = 'idle';
   submitMessage = '';
 
+  showModal = false;
+  modalTitle = '';
+  modalMessage = '';
+  modalType: 'success' | 'error' | 'info' = 'success';
+
   constructor(private helpService: HelpService) {}
+
+  openModal(title: string, message: string, type: 'success' | 'error' | 'info' = 'success'): void {
+    this.modalTitle = title;
+    this.modalMessage = message;
+    this.modalType = type;
+    this.showModal = true;
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+  }
 
   toggleCategory(id: string): void {
     const index = this.selectedCategories.indexOf(id);
@@ -101,15 +117,15 @@ export class HelpComponent {
     this.submitMessage = '';
 
     if (this.selectedCategories.length === 0) {
-      alert('Please select at least one assistance category.');
+      this.openModal('Validation Error', 'Please select at least one assistance category.', 'error');
       return;
     }
     if (!this.formData.fullName || !this.formData.phone || !this.formData.city || !this.formData.situation) {
-      alert('Please fill in all required fields (marked with *).');
+      this.openModal('Validation Error', 'Please fill in all required fields (marked with *).', 'error');
       return;
     }
     if (!this.formData.consent) {
-      alert('Please agree to the consent terms to proceed.');
+      this.openModal('Validation Error', 'Please agree to the consent terms to proceed.', 'error');
       return;
     }
 
@@ -125,7 +141,7 @@ export class HelpComponent {
         this.isSubmitting = false;
         this.submitStatus = 'success';
         this.submitMessage = 'Help request submitted successfully. A case coordinator has received your notice.';
-        alert(this.submitMessage);
+        this.openModal('Request Submitted', this.submitMessage, 'success');
         // Optionally reset form
         this.formData = {
           fullName: '',
@@ -145,7 +161,7 @@ export class HelpComponent {
         this.isSubmitting = false;
         this.submitStatus = 'error';
         this.submitMessage = 'Failed to submit help request. Please try again or contact support.';
-        alert(this.submitMessage);
+        this.openModal('Submission Failed', this.submitMessage, 'error');
       }
     });
   }

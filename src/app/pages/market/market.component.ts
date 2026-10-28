@@ -196,12 +196,28 @@ export class MarketComponent implements OnInit {
   purchaseStatus: 'idle' | 'success' | 'error' = 'idle';
   purchaseMessage = '';
 
+  showModal = false;
+  modalTitle = '';
+  modalMessage = '';
+  modalType: 'success' | 'error' | 'info' = 'success';
+
   constructor(private marketService: MarketService) {
     this.products = [...this.defaultProducts];
   }
 
   ngOnInit(): void {
     this.loadProducts();
+  }
+
+  openModal(title: string, message: string, type: 'success' | 'error' | 'info' = 'success'): void {
+    this.modalTitle = title;
+    this.modalMessage = message;
+    this.modalType = type;
+    this.showModal = true;
+  }
+
+  closeModal(): void {
+    this.showModal = false;
   }
 
   loadProducts(): void {
@@ -245,7 +261,7 @@ export class MarketComponent implements OnInit {
       !this.newProduct.price ||
       !this.newProduct.image
     ) {
-      alert('Please fill in all required fields and upload an image.');
+      this.openModal('Validation Error', 'Please fill in all required fields and upload an image.', 'error');
       return;
     }
 
@@ -268,8 +284,8 @@ export class MarketComponent implements OnInit {
       next: (response) => {
         this.isAddingProduct = false;
         this.productStatus = 'success';
-        this.productMessage = 'Product submitted for review successfully!';
-        alert(this.productMessage);
+        this.productMessage = 'Product submitted for review successfully! It will be visible after review.';
+        this.openModal('Product Submitted', this.productMessage, 'success');
         this.newProduct = {
           name: '',
           category: this.categories[0],
@@ -283,7 +299,7 @@ export class MarketComponent implements OnInit {
         this.isAddingProduct = false;
         this.productStatus = 'error';
         this.productMessage = 'Failed to submit product. Please try again.';
-        alert(this.productMessage);
+        this.openModal('Submission Failed', this.productMessage, 'error');
       }
     });
   }
@@ -316,14 +332,15 @@ export class MarketComponent implements OnInit {
         this.isPurchasing = false;
         this.purchaseStatus = 'success';
         this.purchaseMessage = `You have purchased "${this.selectedProduct.name}" for RM ${this.selectedProduct.price}. Thank you for supporting the community!`;
-        alert(this.purchaseMessage);
         this.closeProduct();
+        this.openModal('Purchase Confirmed', this.purchaseMessage, 'success');
       },
       error: (error) => {
         this.isPurchasing = false;
         this.purchaseStatus = 'error';
         this.purchaseMessage = 'Failed to process purchase. Please try again.';
-        alert(this.purchaseMessage);
+        this.closeProduct();
+        this.openModal('Purchase Failed', this.purchaseMessage, 'error');
       }
     });
   }

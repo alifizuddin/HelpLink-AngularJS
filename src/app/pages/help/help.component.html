@@ -411,4 +411,22 @@
       </div>
     </div>
   </section>
+
+  <!-- CONFIRMATION MODAL -->
+  <div class="modal-backdrop" *ngIf="showModal" (click)="closeModal()" aria-hidden="true"></div>
+  <div class="modal-panel" *ngIf="showModal" role="dialog" aria-modal="true" [attr.aria-labelledby]="'modal-title-help'">
+    <button type="button" class="modal-close" (click)="closeModal()" aria-label="Close">
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+    </button>
+    <div class="modal-body">
+      <div class="modal-icon" [class.modal-icon--success]="modalType === 'success'" [class.modal-icon--error]="modalType === 'error'">
+        <span class="material-symbols-outlined" aria-hidden="true">
+          {{ modalType === 'success' ? 'check_circle' : modalType === 'error' ? 'error' : 'info' }}
+        </span>
+      </div>
+      <h3 id="modal-title-help" class="modal-title">{{ modalTitle }}</h3>
+      <p class="modal-message">{{ modalMessage }}</p>
+      <button type="button" class="modal-btn" (click)="closeModal()">OK</button>
+    </div>
+  </div>
 </div>
