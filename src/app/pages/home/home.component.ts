@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.newsService.getNews().subscribe(data => {
-      this.articles = data.articles;
+      this.articles = data.articles ?? [];
     });
   }
 

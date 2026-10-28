@@ -1,0 +1,358 @@
+<div class="news-page">
+  <!-- ================= PAGE HERO ================= -->
+  <header class="page-hero">
+    <div class="hero-copy">
+      <h1>Humanitarian News &amp; Community Insights</h1>
+      <p>
+        Live headlines on poverty, food security, housing and relief work, drawn from the GNews
+        network and framed around UN Sustainable Development Goal 1.
+      </p>
+    </div>
+
+    <div class="hero-actions">
+      <span class="updated-pill" *ngIf="lastUpdated">
+        <span class="status-dot" aria-hidden="true"></span>
+        Updated {{ lastUpdated | date: 'shortTime' }}
+      </span>
+      <button
+        type="button"
+        class="refresh-btn"
+        (click)="refresh()"
+        [disabled]="loading"
+        aria-label="Refresh news feed"
+      >
+        <span class="material-symbols-outlined" [class.spin]="loading" aria-hidden="true">
+          refresh
+        </span>
+        <span>{{ loading ? 'Refreshing…' : 'Refresh feed' }}</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= SEARCH & FILTER CONTROL ================= -->
+  <section class="control-card" aria-labelledby="news-filter-title">
+    <h2 id="news-filter-title" class="sr-only">Search and filter the news feed</h2>
+
+    <form class="search-row" (ngSubmit)="search()">
+      <div class="field field--search">
+        <label for="news-query">Topic or keyword</label>
+        <div class="input-shell">
+          <span class="material-symbols-outlined" aria-hidden="true">search</span>
+          <input
+            id="news-query"
+            name="newsQuery"
+            type="text"
+            [(ngModel)]="query"
+            placeholder="e.g. poverty, food security, flood relief"
+            autocomplete="off"
+          />
+          <button
+            *ngIf="query"
+            type="button"
+            class="clear-btn"
+            (click)="clearSearch()"
+            title="Clear search"
+            aria-label="Clear search"
+          >
+            <span class="material-symbols-outlined" aria-hidden="true">cancel</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="news-country">Country edition</label>
+        <div class="select-shell">
+          <select id="news-country" name="newsCountry" [(ngModel)]="country">
+            <option *ngFor="let item of countries" [value]="item.code">{{ item.label }}</option>
+          </select>
+          <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="news-language">Language</label>
+        <div class="select-shell">
+          <select id="news-language" name="newsLanguage" [(ngModel)]="lang">
+            <option *ngFor="let item of languages" [value]="item.code">{{ item.label }}</option>
+          </select>
+          <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+        </div>
+      </div>
+
+      <div class="field field--action">
+        <span class="field-label-spacer" aria-hidden="true">&nbsp;</span>
+        <button type="submit" class="search-btn" [disabled]="loading">
+          <span class="material-symbols-outlined" aria-hidden="true">search</span>
+          <span>Search news</span>
+        </button>
+      </div>
+    </form>
+
+    <div class="topic-row" role="group" aria-label="Quick topic filters">
+      <button
+        *ngFor="let topic of topics"
+        type="button"
+        class="topic-pill"
+        [class.is-active]="isActiveTopic(topic)"
+        (click)="selectTopic(topic)"
+      >
+        <span class="material-symbols-outlined" aria-hidden="true">{{ topic.icon }}</span>
+        {{ topic.label }}
+      </button>
+    </div>
+
+    <div class="control-meta" aria-live="polite">
+      <span class="meta-item">
+        <span class="status-dot" aria-hidden="true"></span>
+        {{ resultsCaption }}
+      </span>
+      <span class="meta-item">
+        <span class="material-symbols-outlined" aria-hidden="true">public</span>
+        {{ scopeLabel }}
+      </span>
+      <span class="meta-item meta-item--muted">
+        Latest {{ maxArticles }} results per search · supplied by GNews
+      </span>
+    </div>
+  </section>
+
+  <!-- ================= LOADING STATE ================= -->
+  <div *ngIf="loading" class="state-box" role="status">
+    <span class="material-symbols-outlined spinner" aria-hidden="true">progress_activity</span>
+    <h3>Gathering the latest headlines</h3>
+    <p>Querying GNews for “{{ query || 'poverty' }}” stories in {{ scopeLabel }}…</p>
+  </div>
+
+  <!-- ================= ERROR STATE ================= -->
+  <div *ngIf="!loading && error" class="state-box state-box--error" role="alert">
+    <span class="material-symbols-outlined" aria-hidden="true">cloud_off</span>
+    <h3>News feed unavailable</h3>
+    <p>{{ error }}</p>
+    <button type="button" class="search-btn retry-btn" (click)="refresh()">
+      <span class="material-symbols-outlined" aria-hidden="true">refresh</span>
+      <span>Try again</span>
+    </button>
+  </div>
+
+  <!-- ================= EMPTY STATE ================= -->
+  <div *ngIf="!loading && !error && articles.length === 0" class="state-box">
+    <span class="material-symbols-outlined" aria-hidden="true">search_off</span>
+    <h3>No matching stories</h3>
+    <p>
+      GNews returned no articles for “{{ query || 'poverty' }}” in {{ scopeLabel }}. Try a broader
+      keyword, another country edition, or one of the topic shortcuts above.
+    </p>
+  </div>
+
+  <ng-container *ngIf="!loading && !error && articles.length > 0">
+    <!-- ================= BENTO HERO GRID ================= -->
+    <section class="bento-grid" aria-label="Featured story and latest headlines">
+      <!-- Featured story -->
+      <article class="feature-card" *ngIf="featuredArticle as featured">
+        <a
+          class="feature-media"
+          [href]="featured.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="featured.title"
+        >
+          <img
+            [src]="featured.image || 'assets/news-placeholder.svg'"
+            (error)="onImageError($event)"
+            [alt]="featured.title"
+          />
+          <div class="media-shade"></div>
+          <span class="feature-tag">Top story</span>
+          <div class="feature-headline">
+            <h2>{{ featured.title }}</h2>
+          </div>
+        </a>
+
+        <div class="feature-body">
+          <p class="feature-summary">{{ summary(featured) || 'Open the original story for the full report.' }}</p>
+
+          <div class="feature-footer">
+            <div class="source-identity">
+              <div class="source-avatar" aria-hidden="true">{{ initials(featured.source?.name) }}</div>
+              <div>
+                <p class="source-name">{{ featured.source?.name || 'News source' }}</p>
+                <p class="source-meta">
+                  {{ featured.publishedAt | date: 'mediumDate' }} ·
+                  {{ relativeTime(featured.publishedAt) }}
+                </p>
+              </div>
+            </div>
+
+            <a
+              class="btn-primary"
+              [href]="featured.url"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read full story
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Latest headlines -->
+      <aside class="headlines-card" aria-labelledby="headlines-title">
+        <div class="panel-head">
+          <div class="panel-title">
+            <span class="material-symbols-outlined" aria-hidden="true">campaign</span>
+            <h3 id="headlines-title">Latest headlines</h3>
+          </div>
+          <span class="count-badge">{{ sideArticles.length }}</span>
+        </div>
+
+        <div class="headline-list">
+          <article
+            class="headline-item"
+            *ngFor="let article of sideArticles; trackBy: trackByUrl"
+          >
+            <div class="headline-top">
+              <span class="topic-chip" [ngClass]="topicTone(article)">{{ topicFor(article) }}</span>
+              <span class="headline-time">{{ relativeTime(article.publishedAt) }}</span>
+            </div>
+            <h4>
+              <a [href]="article.url" target="_blank" rel="noopener noreferrer">
+                {{ article.title }}
+              </a>
+            </h4>
+            <p *ngIf="summary(article)">{{ summary(article) }}</p>
+          </article>
+
+          <p class="headline-empty" *ngIf="sideArticles.length === 0">
+            This search returned a single story — it is featured on the left.
+          </p>
+        </div>
+
+        <div class="panel-foot">
+          <span class="material-symbols-outlined" aria-hidden="true">verified</span>
+          <span>
+            Headlines link to the original publisher. HelpLink does not edit article content.
+          </span>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ================= REAL FEED STATS ================= -->
+    <section class="data-bar" aria-label="Feed summary">
+      <div class="data-tile">
+        <p class="data-label">Matching stories</p>
+        <p class="data-value">{{ totalArticles.toLocaleString() }}</p>
+        <p class="data-hint">Reported by GNews for this query</p>
+      </div>
+      <div class="data-tile">
+        <p class="data-label">Unique sources</p>
+        <p class="data-value">{{ sourceCount }}</p>
+        <p class="data-hint">Publishers in this result set</p>
+      </div>
+      <div class="data-tile">
+        <p class="data-label">Most recent</p>
+        <p class="data-value data-value--small">{{ relativeTime(newestArticle?.publishedAt) }}</p>
+        <p class="data-hint">{{ newestArticle?.source?.name || 'Publication time unavailable' }}</p>
+      </div>
+      <div class="data-tile">
+        <p class="data-label">Search scope</p>
+        <p class="data-value data-value--small">{{ scopeLabel }}</p>
+        <p class="data-hint">Country edition &amp; language</p>
+      </div>
+    </section>
+
+    <!-- ================= ADDITIONAL COVERAGE ================= -->
+    <section class="feed-section" *ngIf="gridArticles.length > 0" aria-labelledby="coverage-title">
+      <div class="section-head">
+        <div>
+          <h2 id="coverage-title">More coverage from this search</h2>
+          <p>Additional reporting matched to your keyword, country and language filters.</p>
+        </div>
+
+        <div class="sort-control">
+          <label for="news-sort">Sort coverage</label>
+          <select id="news-sort" name="newsSort" [(ngModel)]="sortKey">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="source">Publisher A–Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="news-grid">
+        <article
+          class="news-card"
+          *ngFor="let article of gridArticles; trackBy: trackByUrl"
+        >
+          <a
+            class="card-media"
+            [href]="article.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.aria-label]="article.title"
+          >
+            <img
+              [src]="article.image || 'assets/news-placeholder.svg'"
+              (error)="onImageError($event)"
+              [alt]="article.title"
+              loading="lazy"
+            />
+          </a>
+
+          <div class="card-body">
+            <div class="card-meta-row">
+              <span class="topic-chip" [ngClass]="topicTone(article)">{{ topicFor(article) }}</span>
+              <span class="card-date">{{ article.publishedAt | date: 'mediumDate' }}</span>
+            </div>
+
+            <h3>
+              <a [href]="article.url" target="_blank" rel="noopener noreferrer">
+                {{ article.title }}
+              </a>
+            </h3>
+
+            <p class="card-desc" *ngIf="summary(article)">{{ summary(article) }}</p>
+
+            <div class="card-footer">
+              <span class="card-source">
+                <span class="material-symbols-outlined" aria-hidden="true">newspaper</span>
+                {{ article.source?.name || 'News source' }}
+              </span>
+              <a
+                class="read-more"
+                [href]="article.url"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Read more
+                <span class="material-symbols-outlined" aria-hidden="true">north_east</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </ng-container>
+
+  <!-- ================= CROSS-LINK CTA ================= -->
+  <section class="crosslink" aria-labelledby="crosslink-title">
+    <div class="crosslink-copy">
+      <span class="crosslink-eyebrow">
+        <span class="material-symbols-outlined" aria-hidden="true">diversity_1</span>
+        Beyond the headlines
+      </span>
+      <h2 id="crosslink-title">Turn awareness into local action</h2>
+      <p>
+        Every story here maps back to HelpLink services — verified food banks, shelter intake,
+        fair-wage job listings and direct assistance requests.
+      </p>
+    </div>
+
+    <div class="crosslink-links">
+      <a routerLink="/resources" class="link-btn">Find resources</a>
+      <a routerLink="/shelter" class="link-btn">Shelter network</a>
+      <a routerLink="/jobs" class="link-btn">Job listings</a>
+      <a routerLink="/help" class="link-btn link-btn--solid">Request help</a>
+    </div>
+  </section>
+</div>

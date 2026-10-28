@@ -10,6 +10,7 @@ export const routes: Routes = [
   { path: 'help', loadComponent: () => import('./pages/help/help.component').then(m => m.HelpComponent) },
   { path: 'volunteer', loadComponent: () => import('./pages/volunteer/volunteer.component').then(m => m.VolunteerComponent) },
   { path: 'jobs', loadComponent: () => import('./pages/jobs/jobs.component').then(m => m.JobsComponent) },
+  { path: 'news', loadComponent: () => import('./pages/news/news.component').then(m => m.NewsComponent) },
   { path: 'shelter', loadComponent: () => import('./pages/shelter/shelter.component').then(m => m.ShelterComponent) },
 
 ];
