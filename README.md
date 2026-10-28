@@ -55,16 +55,16 @@
 
 > Replace the placeholders below with actual screenshots of each page.
 
-| Page                      | Screenshot                                        |
-| ------------------------- | ------------------------------------------------- |
-| **Home**                  | ![Home Page](docs/home1.png)                      |
-| **News Dashboard**        | ![News Page](docs/screenshots/news.png)           |
-| **Jobs**                  | ![Jobs Page](docs/screenshots/jobs.png)           |
-| **Shelter Directory**     | ![Shelter Page](docs/screenshots/shelter.png)     |
-| **Community Support Map** | ![Resources Map](docs/screenshots/resources.png)  |
-| **Community Market**      | ![Market Page](docs/screenshots/market.png)       |
-| **Request Support Form**  | ![Help Form](docs/screenshots/help.png)           |
-| **Volunteer Application** | ![Volunteer Form](docs/screenshots/volunteer.png) |
+| Page                      | Screenshot                             |
+| ------------------------- | -------------------------------------- |
+| **Home**                  | ![Home Page](docs/home1.png)           |
+| **News Dashboard**        | ![News Page](docs/news1.png)           |
+| **Jobs**                  | ![Jobs Page](docs/jobs1.png)           |
+| **Shelter Directory**     | ![Shelter Page](docs/shelters1.png)    |
+| **Community Support Map** | ![Resources Map](docs/resources1.png)  |
+| **Community Market**      | ![Market Page](docs/market1.png)       |
+| **Request Support Form**  | ![Help Form](docs/help1.png)           |
+| **Volunteer Application** | ![Volunteer Form](docs/volunteer1.png) |
 
 ---
 
