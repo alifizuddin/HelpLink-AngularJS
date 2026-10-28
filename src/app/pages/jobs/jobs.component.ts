@@ -14,7 +14,7 @@ import { JobService } from '../../services/job.service';
 export class JobsComponent {
   jobs: any[] = [];
   loading = false;
-  query = ''; // default search query
+  query = 'jobs'; // default search query to load initial results
 
   jobType = 'all';
   sortKey = 'newest';
@@ -29,7 +29,9 @@ export class JobsComponent {
   }
 
   searchJobs(): void {
-    if (!this.query.trim()) return;
+    if (!this.query.trim()) {
+      this.query = 'jobs';
+    }
     this.loading = true;
     this.page = 1;
     this.jobService.getJobs(this.query).subscribe({
