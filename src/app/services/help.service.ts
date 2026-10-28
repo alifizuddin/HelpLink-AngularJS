@@ -22,7 +22,7 @@ export interface HelpRequest {
   providedIn: 'root'
 })
 export class HelpService {
-  private apiUrl = 'http://localhost:3000/api/help';
+  private apiUrl = 'http://localhost:3001/api/help';
 
   constructor(private http: HttpClient) {}
 

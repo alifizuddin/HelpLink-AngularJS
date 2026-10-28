@@ -30,7 +30,7 @@ export interface Purchase {
   providedIn: 'root'
 })
 export class MarketService {
-  private baseUrl = 'http://localhost:3000/api/market';
+  private baseUrl = 'http://localhost:3001/api/market';
 
   constructor(private http: HttpClient) {}
 

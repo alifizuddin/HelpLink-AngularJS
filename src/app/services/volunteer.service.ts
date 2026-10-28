@@ -26,7 +26,7 @@ export interface VolunteerApplication {
   providedIn: 'root'
 })
 export class VolunteerService {
-  private apiUrl = 'http://localhost:3000/api/volunteer';
+  private apiUrl = 'http://localhost:3001/api/volunteer';
 
   constructor(private http: HttpClient) {}
 

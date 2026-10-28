@@ -34,7 +34,7 @@ export interface NewsQuery {
   providedIn: 'root'
 })
 export class NewsService {
-  private apiUrl = 'http://localhost:3000/news';
+  private apiUrl = 'http://localhost:3001/news';
 
   constructor(private http: HttpClient) {}
 

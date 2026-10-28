@@ -209,8 +209,10 @@ export class MarketComponent implements OnInit {
     this.marketService.getProducts().subscribe({
       next: (storedProducts) => {
         this.isLoadingProducts = false;
-        // Merge stored products with defaults, stored products might come first
-        this.products = [...storedProducts, ...this.defaultProducts];
+        const approvedProducts = storedProducts.filter(
+          (product) => product.status?.toLowerCase() !== 'pending_review'
+        );
+        this.products = [...approvedProducts, ...this.defaultProducts];
       },
       error: (error) => {
         this.isLoadingProducts = false;
@@ -268,13 +270,6 @@ export class MarketComponent implements OnInit {
         this.productStatus = 'success';
         this.productMessage = 'Product submitted for review successfully!';
         alert(this.productMessage);
-        // Add to local list
-        this.products.unshift({
-          ...productToAdd,
-          id: response.id,
-          createdAt: response.product?.createdAt,
-          status: 'pending_review'
-        });
         this.newProduct = {
           name: '',
           category: this.categories[0],
