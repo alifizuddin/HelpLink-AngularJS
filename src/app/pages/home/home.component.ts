@@ -1,7 +1,7 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { NewsService } from '../../services/news.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('statValue') statElements!: QueryList<ElementRef<HTMLSpanElement>>;
 
-  constructor(private newsService: NewsService, private router: Router) {}
+  constructor(
+    private newsService: NewsService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {}
 
   navigateTo(path: string) {
     this.router.navigate([path]);
@@ -38,6 +42,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   private initScrollAnimations() {
+    if (!isPlatformBrowser(this.platformId) || typeof IntersectionObserver === 'undefined') {
+      return;
+    }
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {

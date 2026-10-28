@@ -237,30 +237,6 @@
       </aside>
     </section>
 
-    <!-- ================= REAL FEED STATS ================= -->
-    <section class="data-bar" aria-label="Feed summary">
-      <div class="data-tile">
-        <p class="data-label">Matching stories</p>
-        <p class="data-value">{{ totalArticles.toLocaleString() }}</p>
-        <p class="data-hint">Reported by GNews for this query</p>
-      </div>
-      <div class="data-tile">
-        <p class="data-label">Unique sources</p>
-        <p class="data-value">{{ sourceCount }}</p>
-        <p class="data-hint">Publishers in this result set</p>
-      </div>
-      <div class="data-tile">
-        <p class="data-label">Most recent</p>
-        <p class="data-value data-value--small">{{ relativeTime(newestArticle?.publishedAt) }}</p>
-        <p class="data-hint">{{ newestArticle?.source?.name || 'Publication time unavailable' }}</p>
-      </div>
-      <div class="data-tile">
-        <p class="data-label">Search scope</p>
-        <p class="data-value data-value--small">{{ scopeLabel }}</p>
-        <p class="data-hint">Country edition &amp; language</p>
-      </div>
-    </section>
-
     <!-- ================= ADDITIONAL COVERAGE ================= -->
     <section class="feed-section" *ngIf="gridArticles.length > 0" aria-labelledby="coverage-title">
       <div class="section-head">
