@@ -6,7 +6,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-> **SDG Focus:** United Nations Sustainable Development Goal 1 — *No Poverty*
+> **SDG Focus:** United Nations Sustainable Development Goal 1 — _No Poverty_
 
 **HelpLink** is a Rich Internet Application (RIA) built with **Angular 19** that connects underserved communities with real, actionable support. Instead of just raising awareness, HelpLink provides working tools — live job listings, nearby food banks, shelter directories, a community marketplace, and a full intake workflow for aid requests and volunteer onboarding.
 
@@ -15,30 +15,36 @@
 ## ✨ Core Features
 
 ### 📰 News & Data Dashboard
+
 - Real-time poverty-related news articles powered by the **GNews API**, proxied server-side to keep API keys safe.
 - Configurable query, language, and country filters.
 
 ### 💼 Youth Job Center
+
 - Searchable directory of live job listings via **JSearch (RapidAPI)**.
 - Filter by employment type (full-time, part-time, internship, contract).
 - Sort by recency, salary, or title.
 - Paginated results with employer, location, and salary details.
 
 ### 🗺️ Community Support Map
+
 - Discover nearby food banks through **OpenStreetMap (Nominatim)**.
 - Interactive embedded map with geocoded results.
 
 ### 🏠 Shelter Directory
+
 - Filterable list of emergency and transit shelters by state/region.
 - Direct contact details and capacity information.
 
 ### 🛒 Community Market
+
 - A local marketplace for artisans and micro-entrepreneurs from underserved communities.
 - Browse handcrafted goods (jewelry, bags, home & living, pantry, hygiene).
 - Submit your own product for review via the **Artisan Seller Portal**.
 - One-click "Buy Now" with a clear confirmation modal and purchase persistence.
 
 ### 📝 Help & Volunteer Workflows
+
 - **Request Support** — Multi-section intake form (categories, urgency, personal details, location, situation, consent) with validation and a clear submitted/failed state.
 - **Volunteer Application** — Skills, availability, shifts, motivation, and consent with the same robust state handling.
 - All submissions are sent to the backend and persisted, with success/error modals instead of silent alerts.
@@ -49,29 +55,29 @@
 
 > Replace the placeholders below with actual screenshots of each page.
 
-| Page | Screenshot |
-|------|------------|
-| **Home** | ![Home Page](docs/screenshots/home.png) |
-| **News Dashboard** | ![News Page](docs/screenshots/news.png) |
-| **Jobs** | ![Jobs Page](docs/screenshots/jobs.png) |
-| **Shelter Directory** | ![Shelter Page](docs/screenshots/shelter.png) |
-| **Community Support Map** | ![Resources Map](docs/screenshots/resources.png) |
-| **Community Market** | ![Market Page](docs/screenshots/market.png) |
-| **Request Support Form** | ![Help Form](docs/screenshots/help.png) |
+| Page                      | Screenshot                                        |
+| ------------------------- | ------------------------------------------------- |
+| **Home**                  | ![Home Page](docs/home1.png)                      |
+| **News Dashboard**        | ![News Page](docs/screenshots/news.png)           |
+| **Jobs**                  | ![Jobs Page](docs/screenshots/jobs.png)           |
+| **Shelter Directory**     | ![Shelter Page](docs/screenshots/shelter.png)     |
+| **Community Support Map** | ![Resources Map](docs/screenshots/resources.png)  |
+| **Community Market**      | ![Market Page](docs/screenshots/market.png)       |
+| **Request Support Form**  | ![Help Form](docs/screenshots/help.png)           |
 | **Volunteer Application** | ![Volunteer Form](docs/screenshots/volunteer.png) |
 
 ---
 
 ## 🚀 Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| **Frontend** | Angular 19 (standalone components, hash-based routing, SSR via `@angular/ssr`) |
-| **Styling** | Tailwind CSS v4, Material Symbols (CDN) |
-| **Maps** | OpenStreetMap (Nominatim + embedded map) |
-| **API Integration** | GNews API, JSearch API (RapidAPI), OpenStreetMap Nominatim |
-| **Backend proxy** | Node.js / Express (`proxy-server/`) — keeps API keys server-side |
-| **Persistence (demo)** | File-based JSON storage under `proxy-server/data/` |
+| Layer                  | Technology                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------ |
+| **Frontend**           | Angular 19 (standalone components, hash-based routing, SSR via `@angular/ssr`) |
+| **Styling**            | Tailwind CSS v4, Material Symbols (CDN)                                        |
+| **Maps**               | OpenStreetMap (Nominatim + embedded map)                                       |
+| **API Integration**    | GNews API, JSearch API (RapidAPI), OpenStreetMap Nominatim                     |
+| **Backend proxy**      | Node.js / Express (`proxy-server/`) — keeps API keys server-side               |
+| **Persistence (demo)** | File-based JSON storage under `proxy-server/data/`                             |
 
 ---
 
@@ -160,23 +166,25 @@ External API keys (**GNews**, **JSearch**) are **never shipped to the browser**.
 The proxy exposes the following endpoints:
 
 ### External API proxies
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/search?q=` | OpenStreetMap Nominatim food-bank search |
-| `GET` | `/news?q=&lang=&country=&max=` | GNews poverty news |
-| `GET` | `/jobs?query=&country=&page=` | JSearch job listings |
+
+| Method | Endpoint                       | Description                              |
+| ------ | ------------------------------ | ---------------------------------------- |
+| `GET`  | `/search?q=`                   | OpenStreetMap Nominatim food-bank search |
+| `GET`  | `/news?q=&lang=&country=&max=` | GNews poverty news                       |
+| `GET`  | `/jobs?query=&country=&page=`  | JSearch job listings                     |
 
 ### HelpLink persistence (demo)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/help` | Submit a help request |
-| `GET` | `/api/help` | List submitted help requests |
-| `POST` | `/api/volunteer` | Submit a volunteer application |
-| `GET` | `/api/volunteer` | List volunteer applications |
-| `GET` | `/api/market/products` | List marketplace products |
-| `POST` | `/api/market/products` | Submit a new product for review |
-| `POST` | `/api/market/purchase` | Record a purchase |
-| `GET` | `/api/market/purchases` | List purchases |
+
+| Method | Endpoint                | Description                     |
+| ------ | ----------------------- | ------------------------------- |
+| `POST` | `/api/help`             | Submit a help request           |
+| `GET`  | `/api/help`             | List submitted help requests    |
+| `POST` | `/api/volunteer`        | Submit a volunteer application  |
+| `GET`  | `/api/volunteer`        | List volunteer applications     |
+| `GET`  | `/api/market/products`  | List marketplace products       |
+| `POST` | `/api/market/products`  | Submit a new product for review |
+| `POST` | `/api/market/purchase`  | Record a purchase               |
+| `GET`  | `/api/market/purchases` | List purchases                  |
 
 > Persistence is file-based (JSON) under `proxy-server/data/` for demo purposes. Swap with a real database for production.
 
